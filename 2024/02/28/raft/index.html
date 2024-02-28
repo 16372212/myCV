@@ -7,20 +7,24 @@
 <meta name="full-screen" content="yes">
 <meta name="theme-color" content="#317EFB" />
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=0" name="viewport">
-<meta name="description" content="图 原理结构解释Throwable Java中所有的异常类都继承自它，角色在异常的领域中和Object一样；需要捕获所有异常时可以使用catch(Throwable e)进行捕获 1 errorError 表示Java运行时系统(JVM)用于指示与运行时环境本身(JRE)有关的错误。它的子类常用有OutOfMemoryError StackOverFlowError 2 exceptionExce">
+<meta name="description" content="共识算法raft Consensus is a fundamental problem in fault-tolerant distributed systems，Consensus involves multiple servers agreeing on values  共识是容错的一个基本问题。共识算法解决的是分布式系统对某个提案（Proposal），集群中所有节点都达成一致意见的过程 ra">
 <meta property="og:type" content="article">
-<meta property="og:title" content="java异常解析">
-<meta property="og:url" content="http://example.com/2024/02/28/java%E5%BC%82%E5%B8%B8%E8%A7%A3%E6%9E%90/index.html">
+<meta property="og:title" content="raft">
+<meta property="og:url" content="http://example.com/2024/02/28/raft/index.html">
 <meta property="og:site_name" content="Ziyang&#39;s Blog">
-<meta property="og:description" content="图 原理结构解释Throwable Java中所有的异常类都继承自它，角色在异常的领域中和Object一样；需要捕获所有异常时可以使用catch(Throwable e)进行捕获 1 errorError 表示Java运行时系统(JVM)用于指示与运行时环境本身(JRE)有关的错误。它的子类常用有OutOfMemoryError StackOverFlowError 2 exceptionExce">
+<meta property="og:description" content="共识算法raft Consensus is a fundamental problem in fault-tolerant distributed systems，Consensus involves multiple servers agreeing on values  共识是容错的一个基本问题。共识算法解决的是分布式系统对某个提案（Proposal），集群中所有节点都达成一致意见的过程 ra">
 <meta property="og:locale">
-<meta property="article:published_time" content="2024-02-28T10:22:57.000Z">
-<meta property="article:modified_time" content="2024-02-28T10:25:54.237Z">
+<meta property="og:image" content="http://example.com/img/404.jpg">
+<meta property="article:published_time" content="2024-02-28T10:41:38.000Z">
+<meta property="article:modified_time" content="2024-02-28T10:43:19.465Z">
 <meta property="article:author" content="Zhen Ziyang">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/404.jpg">
+
+    <meta name="keywords" content="Raft">
 
 
-<title >java异常解析</title>
+<title >raft</title>
 
 <!-- Favicon -->
 
@@ -63,7 +67,7 @@
 
 <!-- Variable -->
 <script>window.ASYNC_CONFIG = {"hostname":"example.com","author":"Zhen Ziyang","root":"/","typed_text":["ZZ！"],"theme_version":"2.1.10","theme":{"switch":true,"default":"style-light"},"favicon":{"logo":"leaf.svg","icon16":"leaf.svg","icon32":"leaf.svg","appleTouchIcon":"leaf.svg","webmanifest":"/site.webmanifest","visibilitychange":false,"hidden":"/failure.ico","showText":"(/≧▽≦/)咦！又好了！","hideText":"(●—●)喔哟，崩溃啦！"},"i18n":{"placeholder":"搜索文章...","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）","author":"本文作者：","copyright_link":"本文链接：","copyright_license_title":"版权声明：","copyright_license_content":"本博客所有文章除特别声明外，均默认采用 undefined 许可协议。","copy_success":"复制成功","copy_failure":"复制失败","open_read_mode":"进入阅读模式","exit_read_mode":"退出阅读模式","notice_outdate_message":"距离上次更新已经 undefined 天了, 文章内容可能已经过时。","sticky":"置顶","just":"刚刚","min":"分钟前","hour":"小时前","day":"天前","month":"个月前"},"swup":false,"plugin":{"flickr_justified_gallery":"https://npm.elemecdn.com/flickr-justified-gallery@latest/dist/fjGallery.min.js"},"icons":{"sun":"far fa-sun","moon":"far fa-moon","play":"fas fa-play","email":"far fa-envelope","next":"fas fa-arrow-right","calendar":"far fa-calendar-alt","clock":"far fa-clock","user":"far fa-user","back_top":"fas fa-arrow-up","close":"fas fa-times","search":"fas fa-search","reward":"fas fa-hand-holding-usd","user_tag":"fas fa-user-alt","toc_tag":"fas fa-th-list","read":"fas fa-book-reader","arrows":"fas fa-arrows-alt-h","double_arrows":"fas fa-angle-double-down","copy":"fas fa-copy"},"icontype":"font","highlight":{"plugin":"highlighjs","theme":true,"copy":true,"lang":true,"title":"mac","height_limit":200},"toc":{"post_title":true},"live_time":{"start_time":null,"prefix":"博客已萌萌哒运行 undefined 天"}};</script>
-<script id="async-page-config">window.PAGE_CONFIG = {"isPost":true,"isHome":false,"postUpdate":"2024-02-28 18:25:54"};</script>
+<script id="async-page-config">window.PAGE_CONFIG = {"isPost":true,"isHome":false,"postUpdate":"2024-02-28 18:43:19"};</script>
 
 <!-- Theme mode css -->
 <link data-swup-theme rel="stylesheet" href="/css/index.css?v=2.1.10" id="trm-switch-style">
@@ -245,7 +249,7 @@
     <div class="trm-banner">
     
     <!-- banner cover -->
-    <img style="object-position:top;object-fit:cover;" alt="banner" class="trm-banner-cover" src="/images/1280X1280.PNG">
+    <img style="object-position:top;object-fit:cover;" alt="banner" class="trm-banner-cover" src="/images/raft_ini.png">
     <!-- banner cover end -->
     
 
@@ -264,7 +268,7 @@
                             NEWS LETTER
                         </div>
                         <h1 class="trm-mb-30 trm-hsmb-font">
-                            java异常解析
+                            raft
                         </h1>
 
                         
@@ -380,7 +384,7 @@
     <div class="col-sm-4">
         <div class="trm-card trm-label trm-label-light text-center">
             <i class="iconfont far fa-clock trm-icon"></i><br>
-            18:22
+            18:41
         </div>
     </div>
     <div class="col-sm-4">
@@ -392,15 +396,133 @@
 </div>
 <div class="trm-card ">
     <article id="article-container" class="trm-publication">
-    <p><a href="/images/1280X1280.PNG">图</a></p>
-<h1 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h1><h2 id="结构解释"><a href="#结构解释" class="headerlink" title="结构解释"></a>结构解释</h2><p>Throwable Java中所有的异常类都继承自它，角色在异常的领域中和Object一样；需要捕获所有异常时可以使用catch(Throwable e)进行捕获</p>
-<h2 id="1-error"><a href="#1-error" class="headerlink" title="1 error"></a>1 error</h2><p>Error 表示Java运行时系统(JVM)用于指示与运行时环境本身(JRE)有关的错误。它的子类常用有OutOfMemoryError StackOverFlowError</p>
-<h2 id="2-exception"><a href="#2-exception" class="headerlink" title="2 exception"></a>2 exception</h2><p>Exception 它表示程序可能捕捉的异常或者程序可以处理的异常。可以分成检查性异常和非检查性（RuntimeException）异常</p>
-<h3 id="2-1-检查性异常"><a href="#2-1-检查性异常" class="headerlink" title="2.1 检查性异常"></a>2.1 检查性异常</h3><p>编译时必须进行处理的异常。要求程序员在代码中显式地处理这些异常。例如，IOException、SQLException等。不处理编辑器会报错。</p>
-<h3 id="2-2-非检查异常（运行时异常）"><a href="#2-2-非检查异常（运行时异常）" class="headerlink" title="2.2 非检查异常（运行时异常）"></a>2.2 非检查异常（运行时异常）</h3><p>例如，NullPointerException、ArrayIndexOutOfBoundsException等。</p>
-<p>RuntimeException 运行时异常，它是Exception的子类；是一个特殊的检查异常，调用者可以忽略不处理这个异常，交给</p>
-<p>上面的调用者或者全局进行捕获处理；继承自RuntimeException的异常可以不用throws关键字在方法上进行标示也能通过编译，但通常不建议这样做。</p>
-<h1 id="捕获原理"><a href="#捕获原理" class="headerlink" title="捕获原理"></a>捕获原理</h1><p>根据类型捕获的：异常是通过继承关系进行分类的。当抛出异常时，会检查异常的类型和catch块的声明类型是否匹配。如果异常的类型是catch块声明的类型或其子类型，就会执行对应的catch块中的代码。如果是自定义的异常类，你可以查看它的定义和继承关系。</p>
+    <h1 id="共识算法raft"><a href="#共识算法raft" class="headerlink" title="共识算法raft"></a>共识算法raft</h1><blockquote>
+<p>Consensus is a fundamental problem in fault-tolerant distributed systems，Consensus involves multiple servers agreeing on values</p>
+</blockquote>
+<p>共识是容错的一个基本问题。共识算法解决的是分布式系统对某个提案（Proposal），集群中所有节点都达成一致意见的过程</p>
+<h1 id="raft是什么"><a href="#raft是什么" class="headerlink" title="raft是什么"></a>raft是什么</h1><p>raft算是一种共识算法，解决了一个分布式集群如何达成同意values的问题</p>
+<p><img src="/images/raft_ini.png" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<blockquote>
+<p>etcd Raft 模块设计实现上抽象了网络、存储、日志等模块，它本身并不会进行网络、存储相关的操作，上层应用需结合自己业务场景选择内置的模块或自定义实现网络、存储、日志等模块。唐聪，《etcd 实战课》</p>
+</blockquote>
+<h1 id="复制状态机（Replicated-state-machines）"><a href="#复制状态机（Replicated-state-machines）" class="headerlink" title="复制状态机（Replicated state machines）"></a>复制状态机（Replicated state machines）</h1><ul>
+<li>约定存储的是日志</li>
+</ul>
+<h1 id="raft共识算法实现"><a href="#raft共识算法实现" class="headerlink" title="raft共识算法实现"></a>raft共识算法实现</h1><h2 id="0-可视化链接："><a href="#0-可视化链接：" class="headerlink" title="0. 可视化链接："></a>0. 可视化链接：</h2><p><a target="_blank" rel="noopener" href="https://thesecretlivesofdata.com/raft/">https://thesecretlivesofdata.com/raft/</a></p>
+<h2 id="1-节点状态（Server-states）"><a href="#1-节点状态（Server-states）" class="headerlink" title="1. 节点状态（Server states）"></a>1. 节点状态（Server states）</h2><p>每个节点只会有三种状态，leader, follower, 或者 candidate.</p>
+<h2 id="2-任期"><a href="#2-任期" class="headerlink" title="2. 任期"></a>2. 任期</h2><p>Raft 里的逻辑时钟，从 0 开始，随着每次选举的发起而递增</p>
+<h2 id="3-RPCs"><a href="#3-RPCs" class="headerlink" title="3. RPCs"></a>3. RPCs</h2><p>节点之间的通讯方式，最基础的共识算法，只需要两种 </p>
+<ol>
+<li>RPC，RequestVote RPCs </li>
+<li>AppendEntries RPCs</li>
+</ol>
+<h1 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h1><h2 id="1-Leader-Election"><a href="#1-Leader-Election" class="headerlink" title="1. Leader Election"></a>1. Leader Election</h2><h3 id="名词定义"><a href="#名词定义" class="headerlink" title="名词定义"></a>名词定义</h3><ol>
+<li><p>Append Entries: leader -&gt; followers, follower reply</p>
+</li>
+<li><p>Term: 是什么，何时增加修改？</p>
+</li>
+</ol>
+<blockquote>
+<p>raft divides time into terms of arbitrary length</p>
+</blockquote>
+<p>如果有leader，那么所有的节点维护的term是一致的。否则，在竞选状态时，以高的term为大，谁的term高谁的话语权高</p>
+<blockquote>
+<p>tips: 相同term下，如果有的candidate a term_a 比 candidate b term_b来的早(term_a &lt; term&lt;b ), 那可能会投票给term_a而不是term_b</p>
+</blockquote>
+<h3 id="基本思路"><a href="#基本思路" class="headerlink" title="基本思路"></a>基本思路</h3><p>下面是完成的表格，展示了在Raft协议中，leader、candidate和follower在接收到RequestVote和AppendEntry请求时的行为，取决于请求中的term与节点当前的term的比较：</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>RequsestVote</th>
+<th></th>
+<th></th>
+<th>AppendEntry</th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td>req.term&gt;currentTerm</td>
+<td>req.term&#x3D;currentTerm</td>
+<td>req.term&lt;currentTerm</td>
+<td>req.term&gt;currentTerm</td>
+<td>req.term&#x3D;currentTerm</td>
+<td>req.term&lt; currentTerm</td>
+</tr>
+<tr>
+<td>leader</td>
+<td>变为follower，更新term，重新评估投票</td>
+<td>false (拒绝投票)</td>
+<td>false (拒绝投票)</td>
+<td>变为follower，更新term</td>
+<td>忽略请求</td>
+<td>忽略请求</td>
+</tr>
+<tr>
+<td>candidate</td>
+<td>变为follower，更新term，重新评估投票</td>
+<td>false (拒绝投票)</td>
+<td>false (拒绝投票)</td>
+<td>变为follower，更新term</td>
+<td>变为follower，接受来自leader的消息</td>
+<td>忽略请求</td>
+</tr>
+<tr>
+<td>follower</td>
+<td>更新term，没投票则投票，否则拒绝</td>
+<td>没投票则投票，否则拒绝</td>
+<td>false (拒绝投票)</td>
+<td>更新term，接受新leader</td>
+<td>接受来自leader的消息</td>
+<td>忽略请求</td>
+</tr>
+</tbody></table>
+<ul>
+<li>leader send heartbeat RPCs no more than ten times per second.</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// return currentTerm and whether this server</span></span><br><span class="line"><span class="comment">// believes it is the leader.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(rf *Raft)</span></span> GetState() (<span class="type">int</span>, <span class="type">bool</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(rf *Raft)</span></span> sendRequestVote(server <span class="type">int</span>, args *RequestVoteArgs, reply *RequestVoteReply) <span class="type">bool</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">beginElection</span><span class="params">()</span></span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>批量发选票，批量收获所有的结果。如果结果中true的票数 &gt; false的票数，它就成功变成leader</p>
+</li>
+<li><p>candidate时处理其他leader发来的心跳信息，是自己变成follower还是继续candidate？此时candidate的term肯定是大于老leader的term的</p>
+</li>
+<li><p>如果新leader收到老leader的心跳信息，会怎么样呢？</p>
+</li>
+<li><p>follower投票完还会变成candidate吗：会，自己超时后也会开启投票</p>
+</li>
+<li><p>follower在收到心跳信息后，会重新计时判断心跳的实现逻辑：</p>
+</li>
+</ul>
+<p>在时间等待前后判断currentLeader是否是-1</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(rf *Raft)</span></span> tickerAsFollower() &#123;</span><br><span class="line">	<span class="keyword">for</span> &#123;</span><br><span class="line">		<span class="comment">// 判断是否超时，转换状态</span></span><br><span class="line">		rf.currentLeader = <span class="number">-1</span></span><br><span class="line">		ms := <span class="number">500</span> + (rand.Int63() % <span class="number">400</span>)</span><br><span class="line">		time.Sleep(time.Duration(ms) * time.Millisecond)</span><br><span class="line">		DPrintf(<span class="string">&quot;[%d,%d] is follower, leader : %d&quot;</span>, rf.me, rf.currentTerm, rf.currentLeader)</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> rf.currentLeader == <span class="number">-1</span> &#123;</span><br><span class="line">			rf.state = <span class="number">1</span></span><br><span class="line">			<span class="keyword">return</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="特殊情况"><a href="#特殊情况" class="headerlink" title="特殊情况"></a>特殊情况</h3><ol>
+<li>split vote:</li>
+</ol>
+<p>要考虑到，有的follower如果失联，这时判断split vote时就不能只判断是否是peers个数的一半了。</p>
+<ol start="2">
+<li>同一个term内先后收到两个符合要求的RequestVote, 应该怎么办？</li>
+</ol>
+<p>答：根据first-come-first-served，给第一个投票。</p>
+<blockquote>
+<p>server will vote for at most one candidate in a given term, on a first-come-first-served basis</p>
+</blockquote>
+<p>对于第一个请求，如果其term大于follower的currentTerm，follower会更新其currentTerm为请求中的term，然后根据Raft的规则（包括日志的新旧程度等）决定是否投票。</p>
+<p>对于第二个请求，如果其term大于更新后的currentTerm，follower将再次更新其currentTerm。但是，如果follower已经在更新后的任期内投了票（无论是给第一个请求的候选人还是之前的某个候选人），根据Raft协议，它不会在同一任期内投第二次票。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> rf.votedFor != <span class="number">-1</span> &#123;</span><br><span class="line">	DPrintf(<span class="string">&quot;【%d, %d】&lt;------x------ [%d, %d](status: %d) , already vote or leader for %d, leader %d&quot;</span>, args.CandidateId, args.Term, rf.me, rf.currentTerm, rf.state, rf.votedFor, rf.currentLeader)</span><br><span class="line">	reply.VoteGranted = <span class="literal">false</span></span><br><span class="line">	<span class="keyword">return</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>requstVote里广播消息时，如果某一个server消息返回超时怎么收集选票？</li>
+</ol>
+<p>方法一：设置ctx上下文超时机制，修改rpc的调用函数。但是这里在lab中不允许我们修改Call方法，因此弃用</p>
+<p>方法二：使用go中的<code>sync.WaitGroup</code>, 开启一个广播线程时调用wg.add(1), 线程结束前采用wg.Done(), 最后wg.Wait进行阻塞，直到所有线程均返回结果。缺点：rpc失联还是会超时，因此弃用。</p>
+<p>方法三：在线程调用时变判断公用的选票信息done与posVotes, 前者判断是否成为leader，后者判断是否有成为leader的条件，并置done为true。</p>
+<h2 id="2-Log-Replication"><a href="#2-Log-Replication" class="headerlink" title="2. Log Replication"></a>2. Log Replication</h2><p>partition:</p>
+<p>Both nodes A &amp; B will roll back their uncommitted entries and match the new leader’s log </p>
 
 </article>
     
@@ -415,6 +537,7 @@
             <span data-number="02"></span>
         </h5>
     </div>
+    
     
         <div class="col-lg-6">
     <div class="trm-blog-card trm-scroll-animation">
@@ -443,41 +566,6 @@
             <ul class="trm-card-data trm-label">
                 <li>24/02/28</li>
                 <li>18:26</li>
-                
-                
-            </ul>
-        </div>
-    </div>
-</div>
-    
-    
-        <div class="col-lg-6">
-    <div class="trm-blog-card trm-scroll-animation">
-        <a href="/2024/02/28/%E3%80%90%E8%B4%A2%E5%8A%A1%E6%8A%A5%E8%A1%A8%E3%80%91%E7%AE%80%E5%8D%95%E4%BB%8B%E7%BB%8D/" class="trm-cover-frame trm-anima-link">
-            
-            
-                <div class="trm-cover-date">
-                    <div class="trm-cover-day">28</div>
-                    <div class="trm-cover-month">2024/02</div>
-                </div>
-            
-        </a>
-        
-        <div class="trm-card-descr">
-            <div class="trm-label trm-category trm-mb-20">
-                <a href=" /categories/CFA/">
-                    CFA
-                </a>
-            </div>
-            <h5>
-                <a href="/2024/02/28/%E3%80%90%E8%B4%A2%E5%8A%A1%E6%8A%A5%E8%A1%A8%E3%80%91%E7%AE%80%E5%8D%95%E4%BB%8B%E7%BB%8D/" class="trm-anima-link">
-                    【财务报表】简单介绍
-                </a>
-            </h5>
-            <div class="trm-divider trm-mb-20 trm-mt-20"></div>
-            <ul class="trm-card-data trm-label">
-                <li>24/02/28</li>
-                <li>18:14</li>
                 
                 
             </ul>
@@ -584,7 +672,7 @@
 				</span>
       </div>
       <div class="trm-post-toc-content">
-        <ol class="trm-toc"><li class="trm-toc-item trm-toc-level-1" title="原理"><a rel="nofollow" class="trm-toc-link" href="#原理"><span class="trm-toc-number">1.</span> <span class="trm-toc-text">原理</span></a><ol class="trm-toc-child"><li class="trm-toc-item trm-toc-level-2" title="结构解释"><a rel="nofollow" class="trm-toc-link" href="#结构解释"><span class="trm-toc-number">1.1.</span> <span class="trm-toc-text">结构解释</span></a></li><li class="trm-toc-item trm-toc-level-2" title="1 error"><a rel="nofollow" class="trm-toc-link" href="#1-error"><span class="trm-toc-number">1.2.</span> <span class="trm-toc-text">1 error</span></a></li><li class="trm-toc-item trm-toc-level-2" title="2 exception"><a rel="nofollow" class="trm-toc-link" href="#2-exception"><span class="trm-toc-number">1.3.</span> <span class="trm-toc-text">2 exception</span></a><ol class="trm-toc-child"><li class="trm-toc-item trm-toc-level-3" title="2.1 检查性异常"><a rel="nofollow" class="trm-toc-link" href="#2-1-检查性异常"><span class="trm-toc-number">1.3.1.</span> <span class="trm-toc-text">2.1 检查性异常</span></a></li><li class="trm-toc-item trm-toc-level-3" title="2.2 非检查异常（运行时异常）"><a rel="nofollow" class="trm-toc-link" href="#2-2-非检查异常（运行时异常）"><span class="trm-toc-number">1.3.2.</span> <span class="trm-toc-text">2.2 非检查异常（运行时异常）</span></a></li></ol></li></ol></li><li class="trm-toc-item trm-toc-level-1" title="捕获原理"><a rel="nofollow" class="trm-toc-link" href="#捕获原理"><span class="trm-toc-number">2.</span> <span class="trm-toc-text">捕获原理</span></a></li></ol>
+        <ol class="trm-toc"><li class="trm-toc-item trm-toc-level-1" title="共识算法raft"><a rel="nofollow" class="trm-toc-link" href="#共识算法raft"><span class="trm-toc-number">1.</span> <span class="trm-toc-text">共识算法raft</span></a></li><li class="trm-toc-item trm-toc-level-1" title="raft是什么"><a rel="nofollow" class="trm-toc-link" href="#raft是什么"><span class="trm-toc-number">2.</span> <span class="trm-toc-text">raft是什么</span></a></li><li class="trm-toc-item trm-toc-level-1" title="复制状态机（Replicated state machines）"><a rel="nofollow" class="trm-toc-link" href="#复制状态机（Replicated-state-machines）"><span class="trm-toc-number">3.</span> <span class="trm-toc-text">复制状态机（Replicated state machines）</span></a></li><li class="trm-toc-item trm-toc-level-1" title="raft共识算法实现"><a rel="nofollow" class="trm-toc-link" href="#raft共识算法实现"><span class="trm-toc-number">4.</span> <span class="trm-toc-text">raft共识算法实现</span></a><ol class="trm-toc-child"><li class="trm-toc-item trm-toc-level-2" title="0. 可视化链接："><a rel="nofollow" class="trm-toc-link" href="#0-可视化链接："><span class="trm-toc-number">4.1.</span> <span class="trm-toc-text">0. 可视化链接：</span></a></li><li class="trm-toc-item trm-toc-level-2" title="1. 节点状态（Server states）"><a rel="nofollow" class="trm-toc-link" href="#1-节点状态（Server-states）"><span class="trm-toc-number">4.2.</span> <span class="trm-toc-text">1. 节点状态（Server states）</span></a></li><li class="trm-toc-item trm-toc-level-2" title="2. 任期"><a rel="nofollow" class="trm-toc-link" href="#2-任期"><span class="trm-toc-number">4.3.</span> <span class="trm-toc-text">2. 任期</span></a></li><li class="trm-toc-item trm-toc-level-2" title="3. RPCs"><a rel="nofollow" class="trm-toc-link" href="#3-RPCs"><span class="trm-toc-number">4.4.</span> <span class="trm-toc-text">3. RPCs</span></a></li></ol></li><li class="trm-toc-item trm-toc-level-1" title="步骤"><a rel="nofollow" class="trm-toc-link" href="#步骤"><span class="trm-toc-number">5.</span> <span class="trm-toc-text">步骤</span></a><ol class="trm-toc-child"><li class="trm-toc-item trm-toc-level-2" title="1. Leader Election"><a rel="nofollow" class="trm-toc-link" href="#1-Leader-Election"><span class="trm-toc-number">5.1.</span> <span class="trm-toc-text">1. Leader Election</span></a><ol class="trm-toc-child"><li class="trm-toc-item trm-toc-level-3" title="名词定义"><a rel="nofollow" class="trm-toc-link" href="#名词定义"><span class="trm-toc-number">5.1.1.</span> <span class="trm-toc-text">名词定义</span></a></li><li class="trm-toc-item trm-toc-level-3" title="基本思路"><a rel="nofollow" class="trm-toc-link" href="#基本思路"><span class="trm-toc-number">5.1.2.</span> <span class="trm-toc-text">基本思路</span></a></li><li class="trm-toc-item trm-toc-level-3" title="特殊情况"><a rel="nofollow" class="trm-toc-link" href="#特殊情况"><span class="trm-toc-number">5.1.3.</span> <span class="trm-toc-text">特殊情况</span></a></li></ol></li><li class="trm-toc-item trm-toc-level-2" title="2. Log Replication"><a rel="nofollow" class="trm-toc-link" href="#2-Log-Replication"><span class="trm-toc-number">5.2.</span> <span class="trm-toc-text">2. Log Replication</span></a></li></ol></li></ol>
       </div>
     </div>
 
