@@ -7,16 +7,22 @@
 <meta name="full-screen" content="yes">
 <meta name="theme-color" content="#317EFB" />
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=0" name="viewport">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Ziyang&#39;s Blog">
-<meta property="og:url" content="http://example.com/index.html">
+<meta name="description" content="Paper main idea 1234567891011121314151617Figure 1 shows the overall flow of a MapReduce operation in our implementation. When the user program calls the MapReduce function, the following sequence of a">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【6.824】MapReduce">
+<meta property="og:url" content="http://example.com/2024/02/28/%E3%80%906-824%E3%80%91MapReduce/index.html">
 <meta property="og:site_name" content="Ziyang&#39;s Blog">
+<meta property="og:description" content="Paper main idea 1234567891011121314151617Figure 1 shows the overall flow of a MapReduce operation in our implementation. When the user program calls the MapReduce function, the following sequence of a">
 <meta property="og:locale">
+<meta property="og:image" content="http://example.com/img/404.jpg">
+<meta property="article:published_time" content="2024-02-28T10:45:33.000Z">
+<meta property="article:modified_time" content="2024-02-28T10:46:18.235Z">
 <meta property="article:author" content="Zhen Ziyang">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/404.jpg">
 
 
-<title >Ziyang's Blog</title>
+<title >【6.824】MapReduce</title>
 
 <!-- Favicon -->
 
@@ -59,7 +65,7 @@
 
 <!-- Variable -->
 <script>window.ASYNC_CONFIG = {"hostname":"example.com","author":"Zhen Ziyang","root":"/","typed_text":["ZZ！"],"theme_version":"2.1.10","theme":{"switch":true,"default":"style-light"},"favicon":{"logo":"leaf.svg","icon16":"leaf.svg","icon32":"leaf.svg","appleTouchIcon":"leaf.svg","webmanifest":"/site.webmanifest","visibilitychange":false,"hidden":"/failure.ico","showText":"(/≧▽≦/)咦！又好了！","hideText":"(●—●)喔哟，崩溃啦！"},"i18n":{"placeholder":"搜索文章...","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）","author":"本文作者：","copyright_link":"本文链接：","copyright_license_title":"版权声明：","copyright_license_content":"本博客所有文章除特别声明外，均默认采用 undefined 许可协议。","copy_success":"复制成功","copy_failure":"复制失败","open_read_mode":"进入阅读模式","exit_read_mode":"退出阅读模式","notice_outdate_message":"距离上次更新已经 undefined 天了, 文章内容可能已经过时。","sticky":"置顶","just":"刚刚","min":"分钟前","hour":"小时前","day":"天前","month":"个月前"},"swup":false,"plugin":{"flickr_justified_gallery":"https://npm.elemecdn.com/flickr-justified-gallery@latest/dist/fjGallery.min.js"},"icons":{"sun":"far fa-sun","moon":"far fa-moon","play":"fas fa-play","email":"far fa-envelope","next":"fas fa-arrow-right","calendar":"far fa-calendar-alt","clock":"far fa-clock","user":"far fa-user","back_top":"fas fa-arrow-up","close":"fas fa-times","search":"fas fa-search","reward":"fas fa-hand-holding-usd","user_tag":"fas fa-user-alt","toc_tag":"fas fa-th-list","read":"fas fa-book-reader","arrows":"fas fa-arrows-alt-h","double_arrows":"fas fa-angle-double-down","copy":"fas fa-copy"},"icontype":"font","highlight":{"plugin":"highlighjs","theme":true,"copy":true,"lang":true,"title":"mac","height_limit":200},"toc":{"post_title":true},"live_time":{"start_time":null,"prefix":"博客已萌萌哒运行 undefined 天"}};</script>
-<script id="async-page-config">window.PAGE_CONFIG = {"isPost":false,"isHome":true,"postUpdate":"2024-02-28 18:46:33"};</script>
+<script id="async-page-config">window.PAGE_CONFIG = {"isPost":true,"isHome":false,"postUpdate":"2024-02-28 18:46:18"};</script>
 
 <!-- Theme mode css -->
 <link data-swup-theme rel="stylesheet" href="/css/index.css?v=2.1.10" id="trm-switch-style">
@@ -142,7 +148,7 @@
     <nav>
         <ul>
             
-            <li class="menu-item-has-children current-menu-item">
+            <li class="menu-item-has-children ">
                 <a  href="/" target="">
                     首页
                 </a>
@@ -235,12 +241,13 @@
             <!-- top bar end -->
 
             <!-- body -->
-            <div class="trm-content-start">
+            
+<div class="trm-content-start">
     <!-- banner -->
     <div class="trm-banner">
     
     <!-- banner cover -->
-    <img style="object-position:top;object-fit:cover;" alt="banner" class="trm-banner-cover" src="https://pic1.zhimg.com/v2-b3c2c6745b9421a13a3c4706b19223b3_r.jpg?source=1940ef5c">
+    <img style="object-position:top;object-fit:cover;" alt="banner" class="trm-banner-cover" src="/images/map_reduce.png">
     <!-- banner cover end -->
     
 
@@ -256,10 +263,10 @@
                     <!-- banner title -->
                     <div class="trm-banner-text ">
                         <div class="trm-label trm-mb-20">
-                            Welcome to zzy&#39;s blog.
+                            NEWS LETTER
                         </div>
                         <h1 class="trm-mb-30 trm-hsmb-font">
-                            不在显赫处强求，<br>而在隐微处契而不舍。
+                            【6.824】MapReduce
                         </h1>
 
                         
@@ -269,7 +276,7 @@
                                 </li>
                                 <li>
                                     <span>
-                                        index.html
+                                        2024
                                     </span>
                                 </li>
                             </ul>
@@ -365,96 +372,73 @@
             
             <div class="trm-page-content col-lg-8">
                 <div id="trm-content" class="trm-content">
-                    <!-- categories -->
-
-    <div class="row hidden-sm">
-        
-        
-        <div class="col-lg-6">
-            <!-- categories card -->
-<div class="trm-blog-categories trm-scroll-animation">
-    <h6>
-        Java
-        <span class="trm-number">
-            2
-        </span>
-    </h6>
-    <div class="trm-divider trm-mb-20 trm-mt-20"></div>
-    <a href="/categories/Java/." class="trm-label">
-        查看分类 
-        <i class="iconfont fas fa-arrow-right arrow-right"></i>
-    </a>
-</div>
-<!-- categories card end -->
+                    <div class="trm-post-info row hidden-sm">
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-calendar-alt trm-icon"></i><br>
+            02/28
         </div>
-        
-        <div class="col-lg-6">
-            <!-- categories card -->
-<div class="trm-blog-categories trm-scroll-animation">
-    <h6>
-        分布式
-        <span class="trm-number">
-            2
-        </span>
-    </h6>
-    <div class="trm-divider trm-mb-20 trm-mt-20"></div>
-    <a href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/." class="trm-label">
-        查看分类 
-        <i class="iconfont fas fa-arrow-right arrow-right"></i>
-    </a>
-</div>
-<!-- categories card end -->
-        </div>
-        
     </div>
-
-<!-- categories end -->
-
-<!-- newest publications -->
-<div class="row">
-    
-        <div class="col-lg-12">
-            <!-- title -->
-            <h5 class="trm-title-with-divider">
-                最近发布 
-                <span data-number="01"></span>
-            </h5>
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-clock trm-icon"></i><br>
+            18:45
         </div>
-    
-    
-        <div class="col-lg-6">
-    <div class="trm-blog-card trm-scroll-animation">
-        <a href="/2024/02/28/%E3%80%906-824%E3%80%91MapReduce/" class="trm-cover-frame trm-anima-link">
-            
-            
-                <div class="trm-cover-date">
-                    <div class="trm-cover-day">28</div>
-                    <div class="trm-cover-month">2024/02</div>
-                </div>
-            
-        </a>
-        
-        <div class="trm-card-descr">
-            <div class="trm-label trm-category trm-mb-20">
-                <a href=" /categories/%E5%88%86%E5%B8%83%E5%BC%8F/">
-                    分布式
-                </a>
-            </div>
-            <h5>
-                <a href="/2024/02/28/%E3%80%906-824%E3%80%91MapReduce/" class="trm-anima-link">
-                    【6.824】MapReduce
-                </a>
-            </h5>
-            <div class="trm-divider trm-mb-20 trm-mt-20"></div>
-            <ul class="trm-card-data trm-label">
-                <li>24/02/28</li>
-                <li>18:45</li>
-                
-                
-            </ul>
+    </div>
+    <div class="col-sm-4">
+        <div id="post-author" class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-user trm-icon"></i><br>
+            Zhen Ziyang
         </div>
     </div>
 </div>
+<div class="trm-card ">
+    <article id="article-container" class="trm-publication">
+    <h1 id="Paper-main-idea"><a href="#Paper-main-idea" class="headerlink" title="Paper main idea"></a>Paper main idea</h1><p><img src="/images/map_reduce.png" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">Figure 1 shows the overall flow of a MapReduce operation in our implementation. When the user program calls the MapReduce function, the following sequence of actions occurs (the numbered labels in Figure 1 correspond to the numbers in the list below): </span><br><span class="line"></span><br><span class="line">1. The MapReduce library in the user program first splits the input files into M pieces of typically 16 megabytes to 64 megabytes (MB) per piece (controllable by the user via an optional parameter). It then starts up many copies of the program on a cluster of machines. </span><br><span class="line"></span><br><span class="line">2. One of the copies of the program is special – the master. The rest are workers that are assigned work by the master. There are M map tasks and R reduce tasks to assign. The master picks idle workers and assigns each one a map task or a reduce task. </span><br><span class="line"></span><br><span class="line">3. A worker who is assigned a map task reads the contents of the corresponding input split. It parses key/value pairs out of the input data and passes each pair to the user-defined Map function. The intermediate key/value pairs produced by the Map function are buffered in memory</span><br><span class="line"></span><br><span class="line">4. Periodically, the buffered pairs are written to local disk, partitioned into R regions by the partitioning function. The locations of these buffered pairs on the local disk are passed back to the master, who is responsible for forwarding these locations to the reduce workers. </span><br><span class="line"></span><br><span class="line">5. When a reduce worker is notified by the master about these locations, it uses remote procedure calls to read the buffered data from the local disks of the map workers. When a reduce worker has read all intermediate data, it sorts it by the intermediate keys so that all occurrences of the same key are grouped together. The sorting is needed because typically many different keys map to the same reduce task. If the amount of intermediate data is too large to fit in memory, an external sort is used. </span><br><span class="line"></span><br><span class="line">6. The reduce worker iterates over the sorted intermediate data and for each unique intermediate key encountered, it passes the key and the corresponding set of intermediate values to the user&#x27;s Reduce function. The output of the Reduce function is appended to a final output file for this reduce partition</span><br><span class="line"></span><br><span class="line">7. When all map tasks and reduce tasks have been completed, the master wakes up the user program. At this point, the MapReduce call in the user program returns back to the user code.</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="论文的youtube讲解"><a href="#论文的youtube讲解" class="headerlink" title="论文的youtube讲解"></a>论文的youtube讲解</h1><p><a target="_blank" rel="noopener" href="https://www.google.com/search?q=map+reduce+bilibili&sca_esv=573962864&biw=1527&bih=744&tbm=vid&sxsrf=AM9HkKmLsPQM2n0qHvQp-24bArEzuViXPQ:1697548678192&ei=hokuZZSsC8HO1e8PrN2EsA8&ved=0ahUKEwiUh8_Plf2BAxVBZ_UHHawuAfYQ4dUDCA0&uact=5&oq=map+reduce+bilibili&gs_lp=Eg1nd3Mtd2l6LXZpZGVvIhNtYXAgcmVkdWNlIGJpbGliaWxpMggQABiJBRiiBDIFEAAYogQyCBAAGIkFGKIESP8OUK0BWJYNcAB4AJABAJgByQKgAY0SqgEHMC4yLjcuMbgBA8gBAPgBAcICBBAjGCfCAggQABjLARiABMICBRAAGIAEwgIHEAAYigUYQ8ICCBAAGB4YDxgKwgIIEAAYCBgeGArCAggQABgIGB4YE8ICBxAhGKABGAqIBgE&sclient=gws-wiz-video#fpstate=ive&vld=cid:b5108df6,vid:Rz8JCS9TfOQ,st:0">https://www.google.com/search?q=map+reduce+bilibili&amp;sca_esv=573962864&amp;biw=1527&amp;bih=744&amp;tbm=vid&amp;sxsrf=AM9HkKmLsPQM2n0qHvQp-24bArEzuViXPQ%3A1697548678192&amp;ei=hokuZZSsC8HO1e8PrN2EsA8&amp;ved=0ahUKEwiUh8_Plf2BAxVBZ_UHHawuAfYQ4dUDCA0&amp;uact=5&amp;oq=map+reduce+bilibili&amp;gs_lp=Eg1nd3Mtd2l6LXZpZGVvIhNtYXAgcmVkdWNlIGJpbGliaWxpMggQABiJBRiiBDIFEAAYogQyCBAAGIkFGKIESP8OUK0BWJYNcAB4AJABAJgByQKgAY0SqgEHMC4yLjcuMbgBA8gBAPgBAcICBBAjGCfCAggQABjLARiABMICBRAAGIAEwgIHEAAYigUYQ8ICCBAAGB4YDxgKwgIIEAAYCBgeGArCAggQABgIGB4YE8ICBxAhGKABGAqIBgE&amp;sclient=gws-wiz-video#fpstate=ive&amp;vld=cid:b5108df6,vid:Rz8JCS9TfOQ,st:0</a></p>
+<h1 id="some-ideas"><a href="#some-ideas" class="headerlink" title="some ideas"></a>some ideas</h1><h2 id="Task-Synchronous"><a href="#Task-Synchronous" class="headerlink" title="Task Synchronous:"></a>Task Synchronous:</h2><p>all map task should be earlier than reduce task! </p>
+<p>some map task may wait seconds, so should first all map tasks done before reduce.</p>
+<h2 id="Lock"><a href="#Lock" class="headerlink" title="Lock:"></a>Lock:</h2><p>workers run parallel, should add mutex to filelist when </p>
+<h2 id="Error-Return"><a href="#Error-Return" class="headerlink" title="Error Return:"></a>Error Return:</h2><p>workers may run some error, such as <code>rpc sock connect</code> and <code>can not open files</code>. When these errors happend, should return <code>Error</code> to master, other than just stop itself.</p>
+<h2 id="Heartbeat"><a href="#Heartbeat" class="headerlink" title="Heartbeat:"></a>Heartbeat:</h2><p>master should ask workers whether they are alive.</p>
+<p>Implementation method:</p>
+<ol>
+<li>Set a new scheduled task and ask every 2 minutes.</li>
+<li>Every time a new worker requests a new task, add a judgment when rotating all tasks to assign tasks to the worker. If a task status is not Finish and times out, the task fails</li>
+<li>Write in the <code>Done()</code> method and continuously rotate to ensure that all tasks are completed. And take the opportunity to determine if there is a task timeout.</li>
+</ol>
+<p>Performance comparison: 1&gt;2&gt;3</p>
+<p>Judging by frequency. The execution frequency of 3 is too high, constantly executing and discussing the sequence.</p>
+<h1 id="status-of-task-and-worker"><a href="#status-of-task-and-worker" class="headerlink" title="status of task and worker"></a>status of task and worker</h1><p>worker: </p>
+<ul>
+<li>Finish: worker finish task X</li>
+<li>Ready: worker ask for a new task</li>
+<li>Wrong: worker meet some problems</li>
+<li>Close: worker will be closed when master ask worker to close</li>
+</ul>
+<p>task:</p>
+<ul>
+<li>Run: some worker is running on this task</li>
+<li>Done: this task is finished</li>
+<li>(empty string): task not be allocated yet</li>
+</ul>
+
+</article>
+    
+    
+
+</div>
+<div class="trm-post-next-prev row">
+    <div class="col-lg-12">
+        <!-- title -->
+        <h5 class="trm-title-with-divider">
+            其他文章
+            <span data-number="02"></span>
+        </h5>
+    </div>
+    
     
         <div class="col-lg-6">
     <div class="trm-blog-card trm-scroll-animation">
@@ -487,177 +471,54 @@
     </div>
 </div>
     
-        <div class="col-lg-6">
-    <div class="trm-blog-card trm-scroll-animation">
-        <a href="/2024/02/28/mapstruct%E6%98%A0%E5%B0%84%E5%99%A8/" class="trm-cover-frame trm-anima-link">
-            
-            
-                <div class="trm-cover-date">
-                    <div class="trm-cover-day">28</div>
-                    <div class="trm-cover-month">2024/02</div>
-                </div>
-            
-        </a>
-        
-        <div class="trm-card-descr">
-            <div class="trm-label trm-category trm-mb-20">
-                <a href=" /categories/Java/">
-                    Java
-                </a>
-            </div>
-            <h5>
-                <a href="/2024/02/28/mapstruct%E6%98%A0%E5%B0%84%E5%99%A8/" class="trm-anima-link">
-                    mapstruct映射器
-                </a>
-            </h5>
-            <div class="trm-divider trm-mb-20 trm-mt-20"></div>
-            <ul class="trm-card-data trm-label">
-                <li>24/02/28</li>
-                <li>18:26</li>
-                
-                
-            </ul>
-        </div>
-    </div>
 </div>
-    
-        <div class="col-lg-6">
-    <div class="trm-blog-card trm-scroll-animation">
-        <a href="/2024/02/28/java%E5%BC%82%E5%B8%B8%E8%A7%A3%E6%9E%90/" class="trm-cover-frame trm-anima-link">
-            
-            
-                <img alt="cover" class="no-fancybox" src="/images/1280X1280.PNG">
-            
-        </a>
-        
-        <div class="trm-card-descr">
-            <div class="trm-label trm-category trm-mb-20">
-                <a href=" /categories/Java/">
-                    Java
-                </a>
-            </div>
-            <h5>
-                <a href="/2024/02/28/java%E5%BC%82%E5%B8%B8%E8%A7%A3%E6%9E%90/" class="trm-anima-link">
-                    java异常解析
-                </a>
-            </h5>
-            <div class="trm-divider trm-mb-20 trm-mt-20"></div>
-            <ul class="trm-card-data trm-label">
-                <li>24/02/28</li>
-                <li>18:22</li>
-                
-                
-            </ul>
-        </div>
-    </div>
-</div>
-    
-        <div class="col-lg-6">
-    <div class="trm-blog-card trm-scroll-animation">
-        <a href="/2024/02/28/%E3%80%90%E8%B4%A2%E5%8A%A1%E6%8A%A5%E8%A1%A8%E3%80%91%E7%AE%80%E5%8D%95%E4%BB%8B%E7%BB%8D/" class="trm-cover-frame trm-anima-link">
-            
-            
-                <div class="trm-cover-date">
-                    <div class="trm-cover-day">28</div>
-                    <div class="trm-cover-month">2024/02</div>
-                </div>
-            
-        </a>
-        
-        <div class="trm-card-descr">
-            <div class="trm-label trm-category trm-mb-20">
-                <a href=" /categories/CFA/">
-                    CFA
-                </a>
-            </div>
-            <h5>
-                <a href="/2024/02/28/%E3%80%90%E8%B4%A2%E5%8A%A1%E6%8A%A5%E8%A1%A8%E3%80%91%E7%AE%80%E5%8D%95%E4%BB%8B%E7%BB%8D/" class="trm-anima-link">
-                    【财务报表】简单介绍
-                </a>
-            </h5>
-            <div class="trm-divider trm-mb-20 trm-mt-20"></div>
-            <ul class="trm-card-data trm-label">
-                <li>24/02/28</li>
-                <li>18:14</li>
-                
-                
-            </ul>
-        </div>
-    </div>
-</div>
-    
-        <div class="col-lg-6">
-    <div class="trm-blog-card trm-scroll-animation">
-        <a href="/2024/02/28/%E3%80%90giscus-%E9%85%8D%E7%BD%AE%E3%80%91%E7%BB%99%E5%8D%9A%E5%AE%A2%E4%B8%AD%E5%A2%9E%E5%8A%A0%E8%AF%84%E8%AE%BA%E5%8A%9F%E8%83%BD/" class="trm-cover-frame trm-anima-link">
-            
-            
-                <img alt="cover" class="no-fancybox" src="/images/graphQL.png">
-            
-        </a>
-        
-        <div class="trm-card-descr">
-            <div class="trm-label trm-category trm-mb-20">
-                <a href=" /categories/%E9%80%9A%E7%94%A8/">
-                    通用
-                </a>
-            </div>
-            <h5>
-                <a href="/2024/02/28/%E3%80%90giscus-%E9%85%8D%E7%BD%AE%E3%80%91%E7%BB%99%E5%8D%9A%E5%AE%A2%E4%B8%AD%E5%A2%9E%E5%8A%A0%E8%AF%84%E8%AE%BA%E5%8A%9F%E8%83%BD/" class="trm-anima-link">
-                    【giscus 配置】给博客增加评论功能
-                </a>
-            </h5>
-            <div class="trm-divider trm-mb-20 trm-mt-20"></div>
-            <ul class="trm-card-data trm-label">
-                <li>24/02/28</li>
-                <li>15:47</li>
-                
-                
-            </ul>
-        </div>
-    </div>
-</div>
-    
-        <div class="col-lg-6">
-    <div class="trm-blog-card trm-scroll-animation">
-        <a href="/2024/02/27/%E5%88%9D%E5%BF%83/" class="trm-cover-frame trm-anima-link">
-            
-            
-                <div class="trm-cover-date">
-                    <div class="trm-cover-day">27</div>
-                    <div class="trm-cover-month">2024/02</div>
-                </div>
-            
-        </a>
-        
-        <div class="trm-card-descr">
-            <div class="trm-label trm-category trm-mb-20">
-                <a href=" /categories/%E5%BF%83%E5%BE%97%E4%BD%93%E4%BC%9A/">
-                    心得体会
-                </a>
-            </div>
-            <h5>
-                <a href="/2024/02/27/%E5%88%9D%E5%BF%83/" class="trm-anima-link">
-                    初心————灵魂的渴望是欲望的先知。
-                </a>
-            </h5>
-            <div class="trm-divider trm-mb-20 trm-mt-20"></div>
-            <ul class="trm-card-data trm-label">
-                <li>24/02/27</li>
-                <li>19:37</li>
-                
-                
-            </ul>
-        </div>
-    </div>
-</div>
-    
-</div>
-<!-- newest publications end -->
 
+    
 
-    <div class="trm-pagination">
-        <span class="page-number current">1</span>
-    </div>
+    <div id="giscus-wrap" class="trm-card trm-scroll-animation comment-container"></div>
+<script data-swup-reload-script>
+    function loadGiscus() {
+        let nowTheme = document.documentElement.classList.contains('dark') ? 'dark' : 'light'
+        const config = {
+            src: 'https://giscus.app/client.js',
+            "data-repo": '16372212/16372212.github.io',
+            "data-repo-id": 'MDEwOlJlcG9zaXRvcnkzOTMwMTQ5NDg=',
+            "data-category": 'General',
+            "data-category-id": 'DIC_kwDOF2zupM4Cdju8',
+            "data-mapping": 'pathname',
+            "data-reactions-enabled": '1',
+            "data-emit-metadata": '0',
+            "data-theme": nowTheme,
+            "data-lang": 'zh-CN',
+            crossorigin: "anonymous",
+            async: true
+        }
+        let ele = document.createElement('script')
+        for (let key in config) {
+            ele.setAttribute(key, config[key])
+        }
+        document.getElementById('giscus-wrap').insertAdjacentElement('afterbegin', ele)
+    }
+
+    function changeGiscusTheme() {
+        let theme = document.documentElement.classList.contains('dark') ? 'dark' : 'light'
+
+        function sendMessage(message) {
+            const iframe = document.querySelector('iframe.giscus-frame');
+            if (!iframe) return;
+            iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+
+        sendMessage({
+            setConfig: {
+                theme: theme
+            }
+        });
+    }
+
+    loadGiscus();
+</script>
+
 
 
                     <div class="trm-divider footer-divider"></div>
@@ -701,9 +562,29 @@
 
             
 
+    <div id="post-toc" class="trm-post-toc">
+      <div class="trm-post-toc-header">
+        目录导航
+				<span id="post-toc-top">
+					置顶
+				</span>
+      </div>
+      <div class="trm-post-toc-content">
+        <ol class="trm-toc"><li class="trm-toc-item trm-toc-level-1" title="Paper main idea"><a rel="nofollow" class="trm-toc-link" href="#Paper-main-idea"><span class="trm-toc-number">1.</span> <span class="trm-toc-text">Paper main idea</span></a></li><li class="trm-toc-item trm-toc-level-1" title="论文的youtube讲解"><a rel="nofollow" class="trm-toc-link" href="#论文的youtube讲解"><span class="trm-toc-number">2.</span> <span class="trm-toc-text">论文的youtube讲解</span></a></li><li class="trm-toc-item trm-toc-level-1" title="some ideas"><a rel="nofollow" class="trm-toc-link" href="#some-ideas"><span class="trm-toc-number">3.</span> <span class="trm-toc-text">some ideas</span></a><ol class="trm-toc-child"><li class="trm-toc-item trm-toc-level-2" title="Task Synchronous:"><a rel="nofollow" class="trm-toc-link" href="#Task-Synchronous"><span class="trm-toc-number">3.1.</span> <span class="trm-toc-text">Task Synchronous:</span></a></li><li class="trm-toc-item trm-toc-level-2" title="Lock:"><a rel="nofollow" class="trm-toc-link" href="#Lock"><span class="trm-toc-number">3.2.</span> <span class="trm-toc-text">Lock:</span></a></li><li class="trm-toc-item trm-toc-level-2" title="Error Return:"><a rel="nofollow" class="trm-toc-link" href="#Error-Return"><span class="trm-toc-number">3.3.</span> <span class="trm-toc-text">Error Return:</span></a></li><li class="trm-toc-item trm-toc-level-2" title="Heartbeat:"><a rel="nofollow" class="trm-toc-link" href="#Heartbeat"><span class="trm-toc-number">3.4.</span> <span class="trm-toc-text">Heartbeat:</span></a></li></ol></li><li class="trm-toc-item trm-toc-level-1" title="status of task and worker"><a rel="nofollow" class="trm-toc-link" href="#status-of-task-and-worker"><span class="trm-toc-number">4.</span> <span class="trm-toc-text">status of task and worker</span></a></li></ol>
+      </div>
+    </div>
+
             
 <div class="trm-fixed-container">
     
+        <div class="trm-fixed-btn post-toc-btn" data-title="目录">
+            <i class="iconfont fas fa-th-list"></i>
+        </div>
+    
+    
+        <div class="trm-fixed-btn" data-title="阅读模式" onclick="asyncFun.switchReadMode()">
+            <i class="iconfont fas fa-book-reader"></i>
+        </div>
     
     
     <div id="trm-back-top" class="trm-fixed-btn" data-title="回到顶部">
@@ -738,6 +619,10 @@
     
 
     <!-- 评论插件 -->
+    
+        
+
+        
     
 
 
