@@ -7,16 +7,22 @@
 <meta name="full-screen" content="yes">
 <meta name="theme-color" content="#317EFB" />
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=0" name="viewport">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Ziyang&#39;s Blog">
-<meta property="og:url" content="http://example.com/categories/%E9%80%9A%E7%94%A8/index.html">
+<meta name="description" content="低代码简介意义 低代码引擎的核心是设计器，通过扩展、周边生态等可以产出各式各样的设计器。它不是一套可以适合所有人的低代码平台，而是帮助低代码平台的开发者，快速生产低代码平台的工具。  低代码引擎包括前端代码相关的以及后端例如Java相关的代码平台。 EruptErupt是一个基于Java的低代码平台，它不是通过自动生成Java代码来实现功能，而是使用Java注解（Annotations）来动态生成">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于SpringBoot的低代码平台">
+<meta property="og:url" content="http://example.com/2024/02/29/%E3%80%90%E4%BD%8E%E4%BB%A3%E7%A0%81%E5%BC%95%E6%93%8E%E3%80%91%E4%BB%8B%E7%BB%8D%E4%B8%8E%E5%BC%80%E6%BA%90%E6%A1%88%E4%BE%8B/index.html">
 <meta property="og:site_name" content="Ziyang&#39;s Blog">
+<meta property="og:description" content="低代码简介意义 低代码引擎的核心是设计器，通过扩展、周边生态等可以产出各式各样的设计器。它不是一套可以适合所有人的低代码平台，而是帮助低代码平台的开发者，快速生产低代码平台的工具。  低代码引擎包括前端代码相关的以及后端例如Java相关的代码平台。 EruptErupt是一个基于Java的低代码平台，它不是通过自动生成Java代码来实现功能，而是使用Java注解（Annotations）来动态生成">
 <meta property="og:locale">
+<meta property="article:published_time" content="2024-02-29T07:17:24.000Z">
+<meta property="article:modified_time" content="2024-02-29T09:37:04.440Z">
 <meta property="article:author" content="Zhen Ziyang">
 <meta name="twitter:card" content="summary">
 
+    <meta name="keywords" content="Java, 低代码引擎">
 
-<title >Ziyang's Blog</title>
+
+<title >基于SpringBoot的低代码平台</title>
 
 <!-- Favicon -->
 
@@ -59,7 +65,7 @@
 
 <!-- Variable -->
 <script>window.ASYNC_CONFIG = {"hostname":"example.com","author":"Zhen Ziyang","root":"/","typed_text":["ZZ！"],"theme_version":"2.1.10","theme":{"switch":true,"default":"style-light"},"favicon":{"logo":"leaf.svg","icon16":"leaf.svg","icon32":"leaf.svg","appleTouchIcon":"leaf.svg","webmanifest":"/site.webmanifest","visibilitychange":false,"hidden":"/failure.ico","showText":"(/≧▽≦/)咦！又好了！","hideText":"(●—●)喔哟，崩溃啦！"},"i18n":{"placeholder":"搜索文章...","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）","author":"本文作者：","copyright_link":"本文链接：","copyright_license_title":"版权声明：","copyright_license_content":"本博客所有文章除特别声明外，均默认采用 undefined 许可协议。","copy_success":"复制成功","copy_failure":"复制失败","open_read_mode":"进入阅读模式","exit_read_mode":"退出阅读模式","notice_outdate_message":"距离上次更新已经 undefined 天了, 文章内容可能已经过时。","sticky":"置顶","just":"刚刚","min":"分钟前","hour":"小时前","day":"天前","month":"个月前"},"swup":false,"plugin":{"flickr_justified_gallery":"https://npm.elemecdn.com/flickr-justified-gallery@latest/dist/fjGallery.min.js"},"icons":{"sun":"far fa-sun","moon":"far fa-moon","play":"fas fa-play","email":"far fa-envelope","next":"fas fa-arrow-right","calendar":"far fa-calendar-alt","clock":"far fa-clock","user":"far fa-user","back_top":"fas fa-arrow-up","close":"fas fa-times","search":"fas fa-search","reward":"fas fa-hand-holding-usd","user_tag":"fas fa-user-alt","toc_tag":"fas fa-th-list","read":"fas fa-book-reader","arrows":"fas fa-arrows-alt-h","double_arrows":"fas fa-angle-double-down","copy":"fas fa-copy"},"icontype":"font","highlight":{"plugin":"highlighjs","theme":true,"copy":true,"lang":true,"title":"mac","height_limit":200},"toc":{"post_title":true},"live_time":{"start_time":null,"prefix":"博客已萌萌哒运行 undefined 天"}};</script>
-<script id="async-page-config">window.PAGE_CONFIG = {"isPost":false,"isHome":false,"postUpdate":"2024-02-29 18:18:06"};</script>
+<script id="async-page-config">window.PAGE_CONFIG = {"isPost":true,"isHome":false,"postUpdate":"2024-02-29 17:37:04"};</script>
 
 <!-- Theme mode css -->
 <link data-swup-theme rel="stylesheet" href="/css/index.css?v=2.1.10" id="trm-switch-style">
@@ -241,7 +247,7 @@
     <div class="trm-banner">
     
     <!-- banner cover -->
-    <img style="object-position:top;object-fit:cover;" alt="banner" class="trm-banner-cover" src="/img/banner.png">
+    <img style="object-position:top;object-fit:cover;" alt="banner" class="trm-banner-cover" src="/null">
     <!-- banner cover end -->
     
 
@@ -257,10 +263,10 @@
                     <!-- banner title -->
                     <div class="trm-banner-text ">
                         <div class="trm-label trm-mb-20">
-                            The article archive
+                            NEWS LETTER
                         </div>
                         <h1 class="trm-mb-30 trm-hsmb-font">
-                            云间连下榻，<br>天上接行杯。
+                            基于SpringBoot的低代码平台
                         </h1>
 
                         
@@ -270,7 +276,7 @@
                                 </li>
                                 <li>
                                     <span>
-                                        categories
+                                        2024
                                     </span>
                                 </li>
                             </ul>
@@ -366,73 +372,169 @@
             
             <div class="trm-page-content col-lg-8">
                 <div id="trm-content" class="trm-content">
-                    <div class="row">
-    <div class="col-lg-12">
-        <div class="trm-card">
-            <div style="padding: 0 20px;">
-                
-                    <ul class="row trm-list"><li class="col-lg-4 trm-list-item " style="margin: 6px 0;"><a class="category-list-link" href="/categories/CFA/">CFA</a><span class="category-list-count">（1）</span></li><li class="col-lg-4 trm-list-item " style="margin: 6px 0;"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">（3）</span></li><li class="col-lg-4 trm-list-item " style="margin: 6px 0;"><a class="category-list-link" href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式</a><span class="category-list-count">（2）</span></li><li class="col-lg-4 trm-list-item " style="margin: 6px 0;"><a class="category-list-link" href="/categories/%E5%BF%83%E5%BE%97%E4%BD%93%E4%BC%9A/">心得体会</a><span class="category-list-count">（2）</span></li><li class="col-lg-4 trm-list-item " style="margin: 6px 0;"><a class="category-list-link" href="/categories/%E9%80%9A%E7%94%A8/">通用</a><span class="category-list-count">（1）</span></li></ul>
-                
-            </div>
+                    <div class="trm-post-info row hidden-sm">
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-calendar-alt trm-icon"></i><br>
+            02/29
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-clock trm-icon"></i><br>
+            15:17
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div id="post-author" class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-user trm-icon"></i><br>
+            Zhen Ziyang
         </div>
     </div>
 </div>
+<div class="trm-card ">
+    <article id="article-container" class="trm-publication">
+    <h1 id="低代码简介"><a href="#低代码简介" class="headerlink" title="低代码简介"></a>低代码简介</h1><h2 id="意义"><a href="#意义" class="headerlink" title="意义"></a>意义</h2><blockquote>
+<p>低代码引擎的核心是设计器，通过扩展、周边生态等可以产出各式各样的设计器。它不是一套可以适合所有人的低代码平台，而是帮助低代码平台的开发者，快速生产低代码平台的工具。</p>
+</blockquote>
+<p>低代码引擎包括前端代码相关的以及后端例如Java相关的代码平台。</p>
+<h2 id="Erupt"><a href="#Erupt" class="headerlink" title="Erupt"></a>Erupt</h2><p>Erupt是一个基于Java的低代码平台，它不是通过自动生成Java代码来实现功能，而是使用Java注解（Annotations）来动态生成后台管理系统的页面和功能。这种方法使得开发者不需要编写前端代码或是手动创建数据库表结构，极大地简化了开发流程和提高了开发效率。</p>
+<p>Erupt 不是通过自动生成CRUD的Java代码来实现其功能的。相反，它采用一种基于注解的方法，通过在Java实体类上使用注解来定义如何对数据进行增删改查操作，以及如何在用户界面上展示这些数据。这种方法避免了传统的代码生成器所带来的代码冗余和后续维护困难的问题。</p>
+<p>具体来说，开发者只需定义数据模型，并使用Erupt提供的注解来标注这些模型，Erupt框架会自动解析这些注解，并生成相应的后台管理界面，包括数据列表、表单等，以及对应的增删改查逻辑。这一过程完全自动化，极大地简化了后台管理系统的开发工作。</p>
+<p>例如，通过使用@Erupt注解标注一个实体类，然后在类的字段上使用@EruptField注解来定义字段的属性和展示方式，Erupt就能根据这些信息自动构建出一个完整的数据管理界面，无需开发者编写任何额外的HTML、JavaScript代码或SQL脚本。</p>
+<p>这种基于注解的方法使得Erupt非常适合快速开发需要常规数据管理功能的后台管理系统，同时也提供了足够的灵活性来支持更复杂的业务需求。</p>
+<h3 id="多表联动查询的CRUD"><a href="#多表联动查询的CRUD" class="headerlink" title="多表联动查询的CRUD"></a>多表联动查询的CRUD</h3><h1 id="市面上常用低代码引擎分析"><a href="#市面上常用低代码引擎分析" class="headerlink" title="市面上常用低代码引擎分析"></a>市面上常用低代码引擎分析</h1><p>可见这篇文章：<a target="_blank" rel="noopener" href="https://golden.com/wiki/No-code_%2F_low-code_development-NMGMEA6">No-code&#x2F;low-code</a></p>
 
-<!-- history -->
+</article>
+    
+    
 
-<div class="row">
+</div>
+<div class="trm-post-next-prev row">
     <div class="col-lg-12">
         <!-- title -->
         <h5 class="trm-title-with-divider">
-            
-                通用
-            
-            <span data-number="01"></span>
+            其他文章
+            <span data-number="02"></span>
         </h5>
     </div>
-    <div class="col-lg-12">
-        <!-- timeline -->
-        <div class="trm-timeline">
+    
+        <div class="col-lg-6">
+    <div class="trm-blog-card trm-scroll-animation">
+        <a href="/2024/02/29/SpringBoot%E7%83%AD%E9%83%A8%E7%BD%B2/" class="trm-cover-frame trm-anima-link">
             
-            <div class="trm-timeline-item trm-scroll-animation">
-                <div class="trm-timeline-mark-light"></div>
-                <div class="trm-timeline-mark"></div>
-                <div class="trm-a trm-timeline-content more">
-                    
-                        <div class="trm-card-header">
-                            <div class="trm-left-side">
-                                <h6>
-                                    <a href="/2024/02/28/%E3%80%90giscus-%E9%85%8D%E7%BD%AE%E3%80%91%E7%BB%99%E5%8D%9A%E5%AE%A2%E4%B8%AD%E5%A2%9E%E5%8A%A0%E8%AF%84%E8%AE%BA%E5%8A%9F%E8%83%BD/" class="trm-anima-link">
-                                        【giscus 配置】给博客增加评论功能
-                                    </a>
-                                </h6>
-                                <div class="trm-text-sm trm-accent-color trm-mt-15">
-                                    <ul class="trm-card-data trm-label ">
-                                        <li class="trm-accent-color">02/28</li>
-                                        <li class="trm-accent-color">15:47</li>
-                                        
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        
-                    
+            
+                <div class="trm-cover-date">
+                    <div class="trm-cover-day">29</div>
+                    <div class="trm-cover-month">2024/02</div>
                 </div>
-            </div>
             
+        </a>
+        
+        <div class="trm-card-descr">
+            <div class="trm-label trm-category trm-mb-20">
+                <a href=" #.">
+                    未分类
+                </a>
+            </div>
+            <h5>
+                <a href="/2024/02/29/SpringBoot%E7%83%AD%E9%83%A8%E7%BD%B2/" class="trm-anima-link">
+                    SpringBoot热部署
+                </a>
+            </h5>
+            <div class="trm-divider trm-mb-20 trm-mt-20"></div>
+            <ul class="trm-card-data trm-label">
+                <li>24/02/29</li>
+                <li>18:09</li>
+                
+                
+            </ul>
         </div>
-        <!-- timeline end -->
     </div>
 </div>
-
-<!-- history end -->
-
-
-    <div class="trm-pagination">
-        <span class="page-number current">1</span>
+    
+    
+        <div class="col-lg-6">
+    <div class="trm-blog-card trm-scroll-animation">
+        <a href="/2024/02/28/%E5%A6%82%E4%BD%95%E4%B8%8D%E5%81%9A%E5%B1%80%E5%A4%96%E4%BA%BA/" class="trm-cover-frame trm-anima-link">
+            
+            
+                <div class="trm-cover-date">
+                    <div class="trm-cover-day">28</div>
+                    <div class="trm-cover-month">2024/02</div>
+                </div>
+            
+        </a>
+        
+        <div class="trm-card-descr">
+            <div class="trm-label trm-category trm-mb-20">
+                <a href=" /categories/%E5%BF%83%E5%BE%97%E4%BD%93%E4%BC%9A/">
+                    心得体会
+                </a>
+            </div>
+            <h5>
+                <a href="/2024/02/28/%E5%A6%82%E4%BD%95%E4%B8%8D%E5%81%9A%E5%B1%80%E5%A4%96%E4%BA%BA/" class="trm-anima-link">
+                    如何own好项目，不做局外人
+                </a>
+            </h5>
+            <div class="trm-divider trm-mb-20 trm-mt-20"></div>
+            <ul class="trm-card-data trm-label">
+                <li>24/02/28</li>
+                <li>22:33</li>
+                
+                
+            </ul>
+        </div>
     </div>
+</div>
+    
+</div>
 
+    
 
+    <div id="giscus-wrap" class="trm-card trm-scroll-animation comment-container"></div>
+<script data-swup-reload-script>
+    function loadGiscus() {
+        let nowTheme = document.documentElement.classList.contains('dark') ? 'dark' : 'light'
+        const config = {
+            src: 'https://giscus.app/client.js',
+            "data-repo": '16372212/16372212.github.io',
+            "data-repo-id": 'MDEwOlJlcG9zaXRvcnkzOTMwMTQ5NDg=',
+            "data-category": 'General',
+            "data-category-id": 'DIC_kwDOF2zupM4Cdju8',
+            "data-mapping": 'pathname',
+            "data-reactions-enabled": '1',
+            "data-emit-metadata": '0',
+            "data-theme": nowTheme,
+            "data-lang": 'zh-CN',
+            crossorigin: "anonymous",
+            async: true
+        }
+        let ele = document.createElement('script')
+        for (let key in config) {
+            ele.setAttribute(key, config[key])
+        }
+        document.getElementById('giscus-wrap').insertAdjacentElement('afterbegin', ele)
+    }
+
+    function changeGiscusTheme() {
+        let theme = document.documentElement.classList.contains('dark') ? 'dark' : 'light'
+
+        function sendMessage(message) {
+            const iframe = document.querySelector('iframe.giscus-frame');
+            if (!iframe) return;
+            iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+
+        sendMessage({
+            setConfig: {
+                theme: theme
+            }
+        });
+    }
+
+    loadGiscus();
+</script>
 
 
 
@@ -477,9 +579,29 @@
 
             
 
+    <div id="post-toc" class="trm-post-toc">
+      <div class="trm-post-toc-header">
+        目录导航
+				<span id="post-toc-top">
+					置顶
+				</span>
+      </div>
+      <div class="trm-post-toc-content">
+        <ol class="trm-toc"><li class="trm-toc-item trm-toc-level-1" title="低代码简介"><a rel="nofollow" class="trm-toc-link" href="#低代码简介"><span class="trm-toc-number">1.</span> <span class="trm-toc-text">低代码简介</span></a><ol class="trm-toc-child"><li class="trm-toc-item trm-toc-level-2" title="意义"><a rel="nofollow" class="trm-toc-link" href="#意义"><span class="trm-toc-number">1.1.</span> <span class="trm-toc-text">意义</span></a></li><li class="trm-toc-item trm-toc-level-2" title="Erupt"><a rel="nofollow" class="trm-toc-link" href="#Erupt"><span class="trm-toc-number">1.2.</span> <span class="trm-toc-text">Erupt</span></a><ol class="trm-toc-child"><li class="trm-toc-item trm-toc-level-3" title="多表联动查询的CRUD"><a rel="nofollow" class="trm-toc-link" href="#多表联动查询的CRUD"><span class="trm-toc-number">1.2.1.</span> <span class="trm-toc-text">多表联动查询的CRUD</span></a></li></ol></li></ol></li><li class="trm-toc-item trm-toc-level-1" title="市面上常用低代码引擎分析"><a rel="nofollow" class="trm-toc-link" href="#市面上常用低代码引擎分析"><span class="trm-toc-number">2.</span> <span class="trm-toc-text">市面上常用低代码引擎分析</span></a></li></ol>
+      </div>
+    </div>
+
             
 <div class="trm-fixed-container">
     
+        <div class="trm-fixed-btn post-toc-btn" data-title="目录">
+            <i class="iconfont fas fa-th-list"></i>
+        </div>
+    
+    
+        <div class="trm-fixed-btn" data-title="阅读模式" onclick="asyncFun.switchReadMode()">
+            <i class="iconfont fas fa-book-reader"></i>
+        </div>
     
     
     <div id="trm-back-top" class="trm-fixed-btn" data-title="回到顶部">
@@ -514,6 +636,10 @@
     
 
     <!-- 评论插件 -->
+    
+        
+
+        
     
 
 
