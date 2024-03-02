@@ -7,22 +7,22 @@
 <meta name="full-screen" content="yes">
 <meta name="theme-color" content="#317EFB" />
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=0" name="viewport">
-<meta name="description" content="名词与解释加载与部署加载Loading：  原理：将程序或数据从存储设备读取到内存。  涉及内容：给程序分配内存空间，将机器码和数据加载到分配的空间中。   部署Deployment： 将已编译的机器码（可执行文件）和任何必要的库或依赖项放置到目标系统或服务器 编译型语言和解释型语言两种不同的执行方式。 解释性Interpretation：程序运行时逐行或逐块被解释器直接执行&#x2F;在程序运行">
+<meta name="description" content="名词与解释加载与部署加载Loading：  原理：将程序或数据从存储设备读取到内存。涉及内容：给程序分配内存空间，将机器码和数据加载到分配的空间中。  部署Deployment：  将已编译的机器码（可执行文件）和任何必要的库或依赖项放置到目标系统或服务器  编译型语言和解释型语言这是两种不同的执行方式。 解释性Interpretation：  程序运行时逐行或逐块被解释器直接执行&#x2F;在程">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SpringBoot热部署与热加载">
+<meta property="og:title" content="JVM热部署,热加载与源码解读">
 <meta property="og:url" content="http://example.com/2024/02/29/%E3%80%90Java%E3%80%91SpringBoot%E7%83%AD%E9%83%A8%E7%BD%B2/index.html">
 <meta property="og:site_name" content="Ziyang&#39;s Blog">
-<meta property="og:description" content="名词与解释加载与部署加载Loading：  原理：将程序或数据从存储设备读取到内存。  涉及内容：给程序分配内存空间，将机器码和数据加载到分配的空间中。   部署Deployment： 将已编译的机器码（可执行文件）和任何必要的库或依赖项放置到目标系统或服务器 编译型语言和解释型语言两种不同的执行方式。 解释性Interpretation：程序运行时逐行或逐块被解释器直接执行&#x2F;在程序运行">
+<meta property="og:description" content="名词与解释加载与部署加载Loading：  原理：将程序或数据从存储设备读取到内存。涉及内容：给程序分配内存空间，将机器码和数据加载到分配的空间中。  部署Deployment：  将已编译的机器码（可执行文件）和任何必要的库或依赖项放置到目标系统或服务器  编译型语言和解释型语言这是两种不同的执行方式。 解释性Interpretation：  程序运行时逐行或逐块被解释器直接执行&#x2F;在程">
 <meta property="og:locale">
 <meta property="article:published_time" content="2024-02-29T10:09:19.000Z">
-<meta property="article:modified_time" content="2024-03-02T04:44:47.924Z">
+<meta property="article:modified_time" content="2024-03-02T04:50:07.026Z">
 <meta property="article:author" content="Zhen Ziyang">
 <meta name="twitter:card" content="summary">
 
-    <meta name="keywords" content="HotSwap, 热加载，热部署">
+    <meta name="keywords" content="HotSwap, 热加载，热部署, JVM">
 
 
-<title >SpringBoot热部署与热加载</title>
+<title >JVM热部署,热加载与源码解读</title>
 
 <!-- Favicon -->
 
@@ -65,7 +65,7 @@
 
 <!-- Variable -->
 <script>window.ASYNC_CONFIG = {"hostname":"example.com","author":"Zhen Ziyang","root":"/","typed_text":["ZZ！"],"theme_version":"2.1.10","theme":{"switch":true,"default":"style-light"},"favicon":{"logo":"leaf.svg","icon16":"leaf.svg","icon32":"leaf.svg","appleTouchIcon":"leaf.svg","webmanifest":"/site.webmanifest","visibilitychange":false,"hidden":"/failure.ico","showText":"(/≧▽≦/)咦！又好了！","hideText":"(●—●)喔哟，崩溃啦！"},"i18n":{"placeholder":"搜索文章...","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）","author":"本文作者：","copyright_link":"本文链接：","copyright_license_title":"版权声明：","copyright_license_content":"本博客所有文章除特别声明外，均默认采用 undefined 许可协议。","copy_success":"复制成功","copy_failure":"复制失败","open_read_mode":"进入阅读模式","exit_read_mode":"退出阅读模式","notice_outdate_message":"距离上次更新已经 undefined 天了, 文章内容可能已经过时。","sticky":"置顶","just":"刚刚","min":"分钟前","hour":"小时前","day":"天前","month":"个月前"},"swup":false,"plugin":{"flickr_justified_gallery":"https://npm.elemecdn.com/flickr-justified-gallery@latest/dist/fjGallery.min.js"},"icons":{"sun":"far fa-sun","moon":"far fa-moon","play":"fas fa-play","email":"far fa-envelope","next":"fas fa-arrow-right","calendar":"far fa-calendar-alt","clock":"far fa-clock","user":"far fa-user","back_top":"fas fa-arrow-up","close":"fas fa-times","search":"fas fa-search","reward":"fas fa-hand-holding-usd","user_tag":"fas fa-user-alt","toc_tag":"fas fa-th-list","read":"fas fa-book-reader","arrows":"fas fa-arrows-alt-h","double_arrows":"fas fa-angle-double-down","copy":"fas fa-copy"},"icontype":"font","highlight":{"plugin":"highlighjs","theme":true,"copy":true,"lang":true,"title":"mac","height_limit":200},"toc":{"post_title":true},"live_time":{"start_time":null,"prefix":"博客已萌萌哒运行 undefined 天"}};</script>
-<script id="async-page-config">window.PAGE_CONFIG = {"isPost":true,"isHome":false,"postUpdate":"2024-03-02 12:44:47"};</script>
+<script id="async-page-config">window.PAGE_CONFIG = {"isPost":true,"isHome":false,"postUpdate":"2024-03-02 12:50:07"};</script>
 
 <!-- Theme mode css -->
 <link data-swup-theme rel="stylesheet" href="/css/index.css?v=2.1.10" id="trm-switch-style">
@@ -266,7 +266,7 @@
                             NEWS LETTER
                         </div>
                         <h1 class="trm-mb-30 trm-hsmb-font">
-                            SpringBoot热部署与热加载
+                            JVM热部署,热加载与源码解读
                         </h1>
 
                         
@@ -396,26 +396,30 @@
     <article id="article-container" class="trm-publication">
     <h1 id="名词与解释"><a href="#名词与解释" class="headerlink" title="名词与解释"></a>名词与解释</h1><h2 id="加载与部署"><a href="#加载与部署" class="headerlink" title="加载与部署"></a>加载与部署</h2><p><strong>加载</strong>Loading：</p>
 <ul>
-<li><p>原理：将程序或数据从存储设备读取到内存。</p>
-</li>
-<li><p>涉及内容：给程序分配内存空间，将机器码和数据加载到分配的空间中。</p>
-</li>
+<li>原理：将程序或数据从存储设备读取到内存。涉及内容：给程序分配内存空间，将机器码和数据加载到分配的空间中。</li>
 </ul>
 <p><strong>部署</strong>Deployment：</p>
-<p>将已编译的机器码（可执行文件）和任何必要的库或依赖项放置到目标系统或服务器</p>
-<h2 id="编译型语言和解释型语言"><a href="#编译型语言和解释型语言" class="headerlink" title="编译型语言和解释型语言"></a>编译型语言和解释型语言</h2><p>两种不同的执行方式。</p>
-<p><strong>解释性</strong>Interpretation：<br>程序运行时逐行或逐块被解释器直接执行&#x2F;在程序运行时动态地被解释和执行。python or js.</p>
-<p><strong>编译型</strong>Compilation：<br>运行前事先编译成机器码.c, c++, go</p>
+<ul>
+<li>将已编译的机器码（可执行文件）和任何必要的库或依赖项放置到目标系统或服务器</li>
+</ul>
+<h2 id="编译型语言和解释型语言"><a href="#编译型语言和解释型语言" class="headerlink" title="编译型语言和解释型语言"></a>编译型语言和解释型语言</h2><p>这是两种不同的执行方式。</p>
+<p><strong>解释性</strong>Interpretation：</p>
+<ul>
+<li>程序运行时逐行或逐块被解释器直接执行&#x2F;在程序运行时动态地被解释和执行。python or js.</li>
+</ul>
+<p><strong>编译型</strong>Compilation：</p>
+<ul>
+<li>运行前事先编译成机器码.c, c++, go</li>
+</ul>
 <blockquote>
 <p>注意这里说的是机器码而不是字节码。字节码不直接针对特定的硬件架构。字节码通常由编译器从高级语言源代码编译得到，然后可以由虚拟机解释执行或进一步编译成机器码。一般Java，.Net，Python有字节码</p>
 </blockquote>
 <blockquote>
-<p>那Java属于什么类型语言？Java通常被认为同时具有编译型和解释型语言的特点： </p>
+<p>那Java属于什么类型语言？Java通常被认为同时具有编译型和解释型语言的特点： - 编译型特点：Java源代码（.java文件）首先被Java编译器编译成字节码（.class文件） - 解释型特点：JVM中的解释器对Java代码进行解释。</p>
 </blockquote>
-<p>编译型特点：Java源代码（.java文件）首先被Java编译器编译成字节码（.class文件）<br>解释型特点：JVM中的解释器对Java代码进行解释。</p>
 <h2 id="热部署"><a href="#热部署" class="headerlink" title="热部署"></a>热部署</h2><p>热部署主要依赖于JVM的类加载（Class Loading）机制以及能够动态管理和替换类定义的能力。在Java平台上，热部署允许开发者在应用程序运行时更新和替换特定的类或资源，而无需停止和重启整个应用服务器。</p>
 <blockquote>
-<p>有人说在容器中是没办法实现热部署或者热加载的? 在容器中实现热部署或热加载是完全可能的: Docker环境下，可以通过挂载卷（Docker Volumes）来实现实时重载（Live-reload）; 在Kubernetes环境下，使用DevSpace这样的工具可以更加高效地实现热部署和热加载。</p>
+<p>有人说在容器中是没办法实现热部署或者热加载的?  其实，在容器中实现热部署或热加载是完全可能的: Docker环境下，可以通过挂载卷（Docker Volumes）来实现实时重载（Live-reload）; 在Kubernetes环境下，使用DevSpace这样的工具可以更加高效地实现热部署和热加载。</p>
 </blockquote>
 <h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><h3 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h3><h2 id="热加载"><a href="#热加载" class="headerlink" title="热加载"></a>热加载</h2><h3 id="原理-1"><a href="#原理-1" class="headerlink" title="原理"></a>原理</h3><h3 id="源码-1"><a href="#源码-1" class="headerlink" title="源码"></a>源码</h3>
 </article>
