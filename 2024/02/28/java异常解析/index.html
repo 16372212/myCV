@@ -1,663 +1,72 @@
-<!DOCTYPE html>
-<html lang="zh-Hans">
-
-<head>
-  <meta http-equiv="content-type" content="text/html; charset=utf-8">
-<meta name="x5-fullscreen" content="true">
-<meta name="full-screen" content="yes">
-<meta name="theme-color" content="#317EFB" />
-<meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=0" name="viewport">
-<meta name="description" content="图 原理结构解释Throwable Java中所有的异常类都继承自它，角色在异常的领域中和Object一样；需要捕获所有异常时可以使用catch(Throwable e)进行捕获 1 errorError 表示Java运行时系统(JVM)用于指示与运行时环境本身(JRE)有关的错误。它的子类常用有OutOfMemoryError StackOverFlowError 2 exceptionExce">
+<!DOCTYPE html><html lang="zh-Hans"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/images/icons/favicon-16x16.png?v=2.8.0" type="image/png" sizes="16x16"><link rel="icon" href="/images/icons/favicon-32x32.png?v=2.8.0" type="image/png" sizes="32x32"><meta name="description" content="图                     原理                           结构解释       Throwable Java中所有的异常类都继承自它，角色在异常的领域中和Object一样；需要捕获所有异常时可以使用catch(Throwable e)进行捕获                     1 error       Error 表示Java运行时系统(JVM)">
 <meta property="og:type" content="article">
 <meta property="og:title" content="java异常解析">
 <meta property="og:url" content="http://example.com/2024/02/28/java%E5%BC%82%E5%B8%B8%E8%A7%A3%E6%9E%90/index.html">
 <meta property="og:site_name" content="Ziyang&#39;s Blog">
-<meta property="og:description" content="图 原理结构解释Throwable Java中所有的异常类都继承自它，角色在异常的领域中和Object一样；需要捕获所有异常时可以使用catch(Throwable e)进行捕获 1 errorError 表示Java运行时系统(JVM)用于指示与运行时环境本身(JRE)有关的错误。它的子类常用有OutOfMemoryError StackOverFlowError 2 exceptionExce">
+<meta property="og:description" content="图                     原理                           结构解释       Throwable Java中所有的异常类都继承自它，角色在异常的领域中和Object一样；需要捕获所有异常时可以使用catch(Throwable e)进行捕获                     1 error       Error 表示Java运行时系统(JVM)">
 <meta property="og:locale">
 <meta property="article:published_time" content="2024-02-28T10:22:57.000Z">
 <meta property="article:modified_time" content="2024-02-28T10:25:54.237Z">
 <meta property="article:author" content="Zhen Ziyang">
-<meta name="twitter:card" content="summary">
+<meta name="twitter:card" content="summary"><title>java异常解析 | Ziyang's Blog</title><link ref="canonical" href="http://example.com/2024/02/28/java%E5%BC%82%E5%B8%B8%E8%A7%A3%E6%9E%90/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.8.0"><link rel="stylesheet" href="css/custom.css"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  assistSearch: undefined,
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":true,"scrollDownIcon":false},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"default","highlight":"light","wordWrap":false},
+  reward: false,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: false,
+  pjax: undefined,
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"Copiar","copySuccess":"Éxito en copia","copyError":"Error en copia"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
 
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 7.1.1"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">Inicio</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">Archivos</span></a></div></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">Hello Stun</div><div class="header-banner-info__subtitle">An elegant theme for Hexo</div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">java异常解析</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Creado</span><span class="post-meta-item__value">2024-02-28</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Actualizado</span><span class="post-meta-item__value">2024-02-28</span></span></div></header><div class="post-body"><p><a href="/images/1280X1280.PNG">图</a></p>
 
-<title >java异常解析</title>
+        <h1 id="原理"   >
+          <a href="#原理" class="heading-link"><i class="fas fa-link"></i></a><a href="#原理" class="headerlink" title="原理"></a>原理</h1>
+      
+        <h2 id="结构解释"   >
+          <a href="#结构解释" class="heading-link"><i class="fas fa-link"></i></a><a href="#结构解释" class="headerlink" title="结构解释"></a>结构解释</h2>
+      <p>Throwable Java中所有的异常类都继承自它，角色在异常的领域中和Object一样；需要捕获所有异常时可以使用catch(Throwable e)进行捕获</p>
 
-<!-- Favicon -->
+        <h2 id="1-error"   >
+          <a href="#1-error" class="heading-link"><i class="fas fa-link"></i></a><a href="#1-error" class="headerlink" title="1 error"></a>1 error</h2>
+      <p>Error 表示Java运行时系统(JVM)用于指示与运行时环境本身(JRE)有关的错误。它的子类常用有OutOfMemoryError StackOverFlowError</p>
 
-    <link href='/leaf.svg?v=2.1.10' rel='icon' type='image/png' sizes='16x16' ></link>
+        <h2 id="2-exception"   >
+          <a href="#2-exception" class="heading-link"><i class="fas fa-link"></i></a><a href="#2-exception" class="headerlink" title="2 exception"></a>2 exception</h2>
+      <p>Exception 它表示程序可能捕捉的异常或者程序可以处理的异常。可以分成检查性异常和非检查性（RuntimeException）异常</p>
 
+        <h3 id="2-1-检查性异常"   >
+          <a href="#2-1-检查性异常" class="heading-link"><i class="fas fa-link"></i></a><a href="#2-1-检查性异常" class="headerlink" title="2.1 检查性异常"></a>2.1 检查性异常</h3>
+      <p>编译时必须进行处理的异常。要求程序员在代码中显式地处理这些异常。例如，IOException、SQLException等。不处理编辑器会报错。</p>
 
-    <link href='/leaf.svg?v=2.1.10' rel='icon' type='image/png' sizes='32x32' ></link>
-
-
-    <link href='/leaf.svg?v=2.1.10' rel='apple-touch-icon' sizes='180x180' ></link>
-
-
-    <link href='/site.webmanifest' rel='manifest' ></link>
-
-
-<!-- Plugin -->
-
-
-
-
-    
-<link rel="stylesheet" href="/css/plugins/bootstrap.row.css">
-
-    
-<link rel="stylesheet" href="https://npm.elemecdn.com/@fancyapps/ui@4.0/dist/fancybox.css">
-
-    
-    
-
-
-
-
-<!-- Icon -->
-
-    
-<link rel="stylesheet" href="/css/plugins/font-awesome.min.css">
-
-
-
-
-<!-- Variable -->
-<script>window.ASYNC_CONFIG = {"hostname":"example.com","author":"Zhen Ziyang","root":"/","typed_text":["ZZ！"],"theme_version":"2.1.10","theme":{"switch":true,"default":"style-light"},"favicon":{"logo":"leaf.svg","icon16":"leaf.svg","icon32":"leaf.svg","appleTouchIcon":"leaf.svg","webmanifest":"/site.webmanifest","visibilitychange":false,"hidden":"/failure.ico","showText":"(/≧▽≦/)咦！又好了！","hideText":"(●—●)喔哟，崩溃啦！"},"i18n":{"placeholder":"搜索文章...","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）","author":"本文作者：","copyright_link":"本文链接：","copyright_license_title":"版权声明：","copyright_license_content":"本博客所有文章除特别声明外，均默认采用 undefined 许可协议。","copy_success":"复制成功","copy_failure":"复制失败","open_read_mode":"进入阅读模式","exit_read_mode":"退出阅读模式","notice_outdate_message":"距离上次更新已经 undefined 天了, 文章内容可能已经过时。","sticky":"置顶","just":"刚刚","min":"分钟前","hour":"小时前","day":"天前","month":"个月前"},"swup":false,"plugin":{"flickr_justified_gallery":"https://npm.elemecdn.com/flickr-justified-gallery@latest/dist/fjGallery.min.js"},"icons":{"sun":"far fa-sun","moon":"far fa-moon","play":"fas fa-play","email":"far fa-envelope","next":"fas fa-arrow-right","calendar":"far fa-calendar-alt","clock":"far fa-clock","user":"far fa-user","back_top":"fas fa-arrow-up","close":"fas fa-times","search":"fas fa-search","reward":"fas fa-hand-holding-usd","user_tag":"fas fa-user-alt","toc_tag":"fas fa-th-list","read":"fas fa-book-reader","arrows":"fas fa-arrows-alt-h","double_arrows":"fas fa-angle-double-down","copy":"fas fa-copy"},"icontype":"font","highlight":{"plugin":"highlighjs","theme":true,"copy":true,"lang":true,"title":"mac","height_limit":200},"toc":{"post_title":true},"live_time":{"start_time":null,"prefix":"博客已萌萌哒运行 undefined 天"}};</script>
-<script id="async-page-config">window.PAGE_CONFIG = {"isPost":true,"isHome":false,"postUpdate":"2024-02-28 18:25:54"};</script>
-
-<!-- Theme mode css -->
-<link data-swup-theme rel="stylesheet" href="/css/index.css?v=2.1.10" id="trm-switch-style">
-<script>
-    let defaultMode = ASYNC_CONFIG.theme.default !=='auto' ?  ASYNC_CONFIG.theme.default : (window.matchMedia("(prefers-color-scheme: light)").matches ? 'style-light' : 'style-dark')
-    let catchMode = localStorage.getItem('theme-mode') || defaultMode;
-    let type = catchMode === 'style-dark' ? 'add' : 'remove';
-    document.documentElement.classList[type]('dark')
-</script>
-
-<!-- CDN -->
-
-
-    
-    
-
-
-
-<!-- Site Analytics -->
- 
-<meta name="generator" content="Hexo 7.1.1"></head>
-
-<body>
-
-  <!-- app wrapper -->
-  <div class="trm-app-frame">
-
-    <!-- page preloader -->
-    <div class="trm-preloader">
-    <div class="trm-holder">
-        <div class="preloader">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
-    </div>
-</div>
-    <!-- page preloader end -->
-
-    <!-- change mode preloader -->
-    <div class="trm-mode-swich-animation-frame">
-    <div class="trm-mode-swich-animation">
-        <i class="i-sun"><i class="iconfont far fa-sun"></i></i>
-        <div class="trm-horizon"></div>
-        <i class="i-moon"><i class="iconfont far fa-moon"></i></i>
-    </div>
-</div>
-    <!-- change mode preloader end -->
-
-      <!-- scroll container -->
-      <div id="trm-dynamic-content" class="trm-swup-animation">
-        <div id="trm-scroll-container" class="trm-scroll-container" style="opacity: 0">
-            <!-- top bar -->
-            <header class="trm-top-bar">
-	<div class="container">
-		<div class="trm-left-side">
-			<!-- logo -->
-<a href="/" class="trm-logo-frame trm-anima-link">
-    
-        <img alt="logo" src="/leaf.svg">
-    
-    
-        <div class="trm-logo-text">
-            Ziyang<span>Zhen</span>
-        </div>
-    
-</a>
-<!-- logo end -->
-		</div>
-		<div class="trm-right-side">
-			<!-- menu -->
-<div class="trm-menu">
-    <nav>
-        <ul>
-            
-            <li class="menu-item-has-children ">
-                <a  href="/" target="">
-                    首页
-                </a>
-                
-            </li>
-            
-            <li class="menu-item-has-children ">
-                <a  href="/categories/" target="">
-                    分类
-                </a>
-                
-                <ul>
-                    
-                    <li>
-                        <a  href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/" target="">
-                            分布式
-                        </a>
-                    </li>
-                    
-                    <li>
-                        <a  href="/categories/AI/" target="">
-                            AI
-                        </a>
-                    </li>
-                    
-                    <li>
-                        <a  href="/categories/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/" target="">
-                            基础算法
-                        </a>
-                    </li>
-                    
-                    <li>
-                        <a  href="/categories/Java/" target="">
-                            Java
-                        </a>
-                    </li>
-                    
-                    <li>
-                        <a  href="/categories/CFA/" target="">
-                            CFA
-                        </a>
-                    </li>
-                    
-                    <li>
-                        <a  href="/categories/%E8%AF%BB%E4%B9%A6/" target="">
-                            读书
-                        </a>
-                    </li>
-                    
-                    <li>
-                        <a  href="/categories/%E5%BF%83%E5%BE%97%E4%BD%93%E4%BC%9A/" target="">
-                            心得
-                        </a>
-                    </li>
-                    
-                </ul>
-                
-            </li>
-            
-            <li class="menu-item-has-children ">
-                <a data-no-swup href="/archives/" target="">
-                    归档
-                </a>
-                
-            </li>
-            
-        </ul>
-    </nav>
-</div>
-<!-- menu end -->
-			
-    <!-- mode switcher place -->
-    <div class="trm-mode-switcher-place">
-        <div class="trm-mode-switcher">
-            <i class="iconfont far fa-sun"></i>
-            <input class="tgl tgl-light" id="trm-swich" type="checkbox">
-            <label class="trm-swich" for="trm-swich"></label>
-            <i class="iconfont far fa-moon"></i>
-        </div>
-    </div>
-    <!-- mode switcher place end -->
-
-			
-		</div>
-		<div class="trm-menu-btn">
-			<span></span>
-		</div>
-	</div>
-</header>
-            <!-- top bar end -->
-
-            <!-- body -->
-            
-<div class="trm-content-start">
-    <!-- banner -->
-    <div class="trm-banner">
-    
-    <!-- banner cover -->
-    <img style="object-position:top;object-fit:cover;" alt="banner" class="trm-banner-cover" src="/images/1280X1280.PNG">
-    <!-- banner cover end -->
-    
-
-    <!-- banner content -->
-    <div class="trm-banner-content trm-overlay">
-        <div class="container">
-            <div class="row">
-                
-                <div class="col-lg-4"></div>
-                
-                <div class="col-lg-8">
-
-                    <!-- banner title -->
-                    <div class="trm-banner-text ">
-                        <div class="trm-label trm-mb-20">
-                            NEWS LETTER
-                        </div>
-                        <h1 class="trm-mb-30 trm-hsmb-font">
-                            java异常解析
-                        </h1>
-
-                        
-                            <ul class="trm-breadcrumbs trm-label">
-                                <li>
-                                    <a href="/" class="trm-anima-link">Home</a>
-                                </li>
-                                <li>
-                                    <span>
-                                        2024
-                                    </span>
-                                </li>
-                            </ul>
-                        
-                    </div>
-                    <!-- banner title end -->
-
-                    <!-- scroll hint -->
-                    <span id="scroll-triger" class="trm-scroll-hint-frame">
-                        <div class="trm-scroll-hint"></div>
-                        <span class="trm-label">Scroll down</span>
-                    </span>
-                    <!-- scroll hint end -->
-
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- banner content end -->
-</div>
-    <!-- banner end -->
-    <div class="container">
-        <div class="row">
-            
-                <div class="trm-page-sidebar col-lg-4 hidden-sm">
-                    <!-- main card -->
-                    <div class="trm-main-card-frame trm-sidebar">
-    <div class="trm-main-card"> 
-        <!-- card header -->
-<div class="trm-mc-header">
-    <div class="trm-avatar-frame trm-mb-20">
-        <img alt="Avatar" class="trm-avatar" src="/images/avator_my.jpg">
-    </div>
-    <h5 class="trm-name trm-mb-15">
-        Zhen Ziyang
-    </h5>
-    
-        <div class="trm-label">
-            Coding吧
-            <span class="trm-typed-text">
-                <!-- Words for theme.user.typedText -->
-            </span>
-        </div>
-    
-</div>
-<!-- card header end -->
-        <!-- sidebar social -->
-
-<div class="trm-divider trm-mb-40 trm-mt-40"></div>
-<div class="trm-social">
-    
-        <a href="https://github.com/16372212/" title="github" rel="nofollow" target="_blank">
-            <i class="iconfont fab fa-github"></i>
-        </a>
-    
-        <a href="mailto:coding8ziyang@gmail.com" title="mail" rel="nofollow" target="_blank">
-            <i class="iconfont fas fa-mail-bulk"></i>
-        </a>
-    
-</div>
-
-<!-- sidebar social end -->
-        <!-- info -->
-<div class="trm-divider trm-mb-40 trm-mt-40"></div>
-<ul class="trm-table trm-mb-20">
-    
-        <li>
-            <div class="trm-label">
-                地址:
-            </div>
-            <div class="trm-label trm-label-light">
-                银河系
-            </div>
-        </li>
-    
-        <li>
-            <div class="trm-label">
-                博客关键词:
-            </div>
-            <div class="trm-label trm-label-light">
-                Coding/分布式/CFA
-            </div>
-        </li>
-    
-</ul>
-<!-- info end -->
-
-        
-    </div>
-</div>
-                    <!-- main card end -->
-                </div>
-            
-            <div class="trm-page-content col-lg-8">
-                <div id="trm-content" class="trm-content">
-                    <div class="trm-post-info row hidden-sm">
-    <div class="col-sm-4">
-        <div class="trm-card trm-label trm-label-light text-center">
-            <i class="iconfont far fa-calendar-alt trm-icon"></i><br>
-            02/28
-        </div>
-    </div>
-    <div class="col-sm-4">
-        <div class="trm-card trm-label trm-label-light text-center">
-            <i class="iconfont far fa-clock trm-icon"></i><br>
-            18:22
-        </div>
-    </div>
-    <div class="col-sm-4">
-        <div id="post-author" class="trm-card trm-label trm-label-light text-center">
-            <i class="iconfont far fa-user trm-icon"></i><br>
-            Zhen Ziyang
-        </div>
-    </div>
-</div>
-<div class="trm-card ">
-    <article id="article-container" class="trm-publication">
-    <p><a href="/images/1280X1280.PNG">图</a></p>
-<h1 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h1><h2 id="结构解释"><a href="#结构解释" class="headerlink" title="结构解释"></a>结构解释</h2><p>Throwable Java中所有的异常类都继承自它，角色在异常的领域中和Object一样；需要捕获所有异常时可以使用catch(Throwable e)进行捕获</p>
-<h2 id="1-error"><a href="#1-error" class="headerlink" title="1 error"></a>1 error</h2><p>Error 表示Java运行时系统(JVM)用于指示与运行时环境本身(JRE)有关的错误。它的子类常用有OutOfMemoryError StackOverFlowError</p>
-<h2 id="2-exception"><a href="#2-exception" class="headerlink" title="2 exception"></a>2 exception</h2><p>Exception 它表示程序可能捕捉的异常或者程序可以处理的异常。可以分成检查性异常和非检查性（RuntimeException）异常</p>
-<h3 id="2-1-检查性异常"><a href="#2-1-检查性异常" class="headerlink" title="2.1 检查性异常"></a>2.1 检查性异常</h3><p>编译时必须进行处理的异常。要求程序员在代码中显式地处理这些异常。例如，IOException、SQLException等。不处理编辑器会报错。</p>
-<h3 id="2-2-非检查异常（运行时异常）"><a href="#2-2-非检查异常（运行时异常）" class="headerlink" title="2.2 非检查异常（运行时异常）"></a>2.2 非检查异常（运行时异常）</h3><p>例如，NullPointerException、ArrayIndexOutOfBoundsException等。</p>
+        <h3 id="2-2-非检查异常（运行时异常）"   >
+          <a href="#2-2-非检查异常（运行时异常）" class="heading-link"><i class="fas fa-link"></i></a><a href="#2-2-非检查异常（运行时异常）" class="headerlink" title="2.2 非检查异常（运行时异常）"></a>2.2 非检查异常（运行时异常）</h3>
+      <p>例如，NullPointerException、ArrayIndexOutOfBoundsException等。</p>
 <p>RuntimeException 运行时异常，它是Exception的子类；是一个特殊的检查异常，调用者可以忽略不处理这个异常，交给</p>
 <p>上面的调用者或者全局进行捕获处理；继承自RuntimeException的异常可以不用throws关键字在方法上进行标示也能通过编译，但通常不建议这样做。</p>
-<h1 id="捕获原理"><a href="#捕获原理" class="headerlink" title="捕获原理"></a>捕获原理</h1><p>根据类型捕获的：异常是通过继承关系进行分类的。当抛出异常时，会检查异常的类型和catch块的声明类型是否匹配。如果异常的类型是catch块声明的类型或其子类型，就会执行对应的catch块中的代码。如果是自定义的异常类，你可以查看它的定义和继承关系。</p>
 
-</article>
-    
-    
-
-</div>
-<div class="trm-post-next-prev row">
-    <div class="col-lg-12">
-        <!-- title -->
-        <h5 class="trm-title-with-divider">
-            其他文章
-            <span data-number="02"></span>
-        </h5>
-    </div>
-    
-        <div class="col-lg-6">
-    <div class="trm-blog-card trm-scroll-animation">
-        <a href="/2024/02/28/mapstruct%E6%98%A0%E5%B0%84%E5%99%A8/" class="trm-cover-frame trm-anima-link">
-            
-            
-                <img alt="cover" class="no-fancybox" src="/images/jvm.webp">
-            
-        </a>
-        
-        <div class="trm-card-descr">
-            <div class="trm-label trm-category trm-mb-20">
-                <a href=" /categories/Java/">
-                    Java
-                </a>
-            </div>
-            <h5>
-                <a href="/2024/02/28/mapstruct%E6%98%A0%E5%B0%84%E5%99%A8/" class="trm-anima-link">
-                    mapstruct映射器
-                </a>
-            </h5>
-            <div class="trm-divider trm-mb-20 trm-mt-20"></div>
-            <ul class="trm-card-data trm-label">
-                <li>24/02/28</li>
-                <li>18:26</li>
-                
-                
-            </ul>
-        </div>
-    </div>
-</div>
-    
-    
-        <div class="col-lg-6">
-    <div class="trm-blog-card trm-scroll-animation">
-        <a href="/2024/02/28/%E3%80%90%E8%B4%A2%E5%8A%A1%E6%8A%A5%E8%A1%A8%E3%80%91%E7%AE%80%E5%8D%95%E4%BB%8B%E7%BB%8D/" class="trm-cover-frame trm-anima-link">
-            
-            
-                <div class="trm-cover-date">
-                    <div class="trm-cover-day">28</div>
-                    <div class="trm-cover-month">2024/02</div>
-                </div>
-            
-        </a>
-        
-        <div class="trm-card-descr">
-            <div class="trm-label trm-category trm-mb-20">
-                <a href=" /categories/CFA/">
-                    CFA
-                </a>
-            </div>
-            <h5>
-                <a href="/2024/02/28/%E3%80%90%E8%B4%A2%E5%8A%A1%E6%8A%A5%E8%A1%A8%E3%80%91%E7%AE%80%E5%8D%95%E4%BB%8B%E7%BB%8D/" class="trm-anima-link">
-                    【财务报表】简单介绍
-                </a>
-            </h5>
-            <div class="trm-divider trm-mb-20 trm-mt-20"></div>
-            <ul class="trm-card-data trm-label">
-                <li>24/02/28</li>
-                <li>18:14</li>
-                
-                
-            </ul>
-        </div>
-    </div>
-</div>
-    
-</div>
-
-    
-
-    <div id="giscus-wrap" class="trm-card trm-scroll-animation comment-container"></div>
-<script data-swup-reload-script>
-    function loadGiscus() {
-        let nowTheme = document.documentElement.classList.contains('dark') ? 'dark' : 'light'
-        const config = {
-            src: 'https://giscus.app/client.js',
-            "data-repo": '16372212/16372212.github.io',
-            "data-repo-id": 'MDEwOlJlcG9zaXRvcnkzOTMwMTQ5NDg=',
-            "data-category": 'General',
-            "data-category-id": 'DIC_kwDOF2zupM4Cdju8',
-            "data-mapping": 'pathname',
-            "data-reactions-enabled": '1',
-            "data-emit-metadata": '0',
-            "data-theme": nowTheme,
-            "data-lang": 'zh-CN',
-            crossorigin: "anonymous",
-            async: true
-        }
-        let ele = document.createElement('script')
-        for (let key in config) {
-            ele.setAttribute(key, config[key])
-        }
-        document.getElementById('giscus-wrap').insertAdjacentElement('afterbegin', ele)
-    }
-
-    function changeGiscusTheme() {
-        let theme = document.documentElement.classList.contains('dark') ? 'dark' : 'light'
-
-        function sendMessage(message) {
-            const iframe = document.querySelector('iframe.giscus-frame');
-            if (!iframe) return;
-            iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
-        }
-
-        sendMessage({
-            setConfig: {
-                theme: theme
-            }
-        });
-    }
-
-    loadGiscus();
-</script>
-
-
-
-                    <div class="trm-divider footer-divider"></div>
-
-                    <!-- footer -->
-                    <style>
-    #footer {
-        text-align: center;
-        font-size: 0.8em; /* 调整字体大小 */
-    }
-    .busuanzi {
-        display: inline-block;
-        margin: 0 auto;
-    }
-</style>
-
-<div id="footer">
-    <div class="busuanzi">
-        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-        <span id="busuanzi_container_site_pv">
-            本站总访问量<span id="busuanzi_value_site_pv"></span>次
-        </span>
-        <span class="post-meta-divider">|</span>
-        <span id="busuanzi_container_site_uv" style='display:none'>
-            本站访客数<span id="busuanzi_value_site_uv"></span>人
-        </span>
-    </div>
-    <div>
-        Hosted by 🤡<a href="https://github.com/16372212" rel="noopener" target="_blank">zzy's github</a>
-    </div>
-</div>
-
-                    <!-- footer end -->
-
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-            <!-- body end -->
-
-            
-
-    <div id="post-toc" class="trm-post-toc">
-      <div class="trm-post-toc-header">
-        目录导航
-				<span id="post-toc-top">
-					置顶
-				</span>
-      </div>
-      <div class="trm-post-toc-content">
-        <ol class="trm-toc"><li class="trm-toc-item trm-toc-level-1" title="原理"><a rel="nofollow" class="trm-toc-link" href="#原理"><span class="trm-toc-number">1.</span> <span class="trm-toc-text">原理</span></a><ol class="trm-toc-child"><li class="trm-toc-item trm-toc-level-2" title="结构解释"><a rel="nofollow" class="trm-toc-link" href="#结构解释"><span class="trm-toc-number">1.1.</span> <span class="trm-toc-text">结构解释</span></a></li><li class="trm-toc-item trm-toc-level-2" title="1 error"><a rel="nofollow" class="trm-toc-link" href="#1-error"><span class="trm-toc-number">1.2.</span> <span class="trm-toc-text">1 error</span></a></li><li class="trm-toc-item trm-toc-level-2" title="2 exception"><a rel="nofollow" class="trm-toc-link" href="#2-exception"><span class="trm-toc-number">1.3.</span> <span class="trm-toc-text">2 exception</span></a><ol class="trm-toc-child"><li class="trm-toc-item trm-toc-level-3" title="2.1 检查性异常"><a rel="nofollow" class="trm-toc-link" href="#2-1-检查性异常"><span class="trm-toc-number">1.3.1.</span> <span class="trm-toc-text">2.1 检查性异常</span></a></li><li class="trm-toc-item trm-toc-level-3" title="2.2 非检查异常（运行时异常）"><a rel="nofollow" class="trm-toc-link" href="#2-2-非检查异常（运行时异常）"><span class="trm-toc-number">1.3.2.</span> <span class="trm-toc-text">2.2 非检查异常（运行时异常）</span></a></li></ol></li></ol></li><li class="trm-toc-item trm-toc-level-1" title="捕获原理"><a rel="nofollow" class="trm-toc-link" href="#捕获原理"><span class="trm-toc-number">2.</span> <span class="trm-toc-text">捕获原理</span></a></li></ol>
-      </div>
-    </div>
-
-            
-<div class="trm-fixed-container">
-    
-        <div class="trm-fixed-btn post-toc-btn" data-title="目录">
-            <i class="iconfont fas fa-th-list"></i>
-        </div>
-    
-    
-        <div class="trm-fixed-btn" data-title="阅读模式" onclick="asyncFun.switchReadMode()">
-            <i class="iconfont fas fa-book-reader"></i>
-        </div>
-    
-    
-    <div id="trm-back-top" class="trm-fixed-btn" data-title="回到顶部">
-        <i class="iconfont fas fa-arrow-up"></i>
-    </div>
-</div>
-        </div>
-      </div>
-      <!-- scroll container end -->
-  </div>
-  <!-- app wrapper end -->
-
-  
-  <!-- Plugin -->
-
-
-
-
-    
-    
-<script src="https://npm.elemecdn.com/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
-
-    
-
-    
-        <script src="/js/plugins/typing.js?v=2.1.10"></script>
-    
-
-    
-
-    <!-- 数学公式 -->
-    
-
-    <!-- 评论插件 -->
-    
-        
-
-        
-    
-
-
-
-<!-- CDN -->
-
-
-    
-
-    
-
-    
-
-
-
-
-    <!-- Service Worker -->
-    
-    <!-- baidu push -->
-    
-
-
-<script id="async-script" src="/js/main.js?v=2.1.10"></script>
-
-</body>
-
-</html>
+        <h1 id="捕获原理"   >
+          <a href="#捕获原理" class="heading-link"><i class="fas fa-link"></i></a><a href="#捕获原理" class="headerlink" title="捕获原理"></a>捕获原理</h1>
+      <p>根据类型捕获的：异常是通过继承关系进行分类的。当抛出异常时，会检查异常的类型和catch块的声明类型是否匹配。如果异常的类型是catch块声明的类型或其子类型，就会执行对应的catch块中的代码。如果是自定义的异常类，你可以查看它的定义和继承关系。</p>
+</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ FIN ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">Autor: </span><span class="copyright-author__value"><a href="http://example.com">Zhen Ziyang</a></span></div><div class="copyright-link"><span class="copyright-link__name">Enlace: </span><span class="copyright-link__value"><a href="http://example.com/2024/02/28/java%E5%BC%82%E5%B8%B8%E8%A7%A3%E6%9E%90/">http://example.com/2024/02/28/java%E5%BC%82%E5%B8%B8%E8%A7%A3%E6%9E%90/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">Copyright: </span><span class="copyright-notice__value">Todos los artículos de este blog están bajo licencia  de <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">BY-NC-SA</a> a menos que se indique lo contrario</span></div></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2024/02/28/mapstruct%E6%98%A0%E5%B0%84%E5%99%A8/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">mapstruct映射器</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/2024/02/28/%E3%80%90%E8%B4%A2%E5%8A%A1%E6%8A%A5%E8%A1%A8%E3%80%91%E7%AE%80%E5%8D%95%E4%BB%8B%E7%BB%8D/"><span class="paginator-prev__text">【财务报表】简单介绍</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">Contenido</span><span class="sidebar-nav-ov">Reseña</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8E%9F%E7%90%86"><span class="toc-number">1.</span> <span class="toc-text">
+          原理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E6%9E%84%E8%A7%A3%E9%87%8A"><span class="toc-number">1.1.</span> <span class="toc-text">
+          结构解释</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-error"><span class="toc-number">1.2.</span> <span class="toc-text">
+          1 error</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-exception"><span class="toc-number">1.3.</span> <span class="toc-text">
+          2 exception</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E6%A3%80%E6%9F%A5%E6%80%A7%E5%BC%82%E5%B8%B8"><span class="toc-number">1.3.1.</span> <span class="toc-text">
+          2.1 检查性异常</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E9%9D%9E%E6%A3%80%E6%9F%A5%E5%BC%82%E5%B8%B8%EF%BC%88%E8%BF%90%E8%A1%8C%E6%97%B6%E5%BC%82%E5%B8%B8%EF%BC%89"><span class="toc-number">1.3.2.</span> <span class="toc-text">
+          2.2 非检查异常（运行时异常）</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8D%95%E8%8E%B7%E5%8E%9F%E7%90%86"><span class="toc-number">2.</span> <span class="toc-text">
+          捕获原理</span></a></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/icons/stun-logo.svg" alt="avatar"></div><p class="sidebar-ov-author__text">Hello Stun</p></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">12</div><div class="sidebar-ov-state-item__name">Archivo</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="Creative Commons" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">Has leído </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2024</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>Zhen Ziyang</span></div><div><span>Potenciado por <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a></span><span> v7.1.1</span><span class="footer__devider">|</span><span>Tema - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.8.0</span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="/js/utils.js?v=2.8.0"></script><script src="/js/stun-boot.js?v=2.8.0"></script><script src="/js/scroll.js?v=2.8.0"></script><script src="/js/header.js?v=2.8.0"></script><script src="/js/sidebar.js?v=2.8.0"></script></body></html>
