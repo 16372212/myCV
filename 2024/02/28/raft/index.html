@@ -1,93 +1,422 @@
-<!DOCTYPE html><html lang="zh-Hans"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/images/icons/favicon-16x16.png?v=2.8.0" type="image/png" sizes="16x16"><link rel="icon" href="/images/icons/favicon-32x32.png?v=2.8.0" type="image/png" sizes="32x32"><meta name="description" content="共识算法raft        Consensus is a fundamental problem in fault-tolerant distributed systems，Consensus involves multiple servers agreeing on values  共识是容错的一个基本问题。共识算法解决的是分布式系统对某个提案（Pro">
+<!DOCTYPE html>
+<html lang="zh-Hans">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="x5-fullscreen" content="true">
+<meta name="full-screen" content="yes">
+<meta name="theme-color" content="#317EFB" />
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=0" name="viewport">
+<meta name="description" content="共识算法raft Consensus is a fundamental problem in fault-tolerant distributed systems，Consensus involves multiple servers agreeing on values  共识是容错的一个基本问题。共识算法解决的是分布式系统对某个提案（Proposal），集群中所有节点都达成一致意见的过程 ra">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【6.824】raft">
 <meta property="og:url" content="http://example.com/2024/02/28/raft/index.html">
 <meta property="og:site_name" content="Ziyang&#39;s Blog">
-<meta property="og:description" content="共识算法raft        Consensus is a fundamental problem in fault-tolerant distributed systems，Consensus involves multiple servers agreeing on values  共识是容错的一个基本问题。共识算法解决的是分布式系统对某个提案（Pro">
+<meta property="og:description" content="共识算法raft Consensus is a fundamental problem in fault-tolerant distributed systems，Consensus involves multiple servers agreeing on values  共识是容错的一个基本问题。共识算法解决的是分布式系统对某个提案（Proposal），集群中所有节点都达成一致意见的过程 ra">
 <meta property="og:locale">
-<meta property="og:image" content="http://example.com/images/raft_ini.png">
+<meta property="og:image" content="http://example.com/img/404.jpg">
 <meta property="article:published_time" content="2024-02-28T10:41:38.000Z">
 <meta property="article:modified_time" content="2024-02-28T10:45:09.393Z">
 <meta property="article:author" content="Zhen Ziyang">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/images/raft_ini.png"><title>【6.824】raft | Ziyang's Blog</title><link ref="canonical" href="http://example.com/2024/02/28/raft/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.8.0"><link rel="stylesheet" href="css/custom.css"><script>var Stun = window.Stun || {};
-var CONFIG = {
-  root: '/',
-  algolia: undefined,
-  assistSearch: undefined,
-  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
-  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
-  header: {"enable":true,"showOnPost":true,"scrollDownIcon":false},
-  postWidget: {"endText":true},
-  nightMode: {"enable":true},
-  back2top: {"enable":true},
-  codeblock: {"style":"default","highlight":"light","wordWrap":false},
-  reward: false,
-  fancybox: false,
-  zoomImage: {"gapAside":"20px"},
-  galleryWaterfall: undefined,
-  lazyload: false,
-  pjax: undefined,
-  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
-  shortcuts: undefined,
-  prompt: {"copyButton":"Copy","copySuccess":"Copy Success","copyError":"Copy Error"},
-  sourcePath: {"js":"js","css":"css","images":"images"},
-};
+<meta name="twitter:image" content="http://example.com/img/404.jpg">
 
-window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 7.1.1"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">Home</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">Archives</span></a></div></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">Hello Stun</div><div class="header-banner-info__subtitle">An elegant theme for Hexo</div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">【6.824】raft</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2024-02-28</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2024-02-28</span></span><span class="post-meta-item post-meta-item--visitors"><span class="post-meta-item__icon"><i class="fas fa-eye"></i></span><span class="post-meta-item__info">Visited</span><span class="post-meta-item__value" id="busuanzi_value_page_pv"></span></span></div></header><div class="post-body">
-        <h1 id="共识算法raft"   >
-          <a href="#共识算法raft" class="heading-link"><i class="fas fa-link"></i></a><a href="#共识算法raft" class="headerlink" title="共识算法raft"></a>共识算法raft</h1>
-      <blockquote>
+    <meta name="keywords" content="Raft">
+
+
+<title >【6.824】raft</title>
+
+<!-- Favicon -->
+
+    <link href='/leaf.svg?v=2.1.10' rel='icon' type='image/png' sizes='16x16' ></link>
+
+
+    <link href='/leaf.svg?v=2.1.10' rel='icon' type='image/png' sizes='32x32' ></link>
+
+
+    <link href='/leaf.svg?v=2.1.10' rel='apple-touch-icon' sizes='180x180' ></link>
+
+
+    <link href='/site.webmanifest' rel='manifest' ></link>
+
+
+<!-- Plugin -->
+
+
+
+
+    
+<link rel="stylesheet" href="/css/plugins/bootstrap.row.css">
+
+    
+<link rel="stylesheet" href="https://npm.elemecdn.com/@fancyapps/ui@4.0/dist/fancybox.css">
+
+    
+    
+
+
+
+
+<!-- Icon -->
+
+    
+<link rel="stylesheet" href="/css/plugins/font-awesome.min.css">
+
+
+
+
+<!-- Variable -->
+<script>window.ASYNC_CONFIG = {"hostname":"example.com","author":"Zhen Ziyang","root":"/","typed_text":["ZZ！"],"theme_version":"2.1.10","theme":{"switch":true,"default":"style-light"},"favicon":{"logo":"leaf.svg","icon16":"leaf.svg","icon32":"leaf.svg","appleTouchIcon":"leaf.svg","webmanifest":"/site.webmanifest","visibilitychange":false,"hidden":"/failure.ico","showText":"(/≧▽≦/)咦！又好了！","hideText":"(●—●)喔哟，崩溃啦！"},"i18n":{"placeholder":"搜索文章...","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）","author":"本文作者：","copyright_link":"本文链接：","copyright_license_title":"版权声明：","copyright_license_content":"本博客所有文章除特别声明外，均默认采用 undefined 许可协议。","copy_success":"复制成功","copy_failure":"复制失败","open_read_mode":"进入阅读模式","exit_read_mode":"退出阅读模式","notice_outdate_message":"距离上次更新已经 undefined 天了, 文章内容可能已经过时。","sticky":"置顶","just":"刚刚","min":"分钟前","hour":"小时前","day":"天前","month":"个月前"},"swup":false,"plugin":{"flickr_justified_gallery":"https://npm.elemecdn.com/flickr-justified-gallery@latest/dist/fjGallery.min.js"},"icons":{"sun":"far fa-sun","moon":"far fa-moon","play":"fas fa-play","email":"far fa-envelope","next":"fas fa-arrow-right","calendar":"far fa-calendar-alt","clock":"far fa-clock","user":"far fa-user","back_top":"fas fa-arrow-up","close":"fas fa-times","search":"fas fa-search","reward":"fas fa-hand-holding-usd","user_tag":"fas fa-user-alt","toc_tag":"fas fa-th-list","read":"fas fa-book-reader","arrows":"fas fa-arrows-alt-h","double_arrows":"fas fa-angle-double-down","copy":"fas fa-copy"},"icontype":"font","highlight":{"plugin":"highlighjs","theme":true,"copy":true,"lang":true,"title":"mac","height_limit":200},"toc":{"post_title":true},"live_time":{"start_time":null,"prefix":"博客已萌萌哒运行 undefined 天"}};</script>
+<script id="async-page-config">window.PAGE_CONFIG = {"isPost":true,"isHome":false,"postUpdate":"2024-02-28 18:45:09"};</script>
+
+<!-- Theme mode css -->
+<link data-swup-theme rel="stylesheet" href="/css/index.css?v=2.1.10" id="trm-switch-style">
+<script>
+    let defaultMode = ASYNC_CONFIG.theme.default !=='auto' ?  ASYNC_CONFIG.theme.default : (window.matchMedia("(prefers-color-scheme: light)").matches ? 'style-light' : 'style-dark')
+    let catchMode = localStorage.getItem('theme-mode') || defaultMode;
+    let type = catchMode === 'style-dark' ? 'add' : 'remove';
+    document.documentElement.classList[type]('dark')
+</script>
+
+<!-- CDN -->
+
+
+    
+    
+
+
+
+<!-- Site Analytics -->
+ 
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+<body>
+
+  <!-- app wrapper -->
+  <div class="trm-app-frame">
+
+    <!-- page preloader -->
+    <div class="trm-preloader">
+    <div class="trm-holder">
+        <div class="preloader">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+</div>
+    <!-- page preloader end -->
+
+    <!-- change mode preloader -->
+    <div class="trm-mode-swich-animation-frame">
+    <div class="trm-mode-swich-animation">
+        <i class="i-sun"><i class="iconfont far fa-sun"></i></i>
+        <div class="trm-horizon"></div>
+        <i class="i-moon"><i class="iconfont far fa-moon"></i></i>
+    </div>
+</div>
+    <!-- change mode preloader end -->
+
+      <!-- scroll container -->
+      <div id="trm-dynamic-content" class="trm-swup-animation">
+        <div id="trm-scroll-container" class="trm-scroll-container" style="opacity: 0">
+            <!-- top bar -->
+            <header class="trm-top-bar">
+	<div class="container">
+		<div class="trm-left-side">
+			<!-- logo -->
+<a href="/" class="trm-logo-frame trm-anima-link">
+    
+        <img alt="logo" src="/leaf.svg">
+    
+    
+        <div class="trm-logo-text">
+            Ziyang<span>Zhen</span>
+        </div>
+    
+</a>
+<!-- logo end -->
+		</div>
+		<div class="trm-right-side">
+			<!-- menu -->
+<div class="trm-menu">
+    <nav>
+        <ul>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/" target="">
+                    首页
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/categories/" target="">
+                    分类
+                </a>
+                
+                <ul>
+                    
+                    <li>
+                        <a  href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/" target="">
+                            分布式
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a  href="/categories/AI/" target="">
+                            AI
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a  href="/categories/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/" target="">
+                            基础算法
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a  href="/categories/Java/" target="">
+                            Java
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a  href="/categories/CFA/" target="">
+                            CFA
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a  href="/categories/%E8%AF%BB%E4%B9%A6/" target="">
+                            读书
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a  href="/categories/%E5%BF%83%E5%BE%97%E4%BD%93%E4%BC%9A/" target="">
+                            心得
+                        </a>
+                    </li>
+                    
+                </ul>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a data-no-swup href="/archives/" target="">
+                    归档
+                </a>
+                
+            </li>
+            
+        </ul>
+    </nav>
+</div>
+<!-- menu end -->
+			
+    <!-- mode switcher place -->
+    <div class="trm-mode-switcher-place">
+        <div class="trm-mode-switcher">
+            <i class="iconfont far fa-sun"></i>
+            <input class="tgl tgl-light" id="trm-swich" type="checkbox">
+            <label class="trm-swich" for="trm-swich"></label>
+            <i class="iconfont far fa-moon"></i>
+        </div>
+    </div>
+    <!-- mode switcher place end -->
+
+			
+		</div>
+		<div class="trm-menu-btn">
+			<span></span>
+		</div>
+	</div>
+</header>
+            <!-- top bar end -->
+
+            <!-- body -->
+            
+<div class="trm-content-start">
+    <!-- banner -->
+    <div class="trm-banner">
+    
+    <!-- banner cover -->
+    <img style="object-position:top;object-fit:cover;" alt="banner" class="trm-banner-cover" src="/images/raft_ini.png">
+    <!-- banner cover end -->
+    
+
+    <!-- banner content -->
+    <div class="trm-banner-content trm-overlay">
+        <div class="container">
+            <div class="row">
+                
+                <div class="col-lg-4"></div>
+                
+                <div class="col-lg-8">
+
+                    <!-- banner title -->
+                    <div class="trm-banner-text ">
+                        <div class="trm-label trm-mb-20">
+                            NEWS LETTER
+                        </div>
+                        <h1 class="trm-mb-30 trm-hsmb-font">
+                            【6.824】raft
+                        </h1>
+
+                        
+                            <ul class="trm-breadcrumbs trm-label">
+                                <li>
+                                    <a href="/" class="trm-anima-link">Home</a>
+                                </li>
+                                <li>
+                                    <span>
+                                        2024
+                                    </span>
+                                </li>
+                            </ul>
+                        
+                    </div>
+                    <!-- banner title end -->
+
+                    <!-- scroll hint -->
+                    <span id="scroll-triger" class="trm-scroll-hint-frame">
+                        <div class="trm-scroll-hint"></div>
+                        <span class="trm-label">Scroll down</span>
+                    </span>
+                    <!-- scroll hint end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- banner content end -->
+</div>
+    <!-- banner end -->
+    <div class="container">
+        <div class="row">
+            
+                <div class="trm-page-sidebar col-lg-4 hidden-sm">
+                    <!-- main card -->
+                    <div class="trm-main-card-frame trm-sidebar">
+    <div class="trm-main-card"> 
+        <!-- card header -->
+<div class="trm-mc-header">
+    <div class="trm-avatar-frame trm-mb-20">
+        <img alt="Avatar" class="trm-avatar" src="/images/avator_my.jpg">
+    </div>
+    <h5 class="trm-name trm-mb-15">
+        Zhen Ziyang
+    </h5>
+    
+        <div class="trm-label">
+            Coding吧
+            <span class="trm-typed-text">
+                <!-- Words for theme.user.typedText -->
+            </span>
+        </div>
+    
+</div>
+<!-- card header end -->
+        <!-- sidebar social -->
+
+<div class="trm-divider trm-mb-40 trm-mt-40"></div>
+<div class="trm-social">
+    
+        <a href="https://github.com/16372212/" title="github" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-github"></i>
+        </a>
+    
+        <a href="mailto:coding8ziyang@gmail.com" title="mail" rel="nofollow" target="_blank">
+            <i class="iconfont fas fa-mail-bulk"></i>
+        </a>
+    
+</div>
+
+<!-- sidebar social end -->
+        <!-- info -->
+<div class="trm-divider trm-mb-40 trm-mt-40"></div>
+<ul class="trm-table trm-mb-20">
+    
+        <li>
+            <div class="trm-label">
+                地址:
+            </div>
+            <div class="trm-label trm-label-light">
+                银河系
+            </div>
+        </li>
+    
+        <li>
+            <div class="trm-label">
+                博客关键词:
+            </div>
+            <div class="trm-label trm-label-light">
+                Coding/分布式/CFA
+            </div>
+        </li>
+    
+</ul>
+<!-- info end -->
+
+        
+    </div>
+</div>
+                    <!-- main card end -->
+                </div>
+            
+            <div class="trm-page-content col-lg-8">
+                <div id="trm-content" class="trm-content">
+                    <div class="trm-post-info row hidden-sm">
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-calendar-alt trm-icon"></i><br>
+            02/28
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-clock trm-icon"></i><br>
+            18:41
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div id="post-author" class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-user trm-icon"></i><br>
+            Zhen Ziyang
+        </div>
+    </div>
+</div>
+<div class="trm-card ">
+    <article id="article-container" class="trm-publication">
+    <h1 id="共识算法raft"><a href="#共识算法raft" class="headerlink" title="共识算法raft"></a>共识算法raft</h1><blockquote>
 <p>Consensus is a fundamental problem in fault-tolerant distributed systems，Consensus involves multiple servers agreeing on values</p>
 </blockquote>
 <p>共识是容错的一个基本问题。共识算法解决的是分布式系统对某个提案（Proposal），集群中所有节点都达成一致意见的过程</p>
-
-        <h1 id="raft是什么"   >
-          <a href="#raft是什么" class="heading-link"><i class="fas fa-link"></i></a><a href="#raft是什么" class="headerlink" title="raft是什么"></a>raft是什么</h1>
-      <p>raft算是一种共识算法，解决了一个分布式集群如何达成同意values的问题</p>
-<p><img src="/images/raft_ini.png"></p>
+<h1 id="raft是什么"><a href="#raft是什么" class="headerlink" title="raft是什么"></a>raft是什么</h1><p>raft算是一种共识算法，解决了一个分布式集群如何达成同意values的问题</p>
+<p><img src="/images/raft_ini.png" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
 <blockquote>
 <p>etcd Raft 模块设计实现上抽象了网络、存储、日志等模块，它本身并不会进行网络、存储相关的操作，上层应用需结合自己业务场景选择内置的模块或自定义实现网络、存储、日志等模块。唐聪，《etcd 实战课》</p>
 </blockquote>
-
-        <h1 id="复制状态机（Replicated-state-machines）"   >
-          <a href="#复制状态机（Replicated-state-machines）" class="heading-link"><i class="fas fa-link"></i></a><a href="#复制状态机（Replicated-state-machines）" class="headerlink" title="复制状态机（Replicated state machines）"></a>复制状态机（Replicated state machines）</h1>
-      <ul>
+<h1 id="复制状态机（Replicated-state-machines）"><a href="#复制状态机（Replicated-state-machines）" class="headerlink" title="复制状态机（Replicated state machines）"></a>复制状态机（Replicated state machines）</h1><ul>
 <li>约定存储的是日志</li>
 </ul>
-
-        <h1 id="raft共识算法实现"   >
-          <a href="#raft共识算法实现" class="heading-link"><i class="fas fa-link"></i></a><a href="#raft共识算法实现" class="headerlink" title="raft共识算法实现"></a>raft共识算法实现</h1>
-      
-        <h2 id="0-可视化链接："   >
-          <a href="#0-可视化链接：" class="heading-link"><i class="fas fa-link"></i></a><a href="#0-可视化链接：" class="headerlink" title="0. 可视化链接："></a>0. 可视化链接：</h2>
-      <p><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://thesecretlivesofdata.com/raft/" >https://thesecretlivesofdata.com/raft/</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
-
-        <h2 id="1-节点状态（Server-states）"   >
-          <a href="#1-节点状态（Server-states）" class="heading-link"><i class="fas fa-link"></i></a><a href="#1-节点状态（Server-states）" class="headerlink" title="1. 节点状态（Server states）"></a>1. 节点状态（Server states）</h2>
-      <p>每个节点只会有三种状态，leader, follower, 或者 candidate.</p>
-
-        <h2 id="2-任期"   >
-          <a href="#2-任期" class="heading-link"><i class="fas fa-link"></i></a><a href="#2-任期" class="headerlink" title="2. 任期"></a>2. 任期</h2>
-      <p>Raft 里的逻辑时钟，从 0 开始，随着每次选举的发起而递增</p>
-
-        <h2 id="3-RPCs"   >
-          <a href="#3-RPCs" class="heading-link"><i class="fas fa-link"></i></a><a href="#3-RPCs" class="headerlink" title="3. RPCs"></a>3. RPCs</h2>
-      <p>节点之间的通讯方式，最基础的共识算法，只需要两种 </p>
+<h1 id="raft共识算法实现"><a href="#raft共识算法实现" class="headerlink" title="raft共识算法实现"></a>raft共识算法实现</h1><h2 id="0-可视化链接："><a href="#0-可视化链接：" class="headerlink" title="0. 可视化链接："></a>0. 可视化链接：</h2><p><a target="_blank" rel="noopener" href="https://thesecretlivesofdata.com/raft/">https://thesecretlivesofdata.com/raft/</a></p>
+<h2 id="1-节点状态（Server-states）"><a href="#1-节点状态（Server-states）" class="headerlink" title="1. 节点状态（Server states）"></a>1. 节点状态（Server states）</h2><p>每个节点只会有三种状态，leader, follower, 或者 candidate.</p>
+<h2 id="2-任期"><a href="#2-任期" class="headerlink" title="2. 任期"></a>2. 任期</h2><p>Raft 里的逻辑时钟，从 0 开始，随着每次选举的发起而递增</p>
+<h2 id="3-RPCs"><a href="#3-RPCs" class="headerlink" title="3. RPCs"></a>3. RPCs</h2><p>节点之间的通讯方式，最基础的共识算法，只需要两种 </p>
 <ol>
 <li>RPC，RequestVote RPCs </li>
 <li>AppendEntries RPCs</li>
 </ol>
-
-        <h1 id="步骤"   >
-          <a href="#步骤" class="heading-link"><i class="fas fa-link"></i></a><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h1>
-      
-        <h2 id="1-Leader-Election"   >
-          <a href="#1-Leader-Election" class="heading-link"><i class="fas fa-link"></i></a><a href="#1-Leader-Election" class="headerlink" title="1. Leader Election"></a>1. Leader Election</h2>
-      
-        <h3 id="名词定义"   >
-          <a href="#名词定义" class="heading-link"><i class="fas fa-link"></i></a><a href="#名词定义" class="headerlink" title="名词定义"></a>名词定义</h3>
-      <ol>
+<h1 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h1><h2 id="1-Leader-Election"><a href="#1-Leader-Election" class="headerlink" title="1. Leader Election"></a>1. Leader Election</h2><h3 id="名词定义"><a href="#名词定义" class="headerlink" title="名词定义"></a>名词定义</h3><ol>
 <li><p>Append Entries: leader -&gt; followers, follower reply</p>
 </li>
 <li><p>Term: 是什么，何时增加修改？</p>
@@ -100,11 +429,8 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 7.1.1"></he
 <blockquote>
 <p>tips: 相同term下，如果有的candidate a term_a 比 candidate b term_b来的早(term_a &lt; term&lt;b ), 那可能会投票给term_a而不是term_b</p>
 </blockquote>
-
-        <h3 id="基本思路"   >
-          <a href="#基本思路" class="heading-link"><i class="fas fa-link"></i></a><a href="#基本思路" class="headerlink" title="基本思路"></a>基本思路</h3>
-      <p>下面是完成的表格，展示了在Raft协议中，leader、candidate和follower在接收到RequestVote和AppendEntry请求时的行为，取决于请求中的term与节点当前的term的比较：</p>
-<div class="table-container"><table>
+<h3 id="基本思路"><a href="#基本思路" class="headerlink" title="基本思路"></a>基本思路</h3><p>下面是完成的表格，展示了在Raft协议中，leader、candidate和follower在接收到RequestVote和AppendEntry请求时的行为，取决于请求中的term与节点当前的term的比较：</p>
+<table>
 <thead>
 <tr>
 <th></th>
@@ -152,11 +478,11 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 7.1.1"></he
 <td>接受来自leader的消息</td>
 <td>忽略请求</td>
 </tr>
-</tbody></table></div>
+</tbody></table>
 <ul>
 <li>leader send heartbeat RPCs no more than ten times per second.</li>
 </ul>
-<figure class="highlight go"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// return currentTerm and whether this server</span></span><br><span class="line"><span class="comment">// believes it is the leader.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(rf *Raft)</span></span> GetState() (<span class="type">int</span>, <span class="type">bool</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(rf *Raft)</span></span> sendRequestVote(server <span class="type">int</span>, args *RequestVoteArgs, reply *RequestVoteReply) <span class="type">bool</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">beginElection</span><span class="params">()</span></span></span><br><span class="line"></span><br></pre></td></tr></table></div></figure>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// return currentTerm and whether this server</span></span><br><span class="line"><span class="comment">// believes it is the leader.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(rf *Raft)</span></span> GetState() (<span class="type">int</span>, <span class="type">bool</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(rf *Raft)</span></span> sendRequestVote(server <span class="type">int</span>, args *RequestVoteArgs, reply *RequestVoteReply) <span class="type">bool</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">beginElection</span><span class="params">()</span></span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <ul>
 <li><p>批量发选票，批量收获所有的结果。如果结果中true的票数 &gt; false的票数，它就成功变成leader</p>
@@ -171,13 +497,10 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 7.1.1"></he
 </li>
 </ul>
 <p>在时间等待前后判断currentLeader是否是-1</p>
-<figure class="highlight go"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(rf *Raft)</span></span> tickerAsFollower() &#123;</span><br><span class="line">	<span class="keyword">for</span> &#123;</span><br><span class="line">		<span class="comment">// 判断是否超时，转换状态</span></span><br><span class="line">		rf.currentLeader = <span class="number">-1</span></span><br><span class="line">		ms := <span class="number">500</span> + (rand.Int63() % <span class="number">400</span>)</span><br><span class="line">		time.Sleep(time.Duration(ms) * time.Millisecond)</span><br><span class="line">		DPrintf(<span class="string">&quot;[%d,%d] is follower, leader : %d&quot;</span>, rf.me, rf.currentTerm, rf.currentLeader)</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> rf.currentLeader == <span class="number">-1</span> &#123;</span><br><span class="line">			rf.state = <span class="number">1</span></span><br><span class="line">			<span class="keyword">return</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(rf *Raft)</span></span> tickerAsFollower() &#123;</span><br><span class="line">	<span class="keyword">for</span> &#123;</span><br><span class="line">		<span class="comment">// 判断是否超时，转换状态</span></span><br><span class="line">		rf.currentLeader = <span class="number">-1</span></span><br><span class="line">		ms := <span class="number">500</span> + (rand.Int63() % <span class="number">400</span>)</span><br><span class="line">		time.Sleep(time.Duration(ms) * time.Millisecond)</span><br><span class="line">		DPrintf(<span class="string">&quot;[%d,%d] is follower, leader : %d&quot;</span>, rf.me, rf.currentTerm, rf.currentLeader)</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> rf.currentLeader == <span class="number">-1</span> &#123;</span><br><span class="line">			rf.state = <span class="number">1</span></span><br><span class="line">			<span class="keyword">return</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
-
-        <h3 id="特殊情况"   >
-          <a href="#特殊情况" class="heading-link"><i class="fas fa-link"></i></a><a href="#特殊情况" class="headerlink" title="特殊情况"></a>特殊情况</h3>
-      <ol>
+<h3 id="特殊情况"><a href="#特殊情况" class="headerlink" title="特殊情况"></a>特殊情况</h3><ol>
 <li>split vote:</li>
 </ol>
 <p>要考虑到，有的follower如果失联，这时判断split vote时就不能只判断是否是peers个数的一半了。</p>
@@ -190,7 +513,7 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 7.1.1"></he
 </blockquote>
 <p>对于第一个请求，如果其term大于follower的currentTerm，follower会更新其currentTerm为请求中的term，然后根据Raft的规则（包括日志的新旧程度等）决定是否投票。</p>
 <p>对于第二个请求，如果其term大于更新后的currentTerm，follower将再次更新其currentTerm。但是，如果follower已经在更新后的任期内投了票（无论是给第一个请求的候选人还是之前的某个候选人），根据Raft协议，它不会在同一任期内投第二次票。</p>
-<figure class="highlight go"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> rf.votedFor != <span class="number">-1</span> &#123;</span><br><span class="line">	DPrintf(<span class="string">&quot;【%d, %d】&lt;------x------ [%d, %d](status: %d) , already vote or leader for %d, leader %d&quot;</span>, args.CandidateId, args.Term, rf.me, rf.currentTerm, rf.state, rf.votedFor, rf.currentLeader)</span><br><span class="line">	reply.VoteGranted = <span class="literal">false</span></span><br><span class="line">	<span class="keyword">return</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> rf.votedFor != <span class="number">-1</span> &#123;</span><br><span class="line">	DPrintf(<span class="string">&quot;【%d, %d】&lt;------x------ [%d, %d](status: %d) , already vote or leader for %d, leader %d&quot;</span>, args.CandidateId, args.Term, rf.me, rf.currentTerm, rf.state, rf.votedFor, rf.currentLeader)</span><br><span class="line">	reply.VoteGranted = <span class="literal">false</span></span><br><span class="line">	<span class="keyword">return</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <ol start="3">
 <li>requstVote里广播消息时，如果某一个server消息返回超时怎么收集选票？</li>
@@ -198,23 +521,262 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 7.1.1"></he
 <p>方法一：设置ctx上下文超时机制，修改rpc的调用函数。但是这里在lab中不允许我们修改Call方法，因此弃用</p>
 <p>方法二：使用go中的<code>sync.WaitGroup</code>, 开启一个广播线程时调用wg.add(1), 线程结束前采用wg.Done(), 最后wg.Wait进行阻塞，直到所有线程均返回结果。缺点：rpc失联还是会超时，因此弃用。</p>
 <p>方法三：在线程调用时变判断公用的选票信息done与posVotes, 前者判断是否成为leader，后者判断是否有成为leader的条件，并置done为true。</p>
-
-        <h2 id="2-Log-Replication"   >
-          <a href="#2-Log-Replication" class="heading-link"><i class="fas fa-link"></i></a><a href="#2-Log-Replication" class="headerlink" title="2. Log Replication"></a>2. Log Replication</h2>
-      <p>partition:</p>
+<h2 id="2-Log-Replication"><a href="#2-Log-Replication" class="headerlink" title="2. Log Replication"></a>2. Log Replication</h2><p>partition:</p>
 <p>Both nodes A &amp; B will roll back their uncommitted entries and match the new leader’s log </p>
-</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ END ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">Author: </span><span class="copyright-author__value"><a href="http://example.com">Zhen Ziyang</a></span></div><div class="copyright-link"><span class="copyright-link__name">Link: </span><span class="copyright-link__value"><a href="http://example.com/2024/02/28/raft/">http://example.com/2024/02/28/raft/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">Copyright: </span><span class="copyright-notice__value">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">BY-NC-SA</a> unless stating additionally</span></div></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2024/02/28/%E3%80%906-824%E3%80%91MapReduce/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">【6.824】MapReduce</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/2024/02/28/mapstruct%E6%98%A0%E5%B0%84%E5%99%A8/"><span class="paginator-prev__text">mapstruct映射器</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">Catalog</span><span class="sidebar-nav-ov">Overview</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%B1%E8%AF%86%E7%AE%97%E6%B3%95raft"><span class="toc-number">1.</span> <span class="toc-text">
-          共识算法raft</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#raft%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-number">2.</span> <span class="toc-text">
-          raft是什么</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%A4%8D%E5%88%B6%E7%8A%B6%E6%80%81%E6%9C%BA%EF%BC%88Replicated-state-machines%EF%BC%89"><span class="toc-number">3.</span> <span class="toc-text">
-          复制状态机（Replicated state machines）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#raft%E5%85%B1%E8%AF%86%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0"><span class="toc-number">4.</span> <span class="toc-text">
-          raft共识算法实现</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#0-%E5%8F%AF%E8%A7%86%E5%8C%96%E9%93%BE%E6%8E%A5%EF%BC%9A"><span class="toc-number">4.1.</span> <span class="toc-text">
-          0. 可视化链接：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E8%8A%82%E7%82%B9%E7%8A%B6%E6%80%81%EF%BC%88Server-states%EF%BC%89"><span class="toc-number">4.2.</span> <span class="toc-text">
-          1. 节点状态（Server states）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E4%BB%BB%E6%9C%9F"><span class="toc-number">4.3.</span> <span class="toc-text">
-          2. 任期</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-RPCs"><span class="toc-number">4.4.</span> <span class="toc-text">
-          3. RPCs</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A4"><span class="toc-number">5.</span> <span class="toc-text">
-          步骤</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Leader-Election"><span class="toc-number">5.1.</span> <span class="toc-text">
-          1. Leader Election</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%8D%E8%AF%8D%E5%AE%9A%E4%B9%89"><span class="toc-number">5.1.1.</span> <span class="toc-text">
-          名词定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%80%9D%E8%B7%AF"><span class="toc-number">5.1.2.</span> <span class="toc-text">
-          基本思路</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%89%B9%E6%AE%8A%E6%83%85%E5%86%B5"><span class="toc-number">5.1.3.</span> <span class="toc-text">
-          特殊情况</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Log-Replication"><span class="toc-number">5.2.</span> <span class="toc-text">
-          2. Log Replication</span></a></li></ol></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/icons/stun-logo.svg" alt="avatar"></div><p class="sidebar-ov-author__text">Hello Stun</p></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">12</div><div class="sidebar-ov-state-item__name">Archives</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="Creative Commons" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">You have read </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2024</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>Zhen Ziyang</span><span class="footer__devider">|</span><span></span></div><div><span>Theme - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.8.0</span></div><div class="busuanzi"><span class="busuanzi-siteuv"><span class="busuanzi-siteuv__icon"><i class="fas fa-user"></i></span><span class="busuanzi-siteuv__info">Visitors</span><span class="busuanzi-siteuv__value" id="busuanzi_value_site_uv"></span></span><span class="busuanzi-sitepv"><span class="busuanzi-siteuv__icon"><i class="fas fa-eye"></i></span><span class="busuanzi-siteuv__info">Views</span><span class="busuanzi-siteuv__value" id="busuanzi_value_site_pv"></span></span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="https://cdn.jsdelivr.net/gh/sukkaw/busuanzi@latest/bsz.pure.mini.js" async></script><script src="/js/utils.js?v=2.8.0"></script><script src="/js/stun-boot.js?v=2.8.0"></script><script src="/js/scroll.js?v=2.8.0"></script><script src="/js/header.js?v=2.8.0"></script><script src="/js/sidebar.js?v=2.8.0"></script></body></html>
+
+</article>
+    
+    
+
+</div>
+<div class="trm-post-next-prev row">
+    <div class="col-lg-12">
+        <!-- title -->
+        <h5 class="trm-title-with-divider">
+            其他文章
+            <span data-number="02"></span>
+        </h5>
+    </div>
+    
+        <div class="col-lg-6">
+    <div class="trm-blog-card trm-scroll-animation">
+        <a href="/2024/02/28/%E3%80%906-824%E3%80%91MapReduce/" class="trm-cover-frame trm-anima-link">
+            
+            
+                <img alt="cover" class="no-fancybox" src="/images/map_reduce.png">
+            
+        </a>
+        
+        <div class="trm-card-descr">
+            <div class="trm-label trm-category trm-mb-20">
+                <a href=" /categories/%E5%88%86%E5%B8%83%E5%BC%8F/">
+                    分布式
+                </a>
+            </div>
+            <h5>
+                <a href="/2024/02/28/%E3%80%906-824%E3%80%91MapReduce/" class="trm-anima-link">
+                    【6.824】MapReduce
+                </a>
+            </h5>
+            <div class="trm-divider trm-mb-20 trm-mt-20"></div>
+            <ul class="trm-card-data trm-label">
+                <li>24/02/28</li>
+                <li>18:45</li>
+                
+                
+            </ul>
+        </div>
+    </div>
+</div>
+    
+    
+        <div class="col-lg-6">
+    <div class="trm-blog-card trm-scroll-animation">
+        <a href="/2024/02/28/mapstruct%E6%98%A0%E5%B0%84%E5%99%A8/" class="trm-cover-frame trm-anima-link">
+            
+            
+                <img alt="cover" class="no-fancybox" src="/images/jvm.webp">
+            
+        </a>
+        
+        <div class="trm-card-descr">
+            <div class="trm-label trm-category trm-mb-20">
+                <a href=" /categories/Java/">
+                    Java
+                </a>
+            </div>
+            <h5>
+                <a href="/2024/02/28/mapstruct%E6%98%A0%E5%B0%84%E5%99%A8/" class="trm-anima-link">
+                    mapstruct映射器
+                </a>
+            </h5>
+            <div class="trm-divider trm-mb-20 trm-mt-20"></div>
+            <ul class="trm-card-data trm-label">
+                <li>24/02/28</li>
+                <li>18:26</li>
+                
+                
+            </ul>
+        </div>
+    </div>
+</div>
+    
+</div>
+
+    
+
+    <div id="giscus-wrap" class="trm-card trm-scroll-animation comment-container"></div>
+<script data-swup-reload-script>
+    function loadGiscus() {
+        let nowTheme = document.documentElement.classList.contains('dark') ? 'dark' : 'light'
+        const config = {
+            src: 'https://giscus.app/client.js',
+            "data-repo": '16372212/16372212.github.io',
+            "data-repo-id": 'MDEwOlJlcG9zaXRvcnkzOTMwMTQ5NDg=',
+            "data-category": 'General',
+            "data-category-id": 'DIC_kwDOF2zupM4Cdju8',
+            "data-mapping": 'pathname',
+            "data-reactions-enabled": '1',
+            "data-emit-metadata": '0',
+            "data-theme": nowTheme,
+            "data-lang": 'zh-CN',
+            crossorigin: "anonymous",
+            async: true
+        }
+        let ele = document.createElement('script')
+        for (let key in config) {
+            ele.setAttribute(key, config[key])
+        }
+        document.getElementById('giscus-wrap').insertAdjacentElement('afterbegin', ele)
+    }
+
+    function changeGiscusTheme() {
+        let theme = document.documentElement.classList.contains('dark') ? 'dark' : 'light'
+
+        function sendMessage(message) {
+            const iframe = document.querySelector('iframe.giscus-frame');
+            if (!iframe) return;
+            iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+
+        sendMessage({
+            setConfig: {
+                theme: theme
+            }
+        });
+    }
+
+    loadGiscus();
+</script>
+
+
+
+                    <div class="trm-divider footer-divider"></div>
+
+                    <!-- footer -->
+                    <style>
+    #footer {
+        text-align: center;
+        font-size: 0.8em; /* 调整字体大小 */
+    }
+    .busuanzi {
+        display: inline-block;
+        margin: 0 auto;
+    }
+</style>
+
+<div id="footer">
+    <div class="busuanzi">
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+        <span id="busuanzi_container_site_pv">
+            本站总访问量<span id="busuanzi_value_site_pv"></span>次
+        </span>
+        <span class="post-meta-divider">|</span>
+        <span id="busuanzi_container_site_uv" style='display:none'>
+            本站访客数<span id="busuanzi_value_site_uv"></span>人
+        </span>
+    </div>
+    <div>
+        Hosted by 🤡<a href="https://github.com/16372212" rel="noopener" target="_blank">zzy's github</a>
+    </div>
+</div>
+
+                    <!-- footer end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+            <!-- body end -->
+
+            
+
+    <div id="post-toc" class="trm-post-toc">
+      <div class="trm-post-toc-header">
+        目录导航
+				<span id="post-toc-top">
+					置顶
+				</span>
+      </div>
+      <div class="trm-post-toc-content">
+        <ol class="trm-toc"><li class="trm-toc-item trm-toc-level-1" title="共识算法raft"><a rel="nofollow" class="trm-toc-link" href="#共识算法raft"><span class="trm-toc-number">1.</span> <span class="trm-toc-text">共识算法raft</span></a></li><li class="trm-toc-item trm-toc-level-1" title="raft是什么"><a rel="nofollow" class="trm-toc-link" href="#raft是什么"><span class="trm-toc-number">2.</span> <span class="trm-toc-text">raft是什么</span></a></li><li class="trm-toc-item trm-toc-level-1" title="复制状态机（Replicated state machines）"><a rel="nofollow" class="trm-toc-link" href="#复制状态机（Replicated-state-machines）"><span class="trm-toc-number">3.</span> <span class="trm-toc-text">复制状态机（Replicated state machines）</span></a></li><li class="trm-toc-item trm-toc-level-1" title="raft共识算法实现"><a rel="nofollow" class="trm-toc-link" href="#raft共识算法实现"><span class="trm-toc-number">4.</span> <span class="trm-toc-text">raft共识算法实现</span></a><ol class="trm-toc-child"><li class="trm-toc-item trm-toc-level-2" title="0. 可视化链接："><a rel="nofollow" class="trm-toc-link" href="#0-可视化链接："><span class="trm-toc-number">4.1.</span> <span class="trm-toc-text">0. 可视化链接：</span></a></li><li class="trm-toc-item trm-toc-level-2" title="1. 节点状态（Server states）"><a rel="nofollow" class="trm-toc-link" href="#1-节点状态（Server-states）"><span class="trm-toc-number">4.2.</span> <span class="trm-toc-text">1. 节点状态（Server states）</span></a></li><li class="trm-toc-item trm-toc-level-2" title="2. 任期"><a rel="nofollow" class="trm-toc-link" href="#2-任期"><span class="trm-toc-number">4.3.</span> <span class="trm-toc-text">2. 任期</span></a></li><li class="trm-toc-item trm-toc-level-2" title="3. RPCs"><a rel="nofollow" class="trm-toc-link" href="#3-RPCs"><span class="trm-toc-number">4.4.</span> <span class="trm-toc-text">3. RPCs</span></a></li></ol></li><li class="trm-toc-item trm-toc-level-1" title="步骤"><a rel="nofollow" class="trm-toc-link" href="#步骤"><span class="trm-toc-number">5.</span> <span class="trm-toc-text">步骤</span></a><ol class="trm-toc-child"><li class="trm-toc-item trm-toc-level-2" title="1. Leader Election"><a rel="nofollow" class="trm-toc-link" href="#1-Leader-Election"><span class="trm-toc-number">5.1.</span> <span class="trm-toc-text">1. Leader Election</span></a><ol class="trm-toc-child"><li class="trm-toc-item trm-toc-level-3" title="名词定义"><a rel="nofollow" class="trm-toc-link" href="#名词定义"><span class="trm-toc-number">5.1.1.</span> <span class="trm-toc-text">名词定义</span></a></li><li class="trm-toc-item trm-toc-level-3" title="基本思路"><a rel="nofollow" class="trm-toc-link" href="#基本思路"><span class="trm-toc-number">5.1.2.</span> <span class="trm-toc-text">基本思路</span></a></li><li class="trm-toc-item trm-toc-level-3" title="特殊情况"><a rel="nofollow" class="trm-toc-link" href="#特殊情况"><span class="trm-toc-number">5.1.3.</span> <span class="trm-toc-text">特殊情况</span></a></li></ol></li><li class="trm-toc-item trm-toc-level-2" title="2. Log Replication"><a rel="nofollow" class="trm-toc-link" href="#2-Log-Replication"><span class="trm-toc-number">5.2.</span> <span class="trm-toc-text">2. Log Replication</span></a></li></ol></li></ol>
+      </div>
+    </div>
+
+            
+<div class="trm-fixed-container">
+    
+        <div class="trm-fixed-btn post-toc-btn" data-title="目录">
+            <i class="iconfont fas fa-th-list"></i>
+        </div>
+    
+    
+        <div class="trm-fixed-btn" data-title="阅读模式" onclick="asyncFun.switchReadMode()">
+            <i class="iconfont fas fa-book-reader"></i>
+        </div>
+    
+    
+    <div id="trm-back-top" class="trm-fixed-btn" data-title="回到顶部">
+        <i class="iconfont fas fa-arrow-up"></i>
+    </div>
+</div>
+        </div>
+      </div>
+      <!-- scroll container end -->
+  </div>
+  <!-- app wrapper end -->
+
+  
+  <!-- Plugin -->
+
+
+
+
+    
+    
+<script src="https://npm.elemecdn.com/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+
+    
+
+    
+        <script src="/js/plugins/typing.js?v=2.1.10"></script>
+    
+
+    
+
+    <!-- 数学公式 -->
+    
+
+    <!-- 评论插件 -->
+    
+        
+
+        
+    
+
+
+
+<!-- CDN -->
+
+
+    
+
+    
+
+    
+
+
+
+
+    <!-- Service Worker -->
+    
+    <!-- baidu push -->
+    
+
+
+<script id="async-script" src="/js/main.js?v=2.1.10"></script>
+
+</body>
+
+</html>

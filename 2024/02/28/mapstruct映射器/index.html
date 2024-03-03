@@ -1,111 +1,681 @@
-<!DOCTYPE html><html lang="zh-Hans"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/images/icons/favicon-16x16.png?v=2.8.0" type="image/png" sizes="16x16"><link rel="icon" href="/images/icons/favicon-32x32.png?v=2.8.0" type="image/png" sizes="32x32"><meta name="description" content="定义与意义        MapStruct是一个开源的基于Java的代码生成器，用于创建实现Java Bean之间转换的扩展映射器。使用MapStruct，我们只需要创建接口，而该库会通过注解在编译过程中自动创建具体的映射实现  MapStruct使用注解处理器来生成映射器的实现代码. 1234567@Mapperpublic interface Cape">
+<!DOCTYPE html>
+<html lang="zh-Hans">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="x5-fullscreen" content="true">
+<meta name="full-screen" content="yes">
+<meta name="theme-color" content="#317EFB" />
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=0" name="viewport">
+<meta name="description" content="定义与意义 MapStruct是一个开源的基于Java的代码生成器，用于创建实现Java Bean之间转换的扩展映射器。使用MapStruct，我们只需要创建接口，而该库会通过注解在编译过程中自动创建具体的映射实现  MapStruct使用注解处理器来生成映射器的实现代码. 1234567@Mapperpublic interface CapexConvert &#123;    CapexCon">
 <meta property="og:type" content="article">
 <meta property="og:title" content="mapstruct映射器">
 <meta property="og:url" content="http://example.com/2024/02/28/mapstruct%E6%98%A0%E5%B0%84%E5%99%A8/index.html">
 <meta property="og:site_name" content="Ziyang&#39;s Blog">
-<meta property="og:description" content="定义与意义        MapStruct是一个开源的基于Java的代码生成器，用于创建实现Java Bean之间转换的扩展映射器。使用MapStruct，我们只需要创建接口，而该库会通过注解在编译过程中自动创建具体的映射实现  MapStruct使用注解处理器来生成映射器的实现代码. 1234567@Mapperpublic interface Cape">
+<meta property="og:description" content="定义与意义 MapStruct是一个开源的基于Java的代码生成器，用于创建实现Java Bean之间转换的扩展映射器。使用MapStruct，我们只需要创建接口，而该库会通过注解在编译过程中自动创建具体的映射实现  MapStruct使用注解处理器来生成映射器的实现代码. 1234567@Mapperpublic interface CapexConvert &#123;    CapexCon">
 <meta property="og:locale">
 <meta property="article:published_time" content="2024-02-28T10:26:08.000Z">
 <meta property="article:modified_time" content="2024-03-02T04:34:41.423Z">
 <meta property="article:author" content="Zhen Ziyang">
-<meta name="twitter:card" content="summary"><title>mapstruct映射器 | Ziyang's Blog</title><link ref="canonical" href="http://example.com/2024/02/28/mapstruct%E6%98%A0%E5%B0%84%E5%99%A8/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.8.0"><link rel="stylesheet" href="css/custom.css"><script>var Stun = window.Stun || {};
-var CONFIG = {
-  root: '/',
-  algolia: undefined,
-  assistSearch: undefined,
-  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
-  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
-  header: {"enable":true,"showOnPost":true,"scrollDownIcon":false},
-  postWidget: {"endText":true},
-  nightMode: {"enable":true},
-  back2top: {"enable":true},
-  codeblock: {"style":"default","highlight":"light","wordWrap":false},
-  reward: false,
-  fancybox: false,
-  zoomImage: {"gapAside":"20px"},
-  galleryWaterfall: undefined,
-  lazyload: false,
-  pjax: undefined,
-  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
-  shortcuts: undefined,
-  prompt: {"copyButton":"Copy","copySuccess":"Copy Success","copyError":"Copy Error"},
-  sourcePath: {"js":"js","css":"css","images":"images"},
-};
+<meta name="twitter:card" content="summary">
 
-window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 7.1.1"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">Home</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">Archives</span></a></div></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">Hello Stun</div><div class="header-banner-info__subtitle">An elegant theme for Hexo</div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">mapstruct映射器</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2024-02-28</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2024-03-02</span></span><span class="post-meta-item post-meta-item--visitors"><span class="post-meta-item__icon"><i class="fas fa-eye"></i></span><span class="post-meta-item__info">Visited</span><span class="post-meta-item__value" id="busuanzi_value_page_pv"></span></span></div></header><div class="post-body">
-        <h1 id="定义与意义"   >
-          <a href="#定义与意义" class="heading-link"><i class="fas fa-link"></i></a><a href="#定义与意义" class="headerlink" title="定义与意义"></a>定义与意义</h1>
-      <blockquote>
+    <meta name="keywords" content="Java, MapStruct">
+
+
+<title >mapstruct映射器</title>
+
+<!-- Favicon -->
+
+    <link href='/leaf.svg?v=2.1.10' rel='icon' type='image/png' sizes='16x16' ></link>
+
+
+    <link href='/leaf.svg?v=2.1.10' rel='icon' type='image/png' sizes='32x32' ></link>
+
+
+    <link href='/leaf.svg?v=2.1.10' rel='apple-touch-icon' sizes='180x180' ></link>
+
+
+    <link href='/site.webmanifest' rel='manifest' ></link>
+
+
+<!-- Plugin -->
+
+
+
+
+    
+<link rel="stylesheet" href="/css/plugins/bootstrap.row.css">
+
+    
+<link rel="stylesheet" href="https://npm.elemecdn.com/@fancyapps/ui@4.0/dist/fancybox.css">
+
+    
+    
+
+
+
+
+<!-- Icon -->
+
+    
+<link rel="stylesheet" href="/css/plugins/font-awesome.min.css">
+
+
+
+
+<!-- Variable -->
+<script>window.ASYNC_CONFIG = {"hostname":"example.com","author":"Zhen Ziyang","root":"/","typed_text":["ZZ！"],"theme_version":"2.1.10","theme":{"switch":true,"default":"style-light"},"favicon":{"logo":"leaf.svg","icon16":"leaf.svg","icon32":"leaf.svg","appleTouchIcon":"leaf.svg","webmanifest":"/site.webmanifest","visibilitychange":false,"hidden":"/failure.ico","showText":"(/≧▽≦/)咦！又好了！","hideText":"(●—●)喔哟，崩溃啦！"},"i18n":{"placeholder":"搜索文章...","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）","author":"本文作者：","copyright_link":"本文链接：","copyright_license_title":"版权声明：","copyright_license_content":"本博客所有文章除特别声明外，均默认采用 undefined 许可协议。","copy_success":"复制成功","copy_failure":"复制失败","open_read_mode":"进入阅读模式","exit_read_mode":"退出阅读模式","notice_outdate_message":"距离上次更新已经 undefined 天了, 文章内容可能已经过时。","sticky":"置顶","just":"刚刚","min":"分钟前","hour":"小时前","day":"天前","month":"个月前"},"swup":false,"plugin":{"flickr_justified_gallery":"https://npm.elemecdn.com/flickr-justified-gallery@latest/dist/fjGallery.min.js"},"icons":{"sun":"far fa-sun","moon":"far fa-moon","play":"fas fa-play","email":"far fa-envelope","next":"fas fa-arrow-right","calendar":"far fa-calendar-alt","clock":"far fa-clock","user":"far fa-user","back_top":"fas fa-arrow-up","close":"fas fa-times","search":"fas fa-search","reward":"fas fa-hand-holding-usd","user_tag":"fas fa-user-alt","toc_tag":"fas fa-th-list","read":"fas fa-book-reader","arrows":"fas fa-arrows-alt-h","double_arrows":"fas fa-angle-double-down","copy":"fas fa-copy"},"icontype":"font","highlight":{"plugin":"highlighjs","theme":true,"copy":true,"lang":true,"title":"mac","height_limit":200},"toc":{"post_title":true},"live_time":{"start_time":null,"prefix":"博客已萌萌哒运行 undefined 天"}};</script>
+<script id="async-page-config">window.PAGE_CONFIG = {"isPost":true,"isHome":false,"postUpdate":"2024-03-02 12:34:41"};</script>
+
+<!-- Theme mode css -->
+<link data-swup-theme rel="stylesheet" href="/css/index.css?v=2.1.10" id="trm-switch-style">
+<script>
+    let defaultMode = ASYNC_CONFIG.theme.default !=='auto' ?  ASYNC_CONFIG.theme.default : (window.matchMedia("(prefers-color-scheme: light)").matches ? 'style-light' : 'style-dark')
+    let catchMode = localStorage.getItem('theme-mode') || defaultMode;
+    let type = catchMode === 'style-dark' ? 'add' : 'remove';
+    document.documentElement.classList[type]('dark')
+</script>
+
+<!-- CDN -->
+
+
+    
+    
+
+
+
+<!-- Site Analytics -->
+ 
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+<body>
+
+  <!-- app wrapper -->
+  <div class="trm-app-frame">
+
+    <!-- page preloader -->
+    <div class="trm-preloader">
+    <div class="trm-holder">
+        <div class="preloader">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+</div>
+    <!-- page preloader end -->
+
+    <!-- change mode preloader -->
+    <div class="trm-mode-swich-animation-frame">
+    <div class="trm-mode-swich-animation">
+        <i class="i-sun"><i class="iconfont far fa-sun"></i></i>
+        <div class="trm-horizon"></div>
+        <i class="i-moon"><i class="iconfont far fa-moon"></i></i>
+    </div>
+</div>
+    <!-- change mode preloader end -->
+
+      <!-- scroll container -->
+      <div id="trm-dynamic-content" class="trm-swup-animation">
+        <div id="trm-scroll-container" class="trm-scroll-container" style="opacity: 0">
+            <!-- top bar -->
+            <header class="trm-top-bar">
+	<div class="container">
+		<div class="trm-left-side">
+			<!-- logo -->
+<a href="/" class="trm-logo-frame trm-anima-link">
+    
+        <img alt="logo" src="/leaf.svg">
+    
+    
+        <div class="trm-logo-text">
+            Ziyang<span>Zhen</span>
+        </div>
+    
+</a>
+<!-- logo end -->
+		</div>
+		<div class="trm-right-side">
+			<!-- menu -->
+<div class="trm-menu">
+    <nav>
+        <ul>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/" target="">
+                    首页
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/categories/" target="">
+                    分类
+                </a>
+                
+                <ul>
+                    
+                    <li>
+                        <a  href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/" target="">
+                            分布式
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a  href="/categories/AI/" target="">
+                            AI
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a  href="/categories/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/" target="">
+                            基础算法
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a  href="/categories/Java/" target="">
+                            Java
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a  href="/categories/CFA/" target="">
+                            CFA
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a  href="/categories/%E8%AF%BB%E4%B9%A6/" target="">
+                            读书
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a  href="/categories/%E5%BF%83%E5%BE%97%E4%BD%93%E4%BC%9A/" target="">
+                            心得
+                        </a>
+                    </li>
+                    
+                </ul>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a data-no-swup href="/archives/" target="">
+                    归档
+                </a>
+                
+            </li>
+            
+        </ul>
+    </nav>
+</div>
+<!-- menu end -->
+			
+    <!-- mode switcher place -->
+    <div class="trm-mode-switcher-place">
+        <div class="trm-mode-switcher">
+            <i class="iconfont far fa-sun"></i>
+            <input class="tgl tgl-light" id="trm-swich" type="checkbox">
+            <label class="trm-swich" for="trm-swich"></label>
+            <i class="iconfont far fa-moon"></i>
+        </div>
+    </div>
+    <!-- mode switcher place end -->
+
+			
+		</div>
+		<div class="trm-menu-btn">
+			<span></span>
+		</div>
+	</div>
+</header>
+            <!-- top bar end -->
+
+            <!-- body -->
+            
+<div class="trm-content-start">
+    <!-- banner -->
+    <div class="trm-banner">
+    
+    <!-- banner cover -->
+    <img style="object-position:top;object-fit:cover;" alt="banner" class="trm-banner-cover" src="/images/jvm.webp">
+    <!-- banner cover end -->
+    
+
+    <!-- banner content -->
+    <div class="trm-banner-content trm-overlay">
+        <div class="container">
+            <div class="row">
+                
+                <div class="col-lg-4"></div>
+                
+                <div class="col-lg-8">
+
+                    <!-- banner title -->
+                    <div class="trm-banner-text ">
+                        <div class="trm-label trm-mb-20">
+                            NEWS LETTER
+                        </div>
+                        <h1 class="trm-mb-30 trm-hsmb-font">
+                            mapstruct映射器
+                        </h1>
+
+                        
+                            <ul class="trm-breadcrumbs trm-label">
+                                <li>
+                                    <a href="/" class="trm-anima-link">Home</a>
+                                </li>
+                                <li>
+                                    <span>
+                                        2024
+                                    </span>
+                                </li>
+                            </ul>
+                        
+                    </div>
+                    <!-- banner title end -->
+
+                    <!-- scroll hint -->
+                    <span id="scroll-triger" class="trm-scroll-hint-frame">
+                        <div class="trm-scroll-hint"></div>
+                        <span class="trm-label">Scroll down</span>
+                    </span>
+                    <!-- scroll hint end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- banner content end -->
+</div>
+    <!-- banner end -->
+    <div class="container">
+        <div class="row">
+            
+                <div class="trm-page-sidebar col-lg-4 hidden-sm">
+                    <!-- main card -->
+                    <div class="trm-main-card-frame trm-sidebar">
+    <div class="trm-main-card"> 
+        <!-- card header -->
+<div class="trm-mc-header">
+    <div class="trm-avatar-frame trm-mb-20">
+        <img alt="Avatar" class="trm-avatar" src="/images/avator_my.jpg">
+    </div>
+    <h5 class="trm-name trm-mb-15">
+        Zhen Ziyang
+    </h5>
+    
+        <div class="trm-label">
+            Coding吧
+            <span class="trm-typed-text">
+                <!-- Words for theme.user.typedText -->
+            </span>
+        </div>
+    
+</div>
+<!-- card header end -->
+        <!-- sidebar social -->
+
+<div class="trm-divider trm-mb-40 trm-mt-40"></div>
+<div class="trm-social">
+    
+        <a href="https://github.com/16372212/" title="github" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-github"></i>
+        </a>
+    
+        <a href="mailto:coding8ziyang@gmail.com" title="mail" rel="nofollow" target="_blank">
+            <i class="iconfont fas fa-mail-bulk"></i>
+        </a>
+    
+</div>
+
+<!-- sidebar social end -->
+        <!-- info -->
+<div class="trm-divider trm-mb-40 trm-mt-40"></div>
+<ul class="trm-table trm-mb-20">
+    
+        <li>
+            <div class="trm-label">
+                地址:
+            </div>
+            <div class="trm-label trm-label-light">
+                银河系
+            </div>
+        </li>
+    
+        <li>
+            <div class="trm-label">
+                博客关键词:
+            </div>
+            <div class="trm-label trm-label-light">
+                Coding/分布式/CFA
+            </div>
+        </li>
+    
+</ul>
+<!-- info end -->
+
+        
+    </div>
+</div>
+                    <!-- main card end -->
+                </div>
+            
+            <div class="trm-page-content col-lg-8">
+                <div id="trm-content" class="trm-content">
+                    <div class="trm-post-info row hidden-sm">
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-calendar-alt trm-icon"></i><br>
+            02/28
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-clock trm-icon"></i><br>
+            18:26
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div id="post-author" class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-user trm-icon"></i><br>
+            Zhen Ziyang
+        </div>
+    </div>
+</div>
+<div class="trm-card ">
+    <article id="article-container" class="trm-publication">
+    <h1 id="定义与意义"><a href="#定义与意义" class="headerlink" title="定义与意义"></a>定义与意义</h1><blockquote>
 <p>MapStruct是一个开源的基于Java的代码生成器，用于创建实现Java Bean之间转换的扩展映射器。使用MapStruct，我们只需要创建接口，而该库会通过注解在编译过程中自动创建具体的映射实现</p>
 </blockquote>
 <p>MapStruct使用注解处理器来生成映射器的实现代码.</p>
-<figure class="highlight java"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Mapper</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">CapexConvert</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="type">CapexConvert</span> <span class="variable">INSTANCE</span> <span class="operator">=</span> Mappers.getMapper(CapexConvert.class);</span><br><span class="line"></span><br><span class="line">    CapexItPageVO <span class="title function_">convertToRespVO</span><span class="params">(CapexItDO capexItDO)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Mapper</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">CapexConvert</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="type">CapexConvert</span> <span class="variable">INSTANCE</span> <span class="operator">=</span> Mappers.getMapper(CapexConvert.class);</span><br><span class="line"></span><br><span class="line">    CapexItPageVO <span class="title function_">convertToRespVO</span><span class="params">(CapexItDO capexItDO)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-
-        <h1 id="原理"   >
-          <a href="#原理" class="heading-link"><i class="fas fa-link"></i></a><a href="#原理" class="headerlink" title="原理"></a>原理</h1>
-      <p>MapStruct会扫描标记了@Mapper注解的接口，并根据接口中的映射规则生成对应的映射器实现类。这些生成的映射器代码会被编译到最终的字节码中。</p>
-
-        <h2 id="Instance"   >
-          <a href="#Instance" class="heading-link"><i class="fas fa-link"></i></a><a href="#Instance" class="headerlink" title="Instance"></a>Instance</h2>
-      <p>在MapStruct的映射器接口中，通常会定义一个INSTANCE常量，用于获取映射器接口的实例。</p>
-
-        <h2 id="getMapper"   >
-          <a href="#getMapper" class="heading-link"><i class="fas fa-link"></i></a><a href="#getMapper" class="headerlink" title="getMapper()"></a>getMapper()</h2>
-      <p>Mapper.getMapper()函数通过反射机制来创建映射器接口的实例，使得你可以方便地使用映射器进行对象之间的映射转换。</p>
-
-        <h2 id="编译后生成的代码"   >
-          <a href="#编译后生成的代码" class="heading-link"><i class="fas fa-link"></i></a><a href="#编译后生成的代码" class="headerlink" title="编译后生成的代码"></a>编译后生成的代码</h2>
-      <p>这段代码中创建了一个DoctorMapper类型的实例INSTANCE，在生成对应的实现代码后，这就是我们调用的“入口”。</p>
-<figure class="highlight java"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Mapper</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">DoctorMapper</span> &#123;</span><br><span class="line">    <span class="type">DoctorMapper</span> <span class="variable">INSTANCE</span> <span class="operator">=</span> Mappers.getMapper(DoctorMapper.class);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
+<h1 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h1><p>MapStruct会扫描标记了@Mapper注解的接口，并根据接口中的映射规则生成对应的映射器实现类。这些生成的映射器代码会被编译到最终的字节码中。</p>
+<h2 id="Instance"><a href="#Instance" class="headerlink" title="Instance"></a>Instance</h2><p>在MapStruct的映射器接口中，通常会定义一个INSTANCE常量，用于获取映射器接口的实例。</p>
+<h2 id="getMapper"><a href="#getMapper" class="headerlink" title="getMapper()"></a>getMapper()</h2><p>Mapper.getMapper()函数通过反射机制来创建映射器接口的实例，使得你可以方便地使用映射器进行对象之间的映射转换。</p>
+<h2 id="编译后生成的代码"><a href="#编译后生成的代码" class="headerlink" title="编译后生成的代码"></a>编译后生成的代码</h2><p>这段代码中创建了一个DoctorMapper类型的实例INSTANCE，在生成对应的实现代码后，这就是我们调用的“入口”。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Mapper</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">DoctorMapper</span> &#123;</span><br><span class="line">    <span class="type">DoctorMapper</span> <span class="variable">INSTANCE</span> <span class="operator">=</span> Mappers.getMapper(DoctorMapper.class);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>这段代码告诉了实力之间的映射关系。我们构建&#x2F;编译应用程序时，MapStruct注解处理器插件会识别出DoctorMapper接口并为其生成一个实现类。</p>
-<figure class="highlight java"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">DoctorDto <span class="title function_">toDto</span><span class="params">(Doctor doctor)</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 编译后，生成的实现类：</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">DoctorMapperImpl</span> <span class="keyword">implements</span> <span class="title class_">DoctorMapper</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> DoctorDto <span class="title function_">toDto</span><span class="params">(Doctor doctor)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> ( doctor == <span class="literal">null</span> ) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">DoctorDtoBuilder</span> <span class="variable">doctorDto</span> <span class="operator">=</span> DoctorDto.builder();</span><br><span class="line"></span><br><span class="line">        doctorDto.id(doctor.getId());</span><br><span class="line">        doctorDto.name(doctor.getName());</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> doctorDto.build();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">DoctorDto <span class="title function_">toDto</span><span class="params">(Doctor doctor)</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 编译后，生成的实现类：</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">DoctorMapperImpl</span> <span class="keyword">implements</span> <span class="title class_">DoctorMapper</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> DoctorDto <span class="title function_">toDto</span><span class="params">(Doctor doctor)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> ( doctor == <span class="literal">null</span> ) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">DoctorDtoBuilder</span> <span class="variable">doctorDto</span> <span class="operator">=</span> DoctorDto.builder();</span><br><span class="line"></span><br><span class="line">        doctorDto.id(doctor.getId());</span><br><span class="line">        doctorDto.name(doctor.getName());</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> doctorDto.build();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<h1 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h1><h2 id="不同属性名称"><a href="#不同属性名称" class="headerlink" title="不同属性名称"></a>不同属性名称</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Mapper</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">DoctorMapper</span> &#123;</span><br><span class="line">    <span class="type">DoctorMapper</span> <span class="variable">INSTANCE</span> <span class="operator">=</span> Mappers.getMapper(DoctorMapper.class);</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Mapping(source = &quot;doctor.specialty&quot;, target = &quot;specialization&quot;)</span></span><br><span class="line">    DoctorDto <span class="title function_">toDto</span><span class="params">(Doctor doctor)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="多个源"><a href="#多个源" class="headerlink" title="多个源"></a>多个源</h2><h3 id="多对多"><a href="#多对多" class="headerlink" title="多对多"></a>多对多</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Mapper</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">DoctorMapper</span> &#123;</span><br><span class="line">    <span class="type">DoctorMapper</span> <span class="variable">INSTANCE</span> <span class="operator">=</span> Mappers.getMapper(DoctorMapper.class);</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Mapping(source = &quot;doctor.specialty&quot;, target = &quot;specialization&quot;)</span></span><br><span class="line">    <span class="meta">@Mapping(source = &quot;education.degreeName&quot;, target = &quot;degree&quot;)</span></span><br><span class="line">    DoctorDto <span class="title function_">toDto</span><span class="params">(Doctor doctor, Education education)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-        <h1 id="用法"   >
-          <a href="#用法" class="heading-link"><i class="fas fa-link"></i></a><a href="#用法" class="headerlink" title="用法"></a>用法</h1>
-      
-        <h2 id="不同属性名称"   >
-          <a href="#不同属性名称" class="heading-link"><i class="fas fa-link"></i></a><a href="#不同属性名称" class="headerlink" title="不同属性名称"></a>不同属性名称</h2>
-      <figure class="highlight java"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Mapper</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">DoctorMapper</span> &#123;</span><br><span class="line">    <span class="type">DoctorMapper</span> <span class="variable">INSTANCE</span> <span class="operator">=</span> Mappers.getMapper(DoctorMapper.class);</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Mapping(source = &quot;doctor.specialty&quot;, target = &quot;specialization&quot;)</span></span><br><span class="line">    DoctorDto <span class="title function_">toDto</span><span class="params">(Doctor doctor)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
-
-        <h2 id="多个源"   >
-          <a href="#多个源" class="heading-link"><i class="fas fa-link"></i></a><a href="#多个源" class="headerlink" title="多个源"></a>多个源</h2>
-      
-        <h3 id="多对多"   >
-          <a href="#多对多" class="heading-link"><i class="fas fa-link"></i></a><a href="#多对多" class="headerlink" title="多对多"></a>多对多</h3>
-      <figure class="highlight java"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Mapper</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">DoctorMapper</span> &#123;</span><br><span class="line">    <span class="type">DoctorMapper</span> <span class="variable">INSTANCE</span> <span class="operator">=</span> Mappers.getMapper(DoctorMapper.class);</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Mapping(source = &quot;doctor.specialty&quot;, target = &quot;specialization&quot;)</span></span><br><span class="line">    <span class="meta">@Mapping(source = &quot;education.degreeName&quot;, target = &quot;degree&quot;)</span></span><br><span class="line">    DoctorDto <span class="title function_">toDto</span><span class="params">(Doctor doctor, Education education)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
-
-
-        <h2 id="子对象映射（集合）"   >
-          <a href="#子对象映射（集合）" class="heading-link"><i class="fas fa-link"></i></a><a href="#子对象映射（集合）" class="headerlink" title="子对象映射（集合）"></a>子对象映射（集合）</h2>
-      <p>POJO除了基本数据类型外，还包含其它类，比如包含一个List<OtherObject></p>
-<figure class="highlight java"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Doctor</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> id;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> String specialty;</span><br><span class="line">    <span class="keyword">private</span> List&lt;Patient&gt; patientList;</span><br><span class="line">    <span class="comment">// getters and setters or builder</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">DoctorDto</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> id;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> String degree;</span><br><span class="line">    <span class="keyword">private</span> String specialization;</span><br><span class="line">    <span class="keyword">private</span> List&lt;PatientDto&gt; patientDtoList;</span><br><span class="line">    <span class="comment">// getters and setters or builder</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
+<h2 id="子对象映射（集合）"><a href="#子对象映射（集合）" class="headerlink" title="子对象映射（集合）"></a>子对象映射（集合）</h2><p>POJO除了基本数据类型外，还包含其它类，比如包含一个List<OtherObject></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Doctor</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> id;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> String specialty;</span><br><span class="line">    <span class="keyword">private</span> List&lt;Patient&gt; patientList;</span><br><span class="line">    <span class="comment">// getters and setters or builder</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">DoctorDto</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> id;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> String degree;</span><br><span class="line">    <span class="keyword">private</span> String specialization;</span><br><span class="line">    <span class="keyword">private</span> List&lt;PatientDto&gt; patientDtoList;</span><br><span class="line">    <span class="comment">// getters and setters or builder</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>需要对最基本的类型进行映射，编写关于patient的映射，然后list自动依赖这个最基本的映射</p>
-<figure class="highlight java"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Mapper</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">PatientMapper</span> &#123;</span><br><span class="line">    <span class="type">PatientMapper</span> <span class="variable">INSTANCE</span> <span class="operator">=</span> Mappers.getMapper(PatientMapper.class);</span><br><span class="line">    PatientDto <span class="title function_">toDto</span><span class="params">(Patient patient)</span>;</span><br><span class="line">&#125;</span><br><span class="line">然后，再来修改 DoctorMapper 处理一下患者列表：</span><br><span class="line"><span class="meta">@Mapper(uses = &#123;PatientMapper.class&#125;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">DoctorMapper</span> &#123;</span><br><span class="line">    <span class="type">DoctorMapper</span> <span class="variable">INSTANCE</span> <span class="operator">=</span> Mappers.getMapper(DoctorMapper.class);</span><br><span class="line">    <span class="meta">@Mapping(source = &quot;doctor.patientList&quot;, target = &quot;patientDtoList&quot;)</span></span><br><span class="line">    <span class="meta">@Mapping(source = &quot;doctor.specialty&quot;, target = &quot;specialization&quot;)</span></span><br><span class="line">    DoctorDto <span class="title function_">toDto</span><span class="params">(Doctor doctor)</span>;</span><br><span class="line">&#125;</span><br><span class="line">原理：（编译后的代码）</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">DoctorMapperImpl</span> <span class="keyword">implements</span> <span class="title class_">DoctorMapper</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="type">PatientMapper</span> <span class="variable">patientMapper</span> <span class="operator">=</span> Mappers.getMapper( PatientMapper.class );</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> DoctorDto <span class="title function_">toDto</span><span class="params">(Doctor doctor)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> ( doctor == <span class="literal">null</span> ) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">DoctorDtoBuilder</span> <span class="variable">doctorDto</span> <span class="operator">=</span> DoctorDto.builder();</span><br><span class="line">        doctorDto.patientDtoList( patientListToPatientDtoList(doctor.getPatientList()));</span><br><span class="line">        doctorDto.specialization( doctor.getSpecialty() );</span><br><span class="line">        doctorDto.id( doctor.getId() );</span><br><span class="line">        doctorDto.name( doctor.getName() );</span><br><span class="line">        <span class="keyword">return</span> doctorDto.build();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">protected</span> List&lt;PatientDto&gt; <span class="title function_">patientListToPatientDtoList</span><span class="params">(List&lt;Patient&gt; list)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> ( list == <span class="literal">null</span> ) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        List&lt;PatientDto&gt; list1 = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;PatientDto&gt;( list.size() );</span><br><span class="line">        <span class="keyword">for</span> ( Patient patient : list ) &#123;</span><br><span class="line">            list1.add( patientMapper.toDto( patient ) );</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> list1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Mapper</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">PatientMapper</span> &#123;</span><br><span class="line">    <span class="type">PatientMapper</span> <span class="variable">INSTANCE</span> <span class="operator">=</span> Mappers.getMapper(PatientMapper.class);</span><br><span class="line">    PatientDto <span class="title function_">toDto</span><span class="params">(Patient patient)</span>;</span><br><span class="line">&#125;</span><br><span class="line">然后，再来修改 DoctorMapper 处理一下患者列表：</span><br><span class="line"><span class="meta">@Mapper(uses = &#123;PatientMapper.class&#125;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">DoctorMapper</span> &#123;</span><br><span class="line">    <span class="type">DoctorMapper</span> <span class="variable">INSTANCE</span> <span class="operator">=</span> Mappers.getMapper(DoctorMapper.class);</span><br><span class="line">    <span class="meta">@Mapping(source = &quot;doctor.patientList&quot;, target = &quot;patientDtoList&quot;)</span></span><br><span class="line">    <span class="meta">@Mapping(source = &quot;doctor.specialty&quot;, target = &quot;specialization&quot;)</span></span><br><span class="line">    DoctorDto <span class="title function_">toDto</span><span class="params">(Doctor doctor)</span>;</span><br><span class="line">&#125;</span><br><span class="line">原理：（编译后的代码）</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">DoctorMapperImpl</span> <span class="keyword">implements</span> <span class="title class_">DoctorMapper</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="type">PatientMapper</span> <span class="variable">patientMapper</span> <span class="operator">=</span> Mappers.getMapper( PatientMapper.class );</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> DoctorDto <span class="title function_">toDto</span><span class="params">(Doctor doctor)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> ( doctor == <span class="literal">null</span> ) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">DoctorDtoBuilder</span> <span class="variable">doctorDto</span> <span class="operator">=</span> DoctorDto.builder();</span><br><span class="line">        doctorDto.patientDtoList( patientListToPatientDtoList(doctor.getPatientList()));</span><br><span class="line">        doctorDto.specialization( doctor.getSpecialty() );</span><br><span class="line">        doctorDto.id( doctor.getId() );</span><br><span class="line">        doctorDto.name( doctor.getName() );</span><br><span class="line">        <span class="keyword">return</span> doctorDto.build();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">protected</span> List&lt;PatientDto&gt; <span class="title function_">patientListToPatientDtoList</span><span class="params">(List&lt;Patient&gt; list)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> ( list == <span class="literal">null</span> ) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        List&lt;PatientDto&gt; list1 = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;PatientDto&gt;( list.size() );</span><br><span class="line">        <span class="keyword">for</span> ( Patient patient : list ) &#123;</span><br><span class="line">            list1.add( patientMapper.toDto( patient ) );</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> list1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="日期转换"><a href="#日期转换" class="headerlink" title="日期转换"></a>日期转换</h2><p>除此之外，不同基本数据类型之间可以转换。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// LocalDate转String:</span></span><br><span class="line"><span class="meta">@Mapping(source = &quot;dateOfBirth&quot;, target = &quot;dateOfBirth&quot;, dateFormat = &quot;dd/MMM/yyyy&quot;)</span></span><br><span class="line">Patient <span class="title function_">toModel</span><span class="params">(PatientDto patientDto)</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 数字格式转换示例</span></span><br><span class="line">   <span class="meta">@Mapping(source = &quot;price&quot;, target = &quot;price&quot;, numberFormat = &quot;$#.00&quot;)</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="枚举映射"><a href="#枚举映射" class="headerlink" title="枚举映射"></a>枚举映射</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> <span class="title class_">PaymentType</span> &#123;</span><br><span class="line">    CASH,</span><br><span class="line">    CHEQUE,</span><br><span class="line">    CARD_VISA,</span><br><span class="line">    CARD_MASTER,</span><br><span class="line">    CARD_CREDIT</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> <span class="title class_">PaymentTypeView</span> &#123;</span><br><span class="line">    CASH,</span><br><span class="line">    CHEQUE,</span><br><span class="line">    CARD</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Mapper</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">PaymentTypeMapper</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="type">PaymentTypeMapper</span> <span class="variable">INSTANCE</span> <span class="operator">=</span> Mappers.getMapper(PaymentTypeMapper.class);</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ValueMappings(&#123;</span></span><br><span class="line"><span class="meta">            @ValueMapping(source = &quot;CARD_VISA&quot;, target = &quot;CARD&quot;),</span></span><br><span class="line"><span class="meta">            @ValueMapping(source = &quot;CARD_MASTER&quot;, target = &quot;CARD&quot;),</span></span><br><span class="line"><span class="meta">            @ValueMapping(source = &quot;CARD_CREDIT&quot;, target = &quot;CARD&quot;)</span></span><br><span class="line"><span class="meta">    &#125;)</span></span><br><span class="line">    PaymentTypeView <span class="title function_">paymentTypeToPaymentTypeView</span><span class="params">(PaymentType paymentType)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>参考：<br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/368731266">链接</a></p>
+
+</article>
+    
+    
+
+</div>
+<div class="trm-post-next-prev row">
+    <div class="col-lg-12">
+        <!-- title -->
+        <h5 class="trm-title-with-divider">
+            其他文章
+            <span data-number="02"></span>
+        </h5>
+    </div>
+    
+        <div class="col-lg-6">
+    <div class="trm-blog-card trm-scroll-animation">
+        <a href="/2024/02/28/raft/" class="trm-cover-frame trm-anima-link">
+            
+            
+                <img alt="cover" class="no-fancybox" src="/images/raft_ini.png">
+            
+        </a>
+        
+        <div class="trm-card-descr">
+            <div class="trm-label trm-category trm-mb-20">
+                <a href=" /categories/%E5%88%86%E5%B8%83%E5%BC%8F/">
+                    分布式
+                </a>
+            </div>
+            <h5>
+                <a href="/2024/02/28/raft/" class="trm-anima-link">
+                    【6.824】raft
+                </a>
+            </h5>
+            <div class="trm-divider trm-mb-20 trm-mt-20"></div>
+            <ul class="trm-card-data trm-label">
+                <li>24/02/28</li>
+                <li>18:41</li>
+                
+                
+            </ul>
+        </div>
+    </div>
+</div>
+    
+    
+        <div class="col-lg-6">
+    <div class="trm-blog-card trm-scroll-animation">
+        <a href="/2024/02/28/java%E5%BC%82%E5%B8%B8%E8%A7%A3%E6%9E%90/" class="trm-cover-frame trm-anima-link">
+            
+            
+                <img alt="cover" class="no-fancybox" src="/images/1280X1280.PNG">
+            
+        </a>
+        
+        <div class="trm-card-descr">
+            <div class="trm-label trm-category trm-mb-20">
+                <a href=" /categories/Java/">
+                    Java
+                </a>
+            </div>
+            <h5>
+                <a href="/2024/02/28/java%E5%BC%82%E5%B8%B8%E8%A7%A3%E6%9E%90/" class="trm-anima-link">
+                    java异常解析
+                </a>
+            </h5>
+            <div class="trm-divider trm-mb-20 trm-mt-20"></div>
+            <ul class="trm-card-data trm-label">
+                <li>24/02/28</li>
+                <li>18:22</li>
+                
+                
+            </ul>
+        </div>
+    </div>
+</div>
+    
+</div>
+
+    
+
+    <div id="giscus-wrap" class="trm-card trm-scroll-animation comment-container"></div>
+<script data-swup-reload-script>
+    function loadGiscus() {
+        let nowTheme = document.documentElement.classList.contains('dark') ? 'dark' : 'light'
+        const config = {
+            src: 'https://giscus.app/client.js',
+            "data-repo": '16372212/16372212.github.io',
+            "data-repo-id": 'MDEwOlJlcG9zaXRvcnkzOTMwMTQ5NDg=',
+            "data-category": 'General',
+            "data-category-id": 'DIC_kwDOF2zupM4Cdju8',
+            "data-mapping": 'pathname',
+            "data-reactions-enabled": '1',
+            "data-emit-metadata": '0',
+            "data-theme": nowTheme,
+            "data-lang": 'zh-CN',
+            crossorigin: "anonymous",
+            async: true
+        }
+        let ele = document.createElement('script')
+        for (let key in config) {
+            ele.setAttribute(key, config[key])
+        }
+        document.getElementById('giscus-wrap').insertAdjacentElement('afterbegin', ele)
+    }
+
+    function changeGiscusTheme() {
+        let theme = document.documentElement.classList.contains('dark') ? 'dark' : 'light'
+
+        function sendMessage(message) {
+            const iframe = document.querySelector('iframe.giscus-frame');
+            if (!iframe) return;
+            iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+
+        sendMessage({
+            setConfig: {
+                theme: theme
+            }
+        });
+    }
+
+    loadGiscus();
+</script>
 
 
-        <h2 id="日期转换"   >
-          <a href="#日期转换" class="heading-link"><i class="fas fa-link"></i></a><a href="#日期转换" class="headerlink" title="日期转换"></a>日期转换</h2>
-      <p>除此之外，不同基本数据类型之间可以转换。</p>
-<figure class="highlight java"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// LocalDate转String:</span></span><br><span class="line"><span class="meta">@Mapping(source = &quot;dateOfBirth&quot;, target = &quot;dateOfBirth&quot;, dateFormat = &quot;dd/MMM/yyyy&quot;)</span></span><br><span class="line">Patient <span class="title function_">toModel</span><span class="params">(PatientDto patientDto)</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 数字格式转换示例</span></span><br><span class="line">   <span class="meta">@Mapping(source = &quot;price&quot;, target = &quot;price&quot;, numberFormat = &quot;$#.00&quot;)</span></span><br><span class="line"></span><br></pre></td></tr></table></div></figure>
+
+                    <div class="trm-divider footer-divider"></div>
+
+                    <!-- footer -->
+                    <style>
+    #footer {
+        text-align: center;
+        font-size: 0.8em; /* 调整字体大小 */
+    }
+    .busuanzi {
+        display: inline-block;
+        margin: 0 auto;
+    }
+</style>
+
+<div id="footer">
+    <div class="busuanzi">
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+        <span id="busuanzi_container_site_pv">
+            本站总访问量<span id="busuanzi_value_site_pv"></span>次
+        </span>
+        <span class="post-meta-divider">|</span>
+        <span id="busuanzi_container_site_uv" style='display:none'>
+            本站访客数<span id="busuanzi_value_site_uv"></span>人
+        </span>
+    </div>
+    <div>
+        Hosted by 🤡<a href="https://github.com/16372212" rel="noopener" target="_blank">zzy's github</a>
+    </div>
+</div>
+
+                    <!-- footer end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+            <!-- body end -->
+
+            
+
+    <div id="post-toc" class="trm-post-toc">
+      <div class="trm-post-toc-header">
+        目录导航
+				<span id="post-toc-top">
+					置顶
+				</span>
+      </div>
+      <div class="trm-post-toc-content">
+        <ol class="trm-toc"><li class="trm-toc-item trm-toc-level-1" title="定义与意义"><a rel="nofollow" class="trm-toc-link" href="#定义与意义"><span class="trm-toc-number">1.</span> <span class="trm-toc-text">定义与意义</span></a></li><li class="trm-toc-item trm-toc-level-1" title="原理"><a rel="nofollow" class="trm-toc-link" href="#原理"><span class="trm-toc-number">2.</span> <span class="trm-toc-text">原理</span></a><ol class="trm-toc-child"><li class="trm-toc-item trm-toc-level-2" title="Instance"><a rel="nofollow" class="trm-toc-link" href="#Instance"><span class="trm-toc-number">2.1.</span> <span class="trm-toc-text">Instance</span></a></li><li class="trm-toc-item trm-toc-level-2" title="getMapper()"><a rel="nofollow" class="trm-toc-link" href="#getMapper"><span class="trm-toc-number">2.2.</span> <span class="trm-toc-text">getMapper()</span></a></li><li class="trm-toc-item trm-toc-level-2" title="编译后生成的代码"><a rel="nofollow" class="trm-toc-link" href="#编译后生成的代码"><span class="trm-toc-number">2.3.</span> <span class="trm-toc-text">编译后生成的代码</span></a></li></ol></li><li class="trm-toc-item trm-toc-level-1" title="用法"><a rel="nofollow" class="trm-toc-link" href="#用法"><span class="trm-toc-number">3.</span> <span class="trm-toc-text">用法</span></a><ol class="trm-toc-child"><li class="trm-toc-item trm-toc-level-2" title="不同属性名称"><a rel="nofollow" class="trm-toc-link" href="#不同属性名称"><span class="trm-toc-number">3.1.</span> <span class="trm-toc-text">不同属性名称</span></a></li><li class="trm-toc-item trm-toc-level-2" title="多个源"><a rel="nofollow" class="trm-toc-link" href="#多个源"><span class="trm-toc-number">3.2.</span> <span class="trm-toc-text">多个源</span></a><ol class="trm-toc-child"><li class="trm-toc-item trm-toc-level-3" title="多对多"><a rel="nofollow" class="trm-toc-link" href="#多对多"><span class="trm-toc-number">3.2.1.</span> <span class="trm-toc-text">多对多</span></a></li></ol></li><li class="trm-toc-item trm-toc-level-2" title="子对象映射（集合）"><a rel="nofollow" class="trm-toc-link" href="#子对象映射（集合）"><span class="trm-toc-number">3.3.</span> <span class="trm-toc-text">子对象映射（集合）</span></a></li><li class="trm-toc-item trm-toc-level-2" title="日期转换"><a rel="nofollow" class="trm-toc-link" href="#日期转换"><span class="trm-toc-number">3.4.</span> <span class="trm-toc-text">日期转换</span></a></li><li class="trm-toc-item trm-toc-level-2" title="枚举映射"><a rel="nofollow" class="trm-toc-link" href="#枚举映射"><span class="trm-toc-number">3.5.</span> <span class="trm-toc-text">枚举映射</span></a></li></ol></li></ol>
+      </div>
+    </div>
+
+            
+<div class="trm-fixed-container">
+    
+        <div class="trm-fixed-btn post-toc-btn" data-title="目录">
+            <i class="iconfont fas fa-th-list"></i>
+        </div>
+    
+    
+        <div class="trm-fixed-btn" data-title="阅读模式" onclick="asyncFun.switchReadMode()">
+            <i class="iconfont fas fa-book-reader"></i>
+        </div>
+    
+    
+    <div id="trm-back-top" class="trm-fixed-btn" data-title="回到顶部">
+        <i class="iconfont fas fa-arrow-up"></i>
+    </div>
+</div>
+        </div>
+      </div>
+      <!-- scroll container end -->
+  </div>
+  <!-- app wrapper end -->
+
+  
+  <!-- Plugin -->
 
 
-        <h2 id="枚举映射"   >
-          <a href="#枚举映射" class="heading-link"><i class="fas fa-link"></i></a><a href="#枚举映射" class="headerlink" title="枚举映射"></a>枚举映射</h2>
-      <figure class="highlight java"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> <span class="title class_">PaymentType</span> &#123;</span><br><span class="line">    CASH,</span><br><span class="line">    CHEQUE,</span><br><span class="line">    CARD_VISA,</span><br><span class="line">    CARD_MASTER,</span><br><span class="line">    CARD_CREDIT</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> <span class="title class_">PaymentTypeView</span> &#123;</span><br><span class="line">    CASH,</span><br><span class="line">    CHEQUE,</span><br><span class="line">    CARD</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Mapper</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">PaymentTypeMapper</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="type">PaymentTypeMapper</span> <span class="variable">INSTANCE</span> <span class="operator">=</span> Mappers.getMapper(PaymentTypeMapper.class);</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ValueMappings(&#123;</span></span><br><span class="line"><span class="meta">            @ValueMapping(source = &quot;CARD_VISA&quot;, target = &quot;CARD&quot;),</span></span><br><span class="line"><span class="meta">            @ValueMapping(source = &quot;CARD_MASTER&quot;, target = &quot;CARD&quot;),</span></span><br><span class="line"><span class="meta">            @ValueMapping(source = &quot;CARD_CREDIT&quot;, target = &quot;CARD&quot;)</span></span><br><span class="line"><span class="meta">    &#125;)</span></span><br><span class="line">    PaymentTypeView <span class="title function_">paymentTypeToPaymentTypeView</span><span class="params">(PaymentType paymentType)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
 
-<p>参考：<br><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/368731266" >链接</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
-</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ END ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">Author: </span><span class="copyright-author__value"><a href="http://example.com">Zhen Ziyang</a></span></div><div class="copyright-link"><span class="copyright-link__name">Link: </span><span class="copyright-link__value"><a href="http://example.com/2024/02/28/mapstruct%E6%98%A0%E5%B0%84%E5%99%A8/">http://example.com/2024/02/28/mapstruct%E6%98%A0%E5%B0%84%E5%99%A8/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">Copyright: </span><span class="copyright-notice__value">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">BY-NC-SA</a> unless stating additionally</span></div></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2024/02/28/raft/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">【6.824】raft</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/2024/02/28/java%E5%BC%82%E5%B8%B8%E8%A7%A3%E6%9E%90/"><span class="paginator-prev__text">java异常解析</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">Catalog</span><span class="sidebar-nav-ov">Overview</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89%E4%B8%8E%E6%84%8F%E4%B9%89"><span class="toc-number">1.</span> <span class="toc-text">
-          定义与意义</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8E%9F%E7%90%86"><span class="toc-number">2.</span> <span class="toc-text">
-          原理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Instance"><span class="toc-number">2.1.</span> <span class="toc-text">
-          Instance</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#getMapper"><span class="toc-number">2.2.</span> <span class="toc-text">
-          getMapper()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%96%E8%AF%91%E5%90%8E%E7%94%9F%E6%88%90%E7%9A%84%E4%BB%A3%E7%A0%81"><span class="toc-number">2.3.</span> <span class="toc-text">
-          编译后生成的代码</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%94%A8%E6%B3%95"><span class="toc-number">3.</span> <span class="toc-text">
-          用法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8D%E5%90%8C%E5%B1%9E%E6%80%A7%E5%90%8D%E7%A7%B0"><span class="toc-number">3.1.</span> <span class="toc-text">
-          不同属性名称</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E4%B8%AA%E6%BA%90"><span class="toc-number">3.2.</span> <span class="toc-text">
-          多个源</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E5%AF%B9%E5%A4%9A"><span class="toc-number">3.2.1.</span> <span class="toc-text">
-          多对多</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%90%E5%AF%B9%E8%B1%A1%E6%98%A0%E5%B0%84%EF%BC%88%E9%9B%86%E5%90%88%EF%BC%89"><span class="toc-number">3.3.</span> <span class="toc-text">
-          子对象映射（集合）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%A5%E6%9C%9F%E8%BD%AC%E6%8D%A2"><span class="toc-number">3.4.</span> <span class="toc-text">
-          日期转换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9E%9A%E4%B8%BE%E6%98%A0%E5%B0%84"><span class="toc-number">3.5.</span> <span class="toc-text">
-          枚举映射</span></a></li></ol></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/icons/stun-logo.svg" alt="avatar"></div><p class="sidebar-ov-author__text">Hello Stun</p></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">12</div><div class="sidebar-ov-state-item__name">Archives</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="Creative Commons" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">You have read </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2024</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>Zhen Ziyang</span><span class="footer__devider">|</span><span></span></div><div><span>Theme - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.8.0</span></div><div class="busuanzi"><span class="busuanzi-siteuv"><span class="busuanzi-siteuv__icon"><i class="fas fa-user"></i></span><span class="busuanzi-siteuv__info">Visitors</span><span class="busuanzi-siteuv__value" id="busuanzi_value_site_uv"></span></span><span class="busuanzi-sitepv"><span class="busuanzi-siteuv__icon"><i class="fas fa-eye"></i></span><span class="busuanzi-siteuv__info">Views</span><span class="busuanzi-siteuv__value" id="busuanzi_value_site_pv"></span></span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="https://cdn.jsdelivr.net/gh/sukkaw/busuanzi@latest/bsz.pure.mini.js" async></script><script src="/js/utils.js?v=2.8.0"></script><script src="/js/stun-boot.js?v=2.8.0"></script><script src="/js/scroll.js?v=2.8.0"></script><script src="/js/header.js?v=2.8.0"></script><script src="/js/sidebar.js?v=2.8.0"></script></body></html>
+
+    
+    
+<script src="https://npm.elemecdn.com/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+
+    
+
+    
+        <script src="/js/plugins/typing.js?v=2.1.10"></script>
+    
+
+    
+
+    <!-- 数学公式 -->
+    
+
+    <!-- 评论插件 -->
+    
+        
+
+        
+    
+
+
+
+<!-- CDN -->
+
+
+    
+
+    
+
+    
+
+
+
+
+    <!-- Service Worker -->
+    
+    <!-- baidu push -->
+    
+
+
+<script id="async-script" src="/js/main.js?v=2.1.10"></script>
+
+</body>
+
+</html>

@@ -1,54 +1,603 @@
-<!DOCTYPE html><html lang="zh-Hans"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/images/icons/favicon-16x16.png?v=2.8.0" type="image/png" sizes="16x16"><link rel="icon" href="/images/icons/favicon-32x32.png?v=2.8.0" type="image/png" sizes="32x32"><meta property="og:type" content="website">
+<!DOCTYPE html>
+<html lang="zh-Hans">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="x5-fullscreen" content="true">
+<meta name="full-screen" content="yes">
+<meta name="theme-color" content="#317EFB" />
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=0" name="viewport">
+<meta property="og:type" content="website">
 <meta property="og:title" content="Ziyang&#39;s Blog">
 <meta property="og:url" content="http://example.com/page/2/index.html">
 <meta property="og:site_name" content="Ziyang&#39;s Blog">
 <meta property="og:locale">
 <meta property="article:author" content="Zhen Ziyang">
-<meta name="twitter:card" content="summary"><title>Ziyang's Blog</title><link ref="canonical" href="http://example.com/page/2/index.html"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.8.0"><link rel="stylesheet" href="css/custom.css"><script>var Stun = window.Stun || {};
-var CONFIG = {
-  root: '/',
-  algolia: undefined,
-  assistSearch: undefined,
-  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
-  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
-  header: {"enable":true,"showOnPost":true,"scrollDownIcon":false},
-  postWidget: {"endText":true},
-  nightMode: {"enable":true},
-  back2top: {"enable":true},
-  codeblock: {"style":"default","highlight":"light","wordWrap":false},
-  reward: false,
-  fancybox: false,
-  zoomImage: {"gapAside":"20px"},
-  galleryWaterfall: undefined,
-  lazyload: false,
-  pjax: undefined,
-  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
-  shortcuts: undefined,
-  prompt: {"copyButton":"Copy","copySuccess":"Copy Success","copyError":"Copy Error"},
-  sourcePath: {"js":"js","css":"css","images":"images"},
-};
+<meta name="twitter:card" content="summary">
 
-window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 7.1.1"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">Home</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">Archives</span></a></div></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">Hello Stun</div><div class="header-banner-info__subtitle">An elegant theme for Hexo</div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content content-home" id="content"><section class="postlist"><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2024/02/28/%E3%80%90giscus-%E9%85%8D%E7%BD%AE%E3%80%91%E7%BB%99%E5%8D%9A%E5%AE%A2%E4%B8%AD%E5%A2%9E%E5%8A%A0%E8%AF%84%E8%AE%BA%E5%8A%9F%E8%83%BD/">【giscus 配置】给博客增加评论功能</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2024-02-28</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2024-02-28</span></span></div></header><div class="post-body"><div class="post-excerpt"><p>giscus是一款开源的github app, 可以用来对repo或者博客等进行评论。我使用的方法是在hexo博客中增加评论功能，具体步骤可见下文。</p>
-<p><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://giscus.app/zh-CN#category" >giscus官网地址</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
-<p>目前文档里有一些配置信息不是很清晰，这里进行详细的配置解释。</p>
 
-        <h1 id="安装"   >
-          <a href="#安装" class="heading-link"><i class="fas fa-link"></i></a><a href="#安装" class="headerlink" title="安装"></a>安装</h1>
-      <p>点击链接<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://github.com/apps/giscus%E5%AE%89%E8%A3%85giscus" >https://github.com/apps/giscus安装giscus</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> app。选择对应的repo。这个repo一定要包含后文用到的repo</p>
+<title >Ziyang's Blog</title>
 
-        <h1 id="获取repo和配置信息"   >
-          <a href="#获取repo和配置信息" class="heading-link"><i class="fas fa-link"></i></a><a href="#获取repo和配置信息" class="headerlink" title="获取repo和配置信息"></a>获取repo和配置信息</h1>
-      <p>可以点击<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://docs.github.com/en/graphql/overview/explorer" >github中的graphQL链接</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>生成自己的repo_id和category_id。</p>
-<p>将 userName 换成具体的 Github 用户名；</p>
-<p>将 repoName 换成保存评论数据的 Repo 名称。</p>
-<p><img src="/images/graphQL.png" alt="graphQL"></p>
+<!-- Favicon -->
 
-        <h1 id="hexo中添加giscus配置"   >
-          <a href="#hexo中添加giscus配置" class="heading-link"><i class="fas fa-link"></i></a><a href="#hexo中添加giscus配置" class="headerlink" title="hexo中添加giscus配置"></a>hexo中添加giscus配置</h1>
-      <p>修改repo, repo-id, category, category-id</p>
-<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">comment:</span><br><span class="line">  giscus:</span><br><span class="line">    enable: true</span><br><span class="line">    repo: 16372212/16372212.github.io</span><br><span class="line">    repo-id: XXXX</span><br><span class="line">    category: General</span><br><span class="line">    category-id: XXXX</span><br><span class="line">    mapping: pathname</span><br><span class="line">    reactions-enabled: 1</span><br><span class="line">    emit-metadata: 0</span><br><span class="line">    lang: zh-CN</span><br><span class="line">    theme: </span><br><span class="line">      light: light</span><br><span class="line">      dark: dark</span><br></pre></td></tr></table></div></figure>
+    <link href='/leaf.svg?v=2.1.10' rel='icon' type='image/png' sizes='16x16' ></link>
 
-<p>这里踩了一些坑。repo应该是userName&#x2F;repoName, 一开始只输repoName一直显示没找到</p>
-</div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2024/02/27/%E5%88%9D%E5%BF%83/">初心———灵魂的渴望是欲望的先知。</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2024-02-27</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2024-02-28</span></span></div></header><div class="post-body"><div class="post-excerpt"><p>工作以后，有了更多的时间，重拾了对技术钻研的热情。日常分享一些学习笔记、CFA备考笔记和读书笔记。</p>
-<p>另外，为人处事、工作沟通上也有不少反思，希望可以将自己的思考记录下来，与诸君共勉。<br>永远保持热情，相信相信的力量。</p>
-</div></div></article></section><nav class="paginator"><div class="paginator-inner"><a class="extend prev" rel="prev" href="/"><i class="fas fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span></div></nav></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><section class="sidebar-toc hide"></section><!-- ov = overview--><section class="sidebar-ov"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/icons/stun-logo.svg" alt="avatar"></div><p class="sidebar-ov-author__text">Hello Stun</p></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">12</div><div class="sidebar-ov-state-item__name">Archives</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="Creative Commons" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2024</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>Zhen Ziyang</span><span class="footer__devider">|</span><span></span></div><div><span>Theme - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.8.0</span></div><div class="busuanzi"><span class="busuanzi-siteuv"><span class="busuanzi-siteuv__icon"><i class="fas fa-user"></i></span><span class="busuanzi-siteuv__info">Visitors</span><span class="busuanzi-siteuv__value" id="busuanzi_value_site_uv"></span></span><span class="busuanzi-sitepv"><span class="busuanzi-siteuv__icon"><i class="fas fa-eye"></i></span><span class="busuanzi-siteuv__info">Views</span><span class="busuanzi-siteuv__value" id="busuanzi_value_site_pv"></span></span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="https://cdn.jsdelivr.net/gh/sukkaw/busuanzi@latest/bsz.pure.mini.js" async></script><script src="/js/utils.js?v=2.8.0"></script><script src="/js/stun-boot.js?v=2.8.0"></script><script src="/js/scroll.js?v=2.8.0"></script><script src="/js/header.js?v=2.8.0"></script><script src="/js/sidebar.js?v=2.8.0"></script></body></html>
+
+    <link href='/leaf.svg?v=2.1.10' rel='icon' type='image/png' sizes='32x32' ></link>
+
+
+    <link href='/leaf.svg?v=2.1.10' rel='apple-touch-icon' sizes='180x180' ></link>
+
+
+    <link href='/site.webmanifest' rel='manifest' ></link>
+
+
+<!-- Plugin -->
+
+
+
+
+    
+<link rel="stylesheet" href="/css/plugins/bootstrap.row.css">
+
+    
+<link rel="stylesheet" href="https://npm.elemecdn.com/@fancyapps/ui@4.0/dist/fancybox.css">
+
+    
+    
+
+
+
+
+<!-- Icon -->
+
+    
+<link rel="stylesheet" href="/css/plugins/font-awesome.min.css">
+
+
+
+
+<!-- Variable -->
+<script>window.ASYNC_CONFIG = {"hostname":"example.com","author":"Zhen Ziyang","root":"/","typed_text":["ZZ！"],"theme_version":"2.1.10","theme":{"switch":true,"default":"style-light"},"favicon":{"logo":"leaf.svg","icon16":"leaf.svg","icon32":"leaf.svg","appleTouchIcon":"leaf.svg","webmanifest":"/site.webmanifest","visibilitychange":false,"hidden":"/failure.ico","showText":"(/≧▽≦/)咦！又好了！","hideText":"(●—●)喔哟，崩溃啦！"},"i18n":{"placeholder":"搜索文章...","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）","author":"本文作者：","copyright_link":"本文链接：","copyright_license_title":"版权声明：","copyright_license_content":"本博客所有文章除特别声明外，均默认采用 undefined 许可协议。","copy_success":"复制成功","copy_failure":"复制失败","open_read_mode":"进入阅读模式","exit_read_mode":"退出阅读模式","notice_outdate_message":"距离上次更新已经 undefined 天了, 文章内容可能已经过时。","sticky":"置顶","just":"刚刚","min":"分钟前","hour":"小时前","day":"天前","month":"个月前"},"swup":false,"plugin":{"flickr_justified_gallery":"https://npm.elemecdn.com/flickr-justified-gallery@latest/dist/fjGallery.min.js"},"icons":{"sun":"far fa-sun","moon":"far fa-moon","play":"fas fa-play","email":"far fa-envelope","next":"fas fa-arrow-right","calendar":"far fa-calendar-alt","clock":"far fa-clock","user":"far fa-user","back_top":"fas fa-arrow-up","close":"fas fa-times","search":"fas fa-search","reward":"fas fa-hand-holding-usd","user_tag":"fas fa-user-alt","toc_tag":"fas fa-th-list","read":"fas fa-book-reader","arrows":"fas fa-arrows-alt-h","double_arrows":"fas fa-angle-double-down","copy":"fas fa-copy"},"icontype":"font","highlight":{"plugin":"highlighjs","theme":true,"copy":true,"lang":true,"title":"mac","height_limit":200},"toc":{"post_title":true},"live_time":{"start_time":null,"prefix":"博客已萌萌哒运行 undefined 天"}};</script>
+<script id="async-page-config">window.PAGE_CONFIG = {"isPost":false,"isHome":true,"postUpdate":"2024-03-03 22:27:48"};</script>
+
+<!-- Theme mode css -->
+<link data-swup-theme rel="stylesheet" href="/css/index.css?v=2.1.10" id="trm-switch-style">
+<script>
+    let defaultMode = ASYNC_CONFIG.theme.default !=='auto' ?  ASYNC_CONFIG.theme.default : (window.matchMedia("(prefers-color-scheme: light)").matches ? 'style-light' : 'style-dark')
+    let catchMode = localStorage.getItem('theme-mode') || defaultMode;
+    let type = catchMode === 'style-dark' ? 'add' : 'remove';
+    document.documentElement.classList[type]('dark')
+</script>
+
+<!-- CDN -->
+
+
+    
+    
+
+
+
+<!-- Site Analytics -->
+ 
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+<body>
+
+  <!-- app wrapper -->
+  <div class="trm-app-frame">
+
+    <!-- page preloader -->
+    <div class="trm-preloader">
+    <div class="trm-holder">
+        <div class="preloader">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+</div>
+    <!-- page preloader end -->
+
+    <!-- change mode preloader -->
+    <div class="trm-mode-swich-animation-frame">
+    <div class="trm-mode-swich-animation">
+        <i class="i-sun"><i class="iconfont far fa-sun"></i></i>
+        <div class="trm-horizon"></div>
+        <i class="i-moon"><i class="iconfont far fa-moon"></i></i>
+    </div>
+</div>
+    <!-- change mode preloader end -->
+
+      <!-- scroll container -->
+      <div id="trm-dynamic-content" class="trm-swup-animation">
+        <div id="trm-scroll-container" class="trm-scroll-container" style="opacity: 0">
+            <!-- top bar -->
+            <header class="trm-top-bar">
+	<div class="container">
+		<div class="trm-left-side">
+			<!-- logo -->
+<a href="/" class="trm-logo-frame trm-anima-link">
+    
+        <img alt="logo" src="/leaf.svg">
+    
+    
+        <div class="trm-logo-text">
+            Ziyang<span>Zhen</span>
+        </div>
+    
+</a>
+<!-- logo end -->
+		</div>
+		<div class="trm-right-side">
+			<!-- menu -->
+<div class="trm-menu">
+    <nav>
+        <ul>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/" target="">
+                    首页
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/categories/" target="">
+                    分类
+                </a>
+                
+                <ul>
+                    
+                    <li>
+                        <a  href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/" target="">
+                            分布式
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a  href="/categories/AI/" target="">
+                            AI
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a  href="/categories/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/" target="">
+                            基础算法
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a  href="/categories/Java/" target="">
+                            Java
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a  href="/categories/CFA/" target="">
+                            CFA
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a  href="/categories/%E8%AF%BB%E4%B9%A6/" target="">
+                            读书
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a  href="/categories/%E5%BF%83%E5%BE%97%E4%BD%93%E4%BC%9A/" target="">
+                            心得
+                        </a>
+                    </li>
+                    
+                </ul>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a data-no-swup href="/archives/" target="">
+                    归档
+                </a>
+                
+            </li>
+            
+        </ul>
+    </nav>
+</div>
+<!-- menu end -->
+			
+    <!-- mode switcher place -->
+    <div class="trm-mode-switcher-place">
+        <div class="trm-mode-switcher">
+            <i class="iconfont far fa-sun"></i>
+            <input class="tgl tgl-light" id="trm-swich" type="checkbox">
+            <label class="trm-swich" for="trm-swich"></label>
+            <i class="iconfont far fa-moon"></i>
+        </div>
+    </div>
+    <!-- mode switcher place end -->
+
+			
+		</div>
+		<div class="trm-menu-btn">
+			<span></span>
+		</div>
+	</div>
+</header>
+            <!-- top bar end -->
+
+            <!-- body -->
+            <div class="trm-content-start">
+    <!-- banner -->
+    <div class="trm-banner">
+    
+    <!-- banner cover -->
+    <img style="object-position:top;object-fit:cover;" alt="banner" class="trm-banner-cover" src="https://pic1.zhimg.com/v2-b3c2c6745b9421a13a3c4706b19223b3_r.jpg?source=1940ef5c">
+    <!-- banner cover end -->
+    
+
+    <!-- banner content -->
+    <div class="trm-banner-content trm-overlay">
+        <div class="container">
+            <div class="row">
+                
+                <div class="col-lg-4"></div>
+                
+                <div class="col-lg-8">
+
+                    <!-- banner title -->
+                    <div class="trm-banner-text ">
+                        <div class="trm-label trm-mb-20">
+                            Welcome to zzy&#39;s blog.
+                        </div>
+                        <h1 class="trm-mb-30 trm-hsmb-font">
+                            不在显赫处强求，<br>而在隐微处锲而不舍。
+                        </h1>
+
+                        
+                            <ul class="trm-breadcrumbs trm-label">
+                                <li>
+                                    <a href="/" class="trm-anima-link">Home</a>
+                                </li>
+                                <li>
+                                    <span>
+                                        page
+                                    </span>
+                                </li>
+                            </ul>
+                        
+                    </div>
+                    <!-- banner title end -->
+
+                    <!-- scroll hint -->
+                    <span id="scroll-triger" class="trm-scroll-hint-frame">
+                        <div class="trm-scroll-hint"></div>
+                        <span class="trm-label">Scroll down</span>
+                    </span>
+                    <!-- scroll hint end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- banner content end -->
+</div>
+    <!-- banner end -->
+    <div class="container">
+        <div class="row">
+            
+                <div class="trm-page-sidebar col-lg-4 hidden-sm">
+                    <!-- main card -->
+                    <div class="trm-main-card-frame trm-sidebar">
+    <div class="trm-main-card"> 
+        <!-- card header -->
+<div class="trm-mc-header">
+    <div class="trm-avatar-frame trm-mb-20">
+        <img alt="Avatar" class="trm-avatar" src="/images/avator_my.jpg">
+    </div>
+    <h5 class="trm-name trm-mb-15">
+        Zhen Ziyang
+    </h5>
+    
+        <div class="trm-label">
+            Coding吧
+            <span class="trm-typed-text">
+                <!-- Words for theme.user.typedText -->
+            </span>
+        </div>
+    
+</div>
+<!-- card header end -->
+        <!-- sidebar social -->
+
+<div class="trm-divider trm-mb-40 trm-mt-40"></div>
+<div class="trm-social">
+    
+        <a href="https://github.com/16372212/" title="github" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-github"></i>
+        </a>
+    
+        <a href="mailto:coding8ziyang@gmail.com" title="mail" rel="nofollow" target="_blank">
+            <i class="iconfont fas fa-mail-bulk"></i>
+        </a>
+    
+</div>
+
+<!-- sidebar social end -->
+        <!-- info -->
+<div class="trm-divider trm-mb-40 trm-mt-40"></div>
+<ul class="trm-table trm-mb-20">
+    
+        <li>
+            <div class="trm-label">
+                地址:
+            </div>
+            <div class="trm-label trm-label-light">
+                银河系
+            </div>
+        </li>
+    
+        <li>
+            <div class="trm-label">
+                博客关键词:
+            </div>
+            <div class="trm-label trm-label-light">
+                Coding/分布式/CFA
+            </div>
+        </li>
+    
+</ul>
+<!-- info end -->
+
+        
+    </div>
+</div>
+                    <!-- main card end -->
+                </div>
+            
+            <div class="trm-page-content col-lg-8">
+                <div id="trm-content" class="trm-content">
+                    <!-- categories -->
+
+    <div class="row hidden-sm">
+        
+        
+        <div class="col-lg-6">
+            <!-- categories card -->
+<div class="trm-blog-categories trm-scroll-animation">
+    <h6>
+        Java
+        <span class="trm-number">
+            4
+        </span>
+    </h6>
+    <div class="trm-divider trm-mb-20 trm-mt-20"></div>
+    <a href="/categories/Java/." class="trm-label">
+        查看分类 
+        <i class="iconfont fas fa-arrow-right arrow-right"></i>
+    </a>
+</div>
+<!-- categories card end -->
+        </div>
+        
+        <div class="col-lg-6">
+            <!-- categories card -->
+<div class="trm-blog-categories trm-scroll-animation">
+    <h6>
+        分布式
+        <span class="trm-number">
+            2
+        </span>
+    </h6>
+    <div class="trm-divider trm-mb-20 trm-mt-20"></div>
+    <a href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/." class="trm-label">
+        查看分类 
+        <i class="iconfont fas fa-arrow-right arrow-right"></i>
+    </a>
+</div>
+<!-- categories card end -->
+        </div>
+        
+    </div>
+
+<!-- categories end -->
+
+<!-- newest publications -->
+<div class="row">
+    
+        <div class="col-lg-12">
+            <!-- title -->
+            <h5 class="trm-title-with-divider">
+                最近发布 
+                <span data-number="01"></span>
+            </h5>
+        </div>
+    
+    
+        <div class="col-lg-6">
+    <div class="trm-blog-card trm-scroll-animation">
+        <a href="/2024/02/28/%E3%80%90giscus-%E9%85%8D%E7%BD%AE%E3%80%91%E7%BB%99%E5%8D%9A%E5%AE%A2%E4%B8%AD%E5%A2%9E%E5%8A%A0%E8%AF%84%E8%AE%BA%E5%8A%9F%E8%83%BD/" class="trm-cover-frame trm-anima-link">
+            
+            
+                <img alt="cover" class="no-fancybox" src="/images/graphQL.png">
+            
+        </a>
+        
+        <div class="trm-card-descr">
+            <div class="trm-label trm-category trm-mb-20">
+                <a href=" /categories/%E9%80%9A%E7%94%A8/">
+                    通用
+                </a>
+            </div>
+            <h5>
+                <a href="/2024/02/28/%E3%80%90giscus-%E9%85%8D%E7%BD%AE%E3%80%91%E7%BB%99%E5%8D%9A%E5%AE%A2%E4%B8%AD%E5%A2%9E%E5%8A%A0%E8%AF%84%E8%AE%BA%E5%8A%9F%E8%83%BD/" class="trm-anima-link">
+                    【giscus 配置】给博客增加评论功能
+                </a>
+            </h5>
+            <div class="trm-divider trm-mb-20 trm-mt-20"></div>
+            <ul class="trm-card-data trm-label">
+                <li>24/02/28</li>
+                <li>15:47</li>
+                
+                
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="col-lg-6">
+    <div class="trm-blog-card trm-scroll-animation">
+        <a href="/2024/02/27/%E5%88%9D%E5%BF%83/" class="trm-cover-frame trm-anima-link">
+            
+            
+                <div class="trm-cover-date">
+                    <div class="trm-cover-day">27</div>
+                    <div class="trm-cover-month">2024/02</div>
+                </div>
+            
+        </a>
+        
+        <div class="trm-card-descr">
+            <div class="trm-label trm-category trm-mb-20">
+                <a href=" /categories/%E5%BF%83%E5%BE%97%E4%BD%93%E4%BC%9A/">
+                    心得体会
+                </a>
+            </div>
+            <h5>
+                <a href="/2024/02/27/%E5%88%9D%E5%BF%83/" class="trm-anima-link">
+                    初心———灵魂的渴望是欲望的先知。
+                </a>
+            </h5>
+            <div class="trm-divider trm-mb-20 trm-mt-20"></div>
+            <ul class="trm-card-data trm-label">
+                <li>24/02/27</li>
+                <li>19:37</li>
+                
+                
+            </ul>
+        </div>
+    </div>
+</div>
+    
+</div>
+<!-- newest publications end -->
+
+
+    <div class="trm-pagination">
+        <a class="page-number" href="/">1</a><span class="page-number current">2</span>
+    </div>
+
+
+                    <div class="trm-divider footer-divider"></div>
+
+                    <!-- footer -->
+                    <style>
+    #footer {
+        text-align: center;
+        font-size: 0.8em; /* 调整字体大小 */
+    }
+    .busuanzi {
+        display: inline-block;
+        margin: 0 auto;
+    }
+</style>
+
+<div id="footer">
+    <div class="busuanzi">
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+        <span id="busuanzi_container_site_pv">
+            本站总访问量<span id="busuanzi_value_site_pv"></span>次
+        </span>
+        <span class="post-meta-divider">|</span>
+        <span id="busuanzi_container_site_uv" style='display:none'>
+            本站访客数<span id="busuanzi_value_site_uv"></span>人
+        </span>
+    </div>
+    <div>
+        Hosted by 🤡<a href="https://github.com/16372212" rel="noopener" target="_blank">zzy's github</a>
+    </div>
+</div>
+
+                    <!-- footer end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+            <!-- body end -->
+
+            
+
+            
+<div class="trm-fixed-container">
+    
+    
+    
+    <div id="trm-back-top" class="trm-fixed-btn" data-title="回到顶部">
+        <i class="iconfont fas fa-arrow-up"></i>
+    </div>
+</div>
+        </div>
+      </div>
+      <!-- scroll container end -->
+  </div>
+  <!-- app wrapper end -->
+
+  
+  <!-- Plugin -->
+
+
+
+
+    
+    
+<script src="https://npm.elemecdn.com/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+
+    
+
+    
+        <script src="/js/plugins/typing.js?v=2.1.10"></script>
+    
+
+    
+
+    <!-- 数学公式 -->
+    
+
+    <!-- 评论插件 -->
+    
+
+
+
+<!-- CDN -->
+
+
+    
+
+    
+
+    
+
+
+
+
+    <!-- Service Worker -->
+    
+    <!-- baidu push -->
+    
+
+
+<script id="async-script" src="/js/main.js?v=2.1.10"></script>
+
+</body>
+
+</html>
