@@ -7,20 +7,22 @@
 <meta name="full-screen" content="yes">
 <meta name="theme-color" content="#317EFB" />
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=0" name="viewport">
-<meta name="description" content="前情故事由于接触了6.824这个神课之后，对分布式的兴趣愈发浓厚。在做完第二个Lab后，发现自己确实可以从lab中了解到分布式的MapReduce，Raft等的机制，但debug过程较为繁琐。并且在开发过程中，很多自己的逻辑是面向Debug编写的，非常想知道业界比较好的实现形式，而不是在我自己写的屎山上堆逻辑。因此决定开始看看大名鼎鼎的Apache项目的源码。进行一番检索调研之后，计划从Hadoo">
+<meta name="description" content="今天是本人参加工作（不包括之前的其他公司的实习时间）的第237天。最近又有一些新的思维层级上的感悟。 leader去年年底交给的一个项目让我去own, 说出了问题全权负责。这个项目一共有五六个开发人员。其实从这项目最开始我就开始跟进了，但我前几个月一直是一个follower的角色，产品经理交给我什么任务我就开发哪里的逻辑，等到我负责完整个模块的开发与测试后，逐渐开始思考是否可以帮到别人。渐渐思考如">
 <meta property="og:type" content="article">
-<meta property="og:title" content="【源码】Hadoop启程计划">
-<meta property="og:url" content="http://example.com/2024/03/06/%E3%80%90%E6%BA%90%E7%A0%81%E3%80%91Hadoop%E8%B5%B7%E8%88%AA/index.html">
+<meta property="og:title" content="【心得】站在项目的角度而不是只会听话">
+<meta property="og:url" content="http://example.com/2024/03/11/%E3%80%90%E5%BF%83%E5%BE%97%E3%80%91%E7%AB%99%E5%9C%A8%E9%A1%B9%E7%9B%AE%E7%9A%84%E8%A7%92%E5%BA%A6%E8%80%8C%E4%B8%8D%E6%98%AF%E5%8F%AA%E4%BC%9A%E5%90%AC%E8%AF%9D/index.html">
 <meta property="og:site_name" content="Ziyang&#39;s Blog">
-<meta property="og:description" content="前情故事由于接触了6.824这个神课之后，对分布式的兴趣愈发浓厚。在做完第二个Lab后，发现自己确实可以从lab中了解到分布式的MapReduce，Raft等的机制，但debug过程较为繁琐。并且在开发过程中，很多自己的逻辑是面向Debug编写的，非常想知道业界比较好的实现形式，而不是在我自己写的屎山上堆逻辑。因此决定开始看看大名鼎鼎的Apache项目的源码。进行一番检索调研之后，计划从Hadoo">
+<meta property="og:description" content="今天是本人参加工作（不包括之前的其他公司的实习时间）的第237天。最近又有一些新的思维层级上的感悟。 leader去年年底交给的一个项目让我去own, 说出了问题全权负责。这个项目一共有五六个开发人员。其实从这项目最开始我就开始跟进了，但我前几个月一直是一个follower的角色，产品经理交给我什么任务我就开发哪里的逻辑，等到我负责完整个模块的开发与测试后，逐渐开始思考是否可以帮到别人。渐渐思考如">
 <meta property="og:locale">
-<meta property="article:published_time" content="2024-03-06T14:00:10.000Z">
-<meta property="article:modified_time" content="2024-03-08T02:59:18.967Z">
+<meta property="og:image" content="http://example.com/img/404.jpg">
+<meta property="article:published_time" content="2024-03-11T14:21:34.000Z">
+<meta property="article:modified_time" content="2024-03-11T15:13:49.457Z">
 <meta property="article:author" content="Zhen Ziyang">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/404.jpg">
 
 
-<title >【源码】Hadoop启程计划</title>
+<title >【心得】站在项目的角度而不是只会听话</title>
 
 <!-- Favicon -->
 
@@ -63,7 +65,7 @@
 
 <!-- Variable -->
 <script>window.ASYNC_CONFIG = {"hostname":"example.com","author":"Zhen Ziyang","root":"/","typed_text":["ZZ！"],"theme_version":"2.1.10","theme":{"switch":true,"default":"style-light"},"favicon":{"logo":"leaf.svg","icon16":"leaf.svg","icon32":"leaf.svg","appleTouchIcon":"leaf.svg","webmanifest":"/site.webmanifest","visibilitychange":false,"hidden":"/failure.ico","showText":"(/≧▽≦/)咦！又好了！","hideText":"(●—●)喔哟，崩溃啦！"},"i18n":{"placeholder":"搜索文章...","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）","author":"本文作者：","copyright_link":"本文链接：","copyright_license_title":"版权声明：","copyright_license_content":"本博客所有文章除特别声明外，均默认采用 undefined 许可协议。","copy_success":"复制成功","copy_failure":"复制失败","open_read_mode":"进入阅读模式","exit_read_mode":"退出阅读模式","notice_outdate_message":"距离上次更新已经 undefined 天了, 文章内容可能已经过时。","sticky":"置顶","just":"刚刚","min":"分钟前","hour":"小时前","day":"天前","month":"个月前"},"swup":false,"plugin":{"flickr_justified_gallery":"https://npm.elemecdn.com/flickr-justified-gallery@latest/dist/fjGallery.min.js"},"icons":{"sun":"far fa-sun","moon":"far fa-moon","play":"fas fa-play","email":"far fa-envelope","next":"fas fa-arrow-right","calendar":"far fa-calendar-alt","clock":"far fa-clock","user":"far fa-user","back_top":"fas fa-arrow-up","close":"fas fa-times","search":"fas fa-search","reward":"fas fa-hand-holding-usd","user_tag":"fas fa-user-alt","toc_tag":"fas fa-th-list","read":"fas fa-book-reader","arrows":"fas fa-arrows-alt-h","double_arrows":"fas fa-angle-double-down","copy":"fas fa-copy"},"icontype":"font","highlight":{"plugin":"highlighjs","theme":true,"copy":true,"lang":true,"title":"mac","height_limit":200},"toc":{"post_title":true},"live_time":{"start_time":null,"prefix":"博客已萌萌哒运行 undefined 天"}};</script>
-<script id="async-page-config">window.PAGE_CONFIG = {"isPost":true,"isHome":false,"postUpdate":"2024-03-08 10:59:18"};</script>
+<script id="async-page-config">window.PAGE_CONFIG = {"isPost":true,"isHome":false,"postUpdate":"2024-03-11 23:13:49"};</script>
 
 <!-- Theme mode css -->
 <link data-swup-theme rel="stylesheet" href="/css/index.css?v=2.1.10" id="trm-switch-style">
@@ -245,7 +247,7 @@
     <div class="trm-banner">
     
     <!-- banner cover -->
-    <img style="object-position:top;object-fit:cover;" alt="banner" class="trm-banner-cover" src="/images/hadoop.png">
+    <img style="object-position:top;object-fit:cover;" alt="banner" class="trm-banner-cover" src="/images/%E5%BF%83%E5%BE%97.jpg">
     <!-- banner cover end -->
     
 
@@ -264,7 +266,7 @@
                             NEWS LETTER
                         </div>
                         <h1 class="trm-mb-30 trm-hsmb-font">
-                            【源码】Hadoop启程计划
+                            【心得】站在项目的角度而不是只会听话
                         </h1>
 
                         
@@ -374,13 +376,13 @@
     <div class="col-sm-4">
         <div class="trm-card trm-label trm-label-light text-center">
             <i class="iconfont far fa-calendar-alt trm-icon"></i><br>
-            03/06
+            03/11
         </div>
     </div>
     <div class="col-sm-4">
         <div class="trm-card trm-label trm-label-light text-center">
             <i class="iconfont far fa-clock trm-icon"></i><br>
-            22:00
+            22:21
         </div>
     </div>
     <div class="col-sm-4">
@@ -392,29 +394,13 @@
 </div>
 <div class="trm-card ">
     <article id="article-container" class="trm-publication">
-    <h1 id="前情故事"><a href="#前情故事" class="headerlink" title="前情故事"></a>前情故事</h1><p>由于接触了6.824这个神课之后，对分布式的兴趣愈发浓厚。在做完第二个Lab后，发现自己确实可以从lab中了解到分布式的MapReduce，Raft等的机制，但debug过程较为繁琐。并且在开发过程中，很多自己的逻辑是面向Debug编写的，非常想知道业界比较好的实现形式，而不是在我自己写的屎山上堆逻辑。因此决定开始看看大名鼎鼎的Apache项目的源码。进行一番检索调研之后，计划从Hadoop开始入手，希望自己不要被快速打脸。嘻嘻嘻&#x2F;&#x3D; &#x3D;&#x2F;</p>
-<h1 id="一些不一定靠谱的计划"><a href="#一些不一定靠谱的计划" class="headerlink" title="一些不一定靠谱的计划"></a>一些不一定靠谱的计划</h1><p>（来自Claude3的建议，我告诉claude3我每天可以抽出两个小时学习，结果这个姐自动规划了五天，还贴心的给我放了个周末的假期，太可爱了&#x2F;&#x2F;)</p>
-<p>(大佬们都是实践的差不多才写博客，但我好像把这个博客当成日记了，反正也没什么人能看到，看到的大佬请别嘲笑，看到的姐妹感兴趣的可以评论区一起交流学习～)</p>
-<p><em>第1周 (10小时)</em>:</p>
-<ul>
-<li>从官方文档入手,了解 Hadoop 的设计目标、核心组件 (HDFS 和 MapReduce)、架构以及应用场景。<br>上手搭建一个最小化的 Hadoop 本地伪分布式环境,运行一些基本的示例程序,熟悉基本使用流程。<br>阅读 MapReduce 论文,深入理解 MapReduce 编程模型的设计理念。</li>
-</ul>
-<p><em>第2周 (10小时):</em></p>
-<ul>
-<li>了解 HDFS 的设计原理和架构,重点关注 NameNode、DataNode、块存储、复制策略等核心概念。<br>阅读相关的源代码,如 hadoop-hdfs-project 模块下的 NameNode.java、DataNode.java 等。<br>动手实践,在本地环境中模拟某些场景,如节点故障、数据复制、文件读写等。</li>
-</ul>
-<p><em>第3周 (10小时):</em></p>
-<ul>
-<li>深入 MapReduce 的实现细节,如 Job 提交流程、任务调度、shuffle 过程等。<br>阅读 hadoop-mapreduce-project 模块下的相关源代码,如 JobTracker.java、TaskTracker.java 等。<br>编写一些小的 MapReduce 程序,在本地环境运行并调试,观察运行日志。</li>
-</ul>
-<p><em>第4周 (10小时):</em></p>
-<ul>
-<li>学习 YARN (Hadoop 2.x 的新资源调度器),了解其设计思路、组件及工作流程。<br>阅读 hadoop-yarn-project 模块相关源代码,如 ResourceManager.java、NodeManager.java 等。<br>在伪分布式环境下实践 YARN 上运行 MapReduce 作业的流程。</li>
-</ul>
-<p><em>第5周 (10小时):</em></p>
-<ul>
-<li>探索 Hadoop 生态中的其他重要项目,如 Hive、HBase、Pig 等,了解它们的定位和工作原理。<br>实践在 Hive 上构建简单的数据仓库,使用 HiveQL 进行数据查询。<br>如有时间,可以尝试阅读这些项目的部分源代码,了解它们是如何与 Hadoop 对接的。</li>
-</ul>
+    <p>今天是本人参加工作（不包括之前的其他公司的实习时间）的第237天。最近又有一些新的思维层级上的感悟。</p>
+<p>leader去年年底交给的一个项目让我去own, 说出了问题全权负责。这个项目一共有五六个开发人员。其实从这项目最开始我就开始跟进了，但我前几个月一直是一个follower的角色，产品经理交给我什么任务我就开发哪里的逻辑，等到我负责完整个模块的开发与测试后，逐渐开始思考是否可以帮到别人。渐渐思考如何提升自己的技术影响力。</p>
+<p><img src="/images/%E5%BF%83%E5%BE%97.jpg" alt="1" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<p>之前的我的思维转变是 从“一个coder”变成一个更有影响力的programer，建立自己的技术影响力或者技术权威。在这样的思维的转变下，自己开始review大家的代码、走查逻辑、和别人沟通时也会直接讲出他们自己的或别人的实现策略与思路。</p>
+<p>但最近工作上遇到的一个契机，包括上线后oncall的体验，以及领导今天开会对我的指点让我意识到自己没有以一个owner的角色工作。之前的想法远远不够。身为一个owner，要更多的理解业务逻辑、宏观上的点，站在项目的角度上，了解上线时间是否应该去主动推动、怎么推动；用户体验是否要改善，怎么改善；系统性能优化是否要提上日程，怎么设计优化；如何把项目做好而不是做一个听领导话的“乖乖员工”。因为讨好领导的收益远远不如让这个项目变得更好。</p>
+<p>有人曾问我最近一段时间的工作目标是什么：我当时的回答完全从自己的角度出发，例如做好xxx的工作，负责更多的开发任务从而让自己赢得更多信任、手更熟、沉淀技术、提升项目管理的能力、锻炼责任心巴拉巴拉。</p>
+<p>但更思维正确的是在某段时间内让xx项目的用户负面反馈率从x%下降到x%、让性能从多少提升到多少，让用户的粘性增加多少这种。这才是踏实做事的正确打开方式呀。</p>
 
 </article>
     
@@ -429,6 +415,7 @@
             <span data-number="02"></span>
         </h5>
     </div>
+    
     
         <div class="col-lg-6">
     <div class="trm-blog-card trm-scroll-animation">
@@ -454,38 +441,6 @@
             <ul class="trm-card-data trm-label">
                 <li>24/03/08</li>
                 <li>10:52</li>
-                
-                
-            </ul>
-        </div>
-    </div>
-</div>
-    
-    
-        <div class="col-lg-6">
-    <div class="trm-blog-card trm-scroll-animation">
-        <a href="/2024/03/05/%E3%80%90%E5%BF%83%E5%BE%97%E3%80%913-15%E5%B0%8F%E8%AE%B0/" class="trm-cover-frame trm-anima-link">
-            
-            
-                <img alt="cover" class="no-fancybox" src="/images/IMG_9248.JPG">
-            
-        </a>
-        
-        <div class="trm-card-descr">
-            <div class="trm-label trm-category trm-mb-20">
-                <a href=" /categories/%E5%BF%83%E5%BE%97%E4%BD%93%E4%BC%9A/">
-                    心得体会
-                </a>
-            </div>
-            <h5>
-                <a href="/2024/03/05/%E3%80%90%E5%BF%83%E5%BE%97%E3%80%913-15%E5%B0%8F%E8%AE%B0/" class="trm-anima-link">
-                    【心得】3.05小记
-                </a>
-            </h5>
-            <div class="trm-divider trm-mb-20 trm-mt-20"></div>
-            <ul class="trm-card-data trm-label">
-                <li>24/03/05</li>
-                <li>21:02</li>
                 
                 
             </ul>
@@ -584,24 +539,8 @@
 
             
 
-    <div id="post-toc" class="trm-post-toc">
-      <div class="trm-post-toc-header">
-        目录导航
-				<span id="post-toc-top">
-					置顶
-				</span>
-      </div>
-      <div class="trm-post-toc-content">
-        <ol class="trm-toc"><li class="trm-toc-item trm-toc-level-1" title="前情故事"><a rel="nofollow" class="trm-toc-link" href="#前情故事"><span class="trm-toc-number">1.</span> <span class="trm-toc-text">前情故事</span></a></li><li class="trm-toc-item trm-toc-level-1" title="一些不一定靠谱的计划"><a rel="nofollow" class="trm-toc-link" href="#一些不一定靠谱的计划"><span class="trm-toc-number">2.</span> <span class="trm-toc-text">一些不一定靠谱的计划</span></a></li></ol>
-      </div>
-    </div>
-
             
 <div class="trm-fixed-container">
-    
-        <div class="trm-fixed-btn post-toc-btn" data-title="目录">
-            <i class="iconfont fas fa-th-list"></i>
-        </div>
     
     
         <div class="trm-fixed-btn" data-title="阅读模式" onclick="asyncFun.switchReadMode()">
