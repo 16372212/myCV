@@ -7,16 +7,20 @@
 <meta name="full-screen" content="yes">
 <meta name="theme-color" content="#317EFB" />
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=0" name="viewport">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Ziyang&#39;s Blog">
-<meta property="og:url" content="http://example.com/archives/2024/02/page/2/index.html">
+<meta name="description" content="前言最近负责的一个新模块，要上线了，需要紧急的修改一些Bug。这算是很好的一个切入点，让我去了解这个项目。负责的过程中发现代码写的有点一言难尽，真好之前看过重构这本书，就忍不住想要重构一下。但改的过程中，自己还是做的很片面，而且临近上线时期，大范围重构挑战太多，且没有一个体系化的重构方法论，借此契机下，了解了解DDD。 什么是DDDDDD(Domain-Driven Design,领域驱动设计)是">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【Java】一次DDD设计实践">
+<meta property="og:url" content="http://example.com/2024/03/13/%E3%80%90Java%E3%80%91%E4%B8%80%E6%AC%A1DDD%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5/index.html">
 <meta property="og:site_name" content="Ziyang&#39;s Blog">
+<meta property="og:description" content="前言最近负责的一个新模块，要上线了，需要紧急的修改一些Bug。这算是很好的一个切入点，让我去了解这个项目。负责的过程中发现代码写的有点一言难尽，真好之前看过重构这本书，就忍不住想要重构一下。但改的过程中，自己还是做的很片面，而且临近上线时期，大范围重构挑战太多，且没有一个体系化的重构方法论，借此契机下，了解了解DDD。 什么是DDDDDD(Domain-Driven Design,领域驱动设计)是">
 <meta property="og:locale">
+<meta property="article:published_time" content="2024-03-13T15:55:56.000Z">
+<meta property="article:modified_time" content="2024-03-13T16:06:28.931Z">
 <meta property="article:author" content="Zhen Ziyang">
 <meta name="twitter:card" content="summary">
 
 
-<title >Ziyang's Blog</title>
+<title >【Java】一次DDD设计实践</title>
 
 <!-- Favicon -->
 
@@ -59,7 +63,7 @@
 
 <!-- Variable -->
 <script>window.ASYNC_CONFIG = {"hostname":"example.com","author":"Zhen Ziyang","root":"/","typed_text":["ZZ！"],"theme_version":"2.1.10","theme":{"switch":true,"default":"style-light"},"favicon":{"logo":"leaf.svg","icon16":"leaf.svg","icon32":"leaf.svg","appleTouchIcon":"leaf.svg","webmanifest":"/site.webmanifest","visibilitychange":false,"hidden":"/failure.ico","showText":"(/≧▽≦/)咦！又好了！","hideText":"(●—●)喔哟，崩溃啦！"},"i18n":{"placeholder":"搜索文章...","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）","author":"本文作者：","copyright_link":"本文链接：","copyright_license_title":"版权声明：","copyright_license_content":"本博客所有文章除特别声明外，均默认采用 undefined 许可协议。","copy_success":"复制成功","copy_failure":"复制失败","open_read_mode":"进入阅读模式","exit_read_mode":"退出阅读模式","notice_outdate_message":"距离上次更新已经 undefined 天了, 文章内容可能已经过时。","sticky":"置顶","just":"刚刚","min":"分钟前","hour":"小时前","day":"天前","month":"个月前"},"swup":false,"plugin":{"flickr_justified_gallery":"https://npm.elemecdn.com/flickr-justified-gallery@latest/dist/fjGallery.min.js"},"icons":{"sun":"far fa-sun","moon":"far fa-moon","play":"fas fa-play","email":"far fa-envelope","next":"fas fa-arrow-right","calendar":"far fa-calendar-alt","clock":"far fa-clock","user":"far fa-user","back_top":"fas fa-arrow-up","close":"fas fa-times","search":"fas fa-search","reward":"fas fa-hand-holding-usd","user_tag":"fas fa-user-alt","toc_tag":"fas fa-th-list","read":"fas fa-book-reader","arrows":"fas fa-arrows-alt-h","double_arrows":"fas fa-angle-double-down","copy":"fas fa-copy"},"icontype":"font","highlight":{"plugin":"highlighjs","theme":true,"copy":true,"lang":true,"title":"mac","height_limit":200},"toc":{"post_title":true},"live_time":{"start_time":null,"prefix":"博客已萌萌哒运行 undefined 天"}};</script>
-<script id="async-page-config">window.PAGE_CONFIG = {"isPost":false,"isHome":false,"postUpdate":"2024-03-14 00:06:42"};</script>
+<script id="async-page-config">window.PAGE_CONFIG = {"isPost":true,"isHome":false,"postUpdate":"2024-03-14 00:06:28"};</script>
 
 <!-- Theme mode css -->
 <link data-swup-theme rel="stylesheet" href="/css/index.css?v=2.1.10" id="trm-switch-style">
@@ -241,7 +245,7 @@
     <div class="trm-banner">
     
     <!-- banner cover -->
-    <img style="object-position:top;object-fit:cover;" alt="banner" class="trm-banner-cover" src="/img/banner.png">
+    <img style="object-position:top;object-fit:cover;" alt="banner" class="trm-banner-cover" src="/images/jvm.webp">
     <!-- banner cover end -->
     
 
@@ -257,10 +261,10 @@
                     <!-- banner title -->
                     <div class="trm-banner-text ">
                         <div class="trm-label trm-mb-20">
-                            The article archive
+                            NEWS LETTER
                         </div>
                         <h1 class="trm-mb-30 trm-hsmb-font">
-                            云间连下榻，<br>天上接行杯。
+                            【Java】一次DDD设计实践
                         </h1>
 
                         
@@ -270,7 +274,7 @@
                                 </li>
                                 <li>
                                     <span>
-                                        archives
+                                        2024
                                     </span>
                                 </li>
                             </ul>
@@ -366,99 +370,185 @@
             
             <div class="trm-page-content col-lg-8">
                 <div id="trm-content" class="trm-content">
-                    <div class="row">
-    <div class="col-lg-12">
-        <div class="trm-card">
-            <div style="padding: 0 20px;">
-                
-                    <ul class="row trm-list" style="margin-bottom: 0px;"><li class="col-lg-4 trm-list-item" style="margin: 6px 0;"><a class="archive-list-link" href="/archives/2024/">2024</a><span class="archive-list-count">（18）</span></li></ul>
-                
-            </div>
+                    <div class="trm-post-info row hidden-sm">
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-calendar-alt trm-icon"></i><br>
+            03/13
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-clock trm-icon"></i><br>
+            23:55
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div id="post-author" class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-user trm-icon"></i><br>
+            Zhen Ziyang
         </div>
     </div>
 </div>
+<div class="trm-card ">
+    <article id="article-container" class="trm-publication">
+    <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>最近负责的一个新模块，要上线了，需要紧急的修改一些Bug。这算是很好的一个切入点，让我去了解这个项目。负责的过程中发现代码写的有点一言难尽，真好之前看过重构这本书，就忍不住想要重构一下。但改的过程中，自己还是做的很片面，而且临近上线时期，大范围重构挑战太多，且没有一个体系化的重构方法论，借此契机下，了解了解DDD。</p>
+<h1 id="什么是DDD"><a href="#什么是DDD" class="headerlink" title="什么是DDD"></a>什么是DDD</h1><p>DDD(Domain-Driven Design,领域驱动设计)是一种软件设计思想和方法论,旨在通过深入理解业务领域知识,构建与该领域高度贴合的领域模型,使代码设计能够反映真实世界的业务概念、属性和行为。DDD强调将复杂的业务需求映射到软件实体中,使代码结构清晰、灵活,能够适应未来业务变化。</p>
+<h1 id="DDD的步骤"><a href="#DDD的步骤" class="headerlink" title="DDD的步骤"></a>DDD的步骤</h1><ol>
+<li><p>识别领域对象和概念。首先要深入理解业务领域,识别出领域中的关键对象和概念,比如订单、订单明细、购物车、商品、仓库、客户等。同时还要搞清楚这些对象&#x2F;概念之间的关系和约束。这个阶段需要开发人员和PM或领域专家紧密沟通。</p>
+</li>
+<li><p>划分限界上下文和子域。将系统划分为有界的限界上下文,每个限界上下文包含一个相对独立的领域模型。一个大型系统可能包含多个限界上下文。同时在每个限界上下文内,可以进一步将模型划分为核心子域和通用子域。</p>
+</li>
+<li><p>构建领域模型层。针对每个限界上下文&#x2F;子域,使用领域通用语言构建领域模型,包括实体、值对象、聚合根等。</p>
+</li>
+</ol>
+<ul>
+<li>实体(Entity): 具有独立生命周期和标识的对象,如订单。</li>
+<li>值对象(Value Object): 描述实体的不可分属性,如订单金额。</li>
+<li>聚合根(Aggregate Root): 作为聚合的统一入口,维护聚合内的完整性约束。</li>
+</ul>
+<p>领域模型对象应只包含与业务相关的属性和行为,不涉及任何基础设施细节。</p>
+<ol start="4">
+<li><p>划分领域服务。对于一些无法自然属于某个对象的业务概念和行为,可以使用领域服务来封装,如订单折扣计算服务。</p>
+</li>
+<li><p>实现仓储层。为领域对象提供持久化服务的仓储接口,每个聚合根对应一个仓储。仓储完全隔离了领域层和基础设施层。</p>
+</li>
+<li><p>构建应用服务层。应用服务层是系统用例的入口,它对领域服务和领域对象进行编排调用,实现特定的用例行为,如下单、支付订单等。</p>
+</li>
+<li><p>实现基础设施层。包括数据访问、消息队列、外部系统集成等技术基础设施,为其它层提供支撑。</p>
+</li>
+<li><p>防腐层。为了防止外部系统入侵污染了领域模型,可以使用防腐层对模型和概念进行转换和隔离。</p>
+</li>
+<li><p>测试驱动开发。DDD模式强调测试在其中的重要性,可以通过测试来验证和完善领域模型。（现在真的是面对测试开发了，测试使对代码有了更深刻的认识，并且逐渐有了抽象出一些容易出问题的逻辑的意识。</p>
+</li>
+</ol>
+<blockquote>
+<p>通过上述步骤,代码将被重构为高度贴近业务领域概念的模块化结构,增强系统的可维护性和可扩展性。但实施DDD需要团队具备很强的领域建模和抽象能力,也需要对架构模式有深入理解。 ———— 来自Claude3（本人认为讲的很好诶）</p>
+</blockquote>
+<h1 id="结合一个支付具体例子的DDD"><a href="#结合一个支付具体例子的DDD" class="headerlink" title="结合一个支付具体例子的DDD"></a>结合一个支付具体例子的DDD</h1><ol>
+<li>理解支付领域</li>
+</ol>
+<p>首先需要深入理解支付这个领域的概念和规则,比如支付方式(微信、支付宝等)、支付订单、支付通知、退款、对账等。这个阶段需要开发人员与支付领域专家紧密沟通和学习。</p>
+<ol start="2">
+<li>确定支付限界上下文</li>
+</ol>
+<p>将支付功能从整个电商系统中划分出一个相对独立的限界上下文(Bounded Context),它有自己的领域模型、语言和概念。</p>
+<ol start="3">
+<li>构建支付领域模型</li>
+</ol>
+<p>针对支付限界上下文,使用通用语言构建支付领域模型:</p>
+<ul>
+<li>实体:如支付订单(PaymentOrder)、退款订单(RefundOrder)</li>
+<li>值对象:如金额(Money)、支付方式(PaymentMethod)</li>
+<li>聚合根:支付订单(PaymentOrder)作为聚合根,负责维护聚合内部的完整性</li>
+<li>提取支付领域服务.对于一些独立的支付业务概念和规则,可以提取为支付领域服务,如支付校验服务(PaymentValidationService)、对账服务(ReconciliationService)等。</li>
+</ul>
+<ol start="4">
+<li><p>支付仓储层<br>为支付领域对象提供持久化服务,可以有PaymentOrderRepository、RefundOrderRepository等仓储接口,它们完全隔离了领域层和基础架构层。</p>
+</li>
+<li><p>支付应用服务<br>构建支付应用服务层,它是支付相关用例的入口,如PaymentApplicationService,封装了下单支付、处理支付通知、发起退款等业务流程。应用服务通过编排领域服务和领域对象来实现具体用例。</p>
+</li>
+<li><p>基础设施层整合<br>实现支付所需的基础设施层,如持久层的数据库访问、消息队列、调用第三方支付渠道等。</p>
+</li>
+<li><p>防腐层<br>对接第三方支付平台时,可以使用防腐层隔离外部概念模型,如AliPayAdapter处理支付宝的模型。</p>
+</li>
+<li><p>测试驱动开发<br>通过测试来驱动支付领域模型的构建和完善,确保模型能够正确反映业务规则。</p>
+</li>
+</ol>
 
-<!-- history -->
+</article>
+    
+    
 
-<div class="row">
+</div>
+<div class="trm-post-next-prev row">
     <div class="col-lg-12">
         <!-- title -->
         <h5 class="trm-title-with-divider">
-            
-                2024 年的归档
-            
-            <span data-number="01"></span>
+            其他文章
+            <span data-number="02"></span>
         </h5>
     </div>
-    <div class="col-lg-12">
-        <!-- timeline -->
-        <div class="trm-timeline">
+    
+    
+        <div class="col-lg-6">
+    <div class="trm-blog-card trm-scroll-animation">
+        <a href="/2024/03/12/%E3%80%90%E6%BA%90%E7%A0%81%E3%80%91%E5%9F%BA%E4%BA%8Emac%E7%9A%84%E4%BC%AA%E5%88%86%E5%B8%83%E5%BC%8F%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" class="trm-cover-frame trm-anima-link">
             
-            <div class="trm-timeline-item trm-scroll-animation">
-                <div class="trm-timeline-mark-light"></div>
-                <div class="trm-timeline-mark"></div>
-                <div class="trm-a trm-timeline-content more">
-                    
-                        <div class="trm-card-header">
-                            <div class="trm-left-side">
-                                <h6>
-                                    <a href="/2024/02/28/%E3%80%90giscus-%E9%85%8D%E7%BD%AE%E3%80%91%E7%BB%99%E5%8D%9A%E5%AE%A2%E4%B8%AD%E5%A2%9E%E5%8A%A0%E8%AF%84%E8%AE%BA%E5%8A%9F%E8%83%BD/" class="trm-anima-link">
-                                        【giscus 配置】给博客增加评论功能
-                                    </a>
-                                </h6>
-                                <div class="trm-text-sm trm-accent-color trm-mt-15">
-                                    <ul class="trm-card-data trm-label ">
-                                        <li class="trm-accent-color">02/28</li>
-                                        <li class="trm-accent-color">15:47</li>
-                                        
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        
-                    
-                </div>
+            
+                <img alt="cover" class="no-fancybox" src="/images/hadoop.png">
+            
+        </a>
+        
+        <div class="trm-card-descr">
+            <div class="trm-label trm-category trm-mb-20">
+                <a href=" /categories/%E5%88%86%E5%B8%83%E5%BC%8F/">
+                    分布式
+                </a>
             </div>
-            
-            <div class="trm-timeline-item trm-scroll-animation">
-                <div class="trm-timeline-mark-light"></div>
-                <div class="trm-timeline-mark"></div>
-                <div class="trm-a trm-timeline-content more">
-                    
-                        <div class="trm-card-header">
-                            <div class="trm-left-side">
-                                <h6>
-                                    <a href="/2024/02/27/%E5%88%9D%E5%BF%83/" class="trm-anima-link">
-                                        初心———灵魂的渴望是欲望的先知。
-                                    </a>
-                                </h6>
-                                <div class="trm-text-sm trm-accent-color trm-mt-15">
-                                    <ul class="trm-card-data trm-label ">
-                                        <li class="trm-accent-color">02/27</li>
-                                        <li class="trm-accent-color">19:37</li>
-                                        
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        
-                    
-                </div>
-            </div>
-            
+            <h5>
+                <a href="/2024/03/12/%E3%80%90%E6%BA%90%E7%A0%81%E3%80%91%E5%9F%BA%E4%BA%8Emac%E7%9A%84%E4%BC%AA%E5%88%86%E5%B8%83%E5%BC%8F%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" class="trm-anima-link">
+                    【源码】基于mac的伪分布式环境搭建
+                </a>
+            </h5>
+            <div class="trm-divider trm-mb-20 trm-mt-20"></div>
+            <ul class="trm-card-data trm-label">
+                <li>24/03/12</li>
+                <li>21:15</li>
+                
+                
+            </ul>
         </div>
-        <!-- timeline end -->
     </div>
 </div>
+    
+</div>
 
-<!-- history end -->
+    
 
+    <div id="giscus-wrap" class="trm-card trm-scroll-animation comment-container"></div>
+<script data-swup-reload-script>
+    function loadGiscus() {
+        let nowTheme = document.documentElement.classList.contains('dark') ? 'dark' : 'light'
+        const config = {
+            src: 'https://giscus.app/client.js',
+            "data-repo": '16372212/16372212.github.io',
+            "data-repo-id": 'MDEwOlJlcG9zaXRvcnkzOTMwMTQ5NDg=',
+            "data-category": 'General',
+            "data-category-id": 'DIC_kwDOF2zupM4Cdju8',
+            "data-mapping": 'pathname',
+            "data-reactions-enabled": '1',
+            "data-emit-metadata": '0',
+            "data-theme": nowTheme,
+            "data-lang": 'zh-CN',
+            crossorigin: "anonymous",
+            async: true
+        }
+        let ele = document.createElement('script')
+        for (let key in config) {
+            ele.setAttribute(key, config[key])
+        }
+        document.getElementById('giscus-wrap').insertAdjacentElement('afterbegin', ele)
+    }
 
-    <div class="trm-pagination">
-        <a class="page-number" href="/archives/2024/02/">1</a><span class="page-number current">2</span>
-    </div>
+    function changeGiscusTheme() {
+        let theme = document.documentElement.classList.contains('dark') ? 'dark' : 'light'
 
+        function sendMessage(message) {
+            const iframe = document.querySelector('iframe.giscus-frame');
+            if (!iframe) return;
+            iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
 
+        sendMessage({
+            setConfig: {
+                theme: theme
+            }
+        });
+    }
+
+    loadGiscus();
+</script>
 
 
 
@@ -503,9 +593,29 @@
 
             
 
+    <div id="post-toc" class="trm-post-toc">
+      <div class="trm-post-toc-header">
+        目录导航
+				<span id="post-toc-top">
+					置顶
+				</span>
+      </div>
+      <div class="trm-post-toc-content">
+        <ol class="trm-toc"><li class="trm-toc-item trm-toc-level-1" title="前言"><a rel="nofollow" class="trm-toc-link" href="#前言"><span class="trm-toc-number">1.</span> <span class="trm-toc-text">前言</span></a></li><li class="trm-toc-item trm-toc-level-1" title="什么是DDD"><a rel="nofollow" class="trm-toc-link" href="#什么是DDD"><span class="trm-toc-number">2.</span> <span class="trm-toc-text">什么是DDD</span></a></li><li class="trm-toc-item trm-toc-level-1" title="DDD的步骤"><a rel="nofollow" class="trm-toc-link" href="#DDD的步骤"><span class="trm-toc-number">3.</span> <span class="trm-toc-text">DDD的步骤</span></a></li><li class="trm-toc-item trm-toc-level-1" title="结合一个支付具体例子的DDD"><a rel="nofollow" class="trm-toc-link" href="#结合一个支付具体例子的DDD"><span class="trm-toc-number">4.</span> <span class="trm-toc-text">结合一个支付具体例子的DDD</span></a></li></ol>
+      </div>
+    </div>
+
             
 <div class="trm-fixed-container">
     
+        <div class="trm-fixed-btn post-toc-btn" data-title="目录">
+            <i class="iconfont fas fa-th-list"></i>
+        </div>
+    
+    
+        <div class="trm-fixed-btn" data-title="阅读模式" onclick="asyncFun.switchReadMode()">
+            <i class="iconfont fas fa-book-reader"></i>
+        </div>
     
     
     <div id="trm-back-top" class="trm-fixed-btn" data-title="回到顶部">
@@ -540,6 +650,10 @@
     
 
     <!-- 评论插件 -->
+    
+        
+
+        
     
 
 
