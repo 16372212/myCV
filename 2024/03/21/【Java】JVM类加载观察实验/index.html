@@ -15,7 +15,7 @@
 <meta property="og:description" content="实验部分加载的实验1234567891011121314151617package org.example.classLoader;public class ClassA &#123;    &#x2F;&#x2F; 静态代码块和静态变量的执行顺序按照代码编写的先后顺序来执行    private static final String STATIC_FINAL_FIELD &#x3D; &quot;Static final">
 <meta property="og:locale">
 <meta property="article:published_time" content="2024-03-21T09:59:30.000Z">
-<meta property="article:modified_time" content="2024-03-22T07:25:11.515Z">
+<meta property="article:modified_time" content="2024-03-22T07:26:28.186Z">
 <meta property="article:author" content="Zhen Ziyang">
 <meta name="twitter:card" content="summary">
 
@@ -63,7 +63,7 @@
 
 <!-- Variable -->
 <script>window.ASYNC_CONFIG = {"hostname":"example.com","author":"Zhen Ziyang","root":"/","typed_text":["ZZ！"],"theme_version":"2.1.13","theme":{"switch":true,"default":"style-light"},"favicon":{"logo":"leaf.svg","icon16":"leaf.svg","icon32":"leaf.svg","appleTouchIcon":"leaf.svg","webmanifest":"/site.webmanifest","visibilitychange":false,"hidden":"/failure.ico","showText":"(/≧▽≦/)咦！又好了！","hideText":"(●—●)喔哟，崩溃啦！"},"i18n":{"placeholder":"搜索文章...","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）","author":"本文作者：","copyright_link":"本文链接：","copyright_license_title":"版权声明：","copyright_license_content":"本博客所有文章除特别声明外，均默认采用 undefined 许可协议。","copy_success":"复制成功","copy_failure":"复制失败","open_read_mode":"进入阅读模式","exit_read_mode":"退出阅读模式","notice_outdate_message":"距离上次更新已经 undefined 天了, 文章内容可能已经过时。","sticky":"置顶","just":"刚刚","min":"分钟前","hour":"小时前","day":"天前","month":"个月前"},"swup":false,"plugin":{"flickr_justified_gallery":"https://npm.elemecdn.com/flickr-justified-gallery@latest/dist/fjGallery.min.js"},"icons":{"sun":"far fa-sun","moon":"far fa-moon","play":"fas fa-play","email":"far fa-envelope","next":"fas fa-arrow-right","calendar":"far fa-calendar-alt","clock":"far fa-clock","user":"far fa-user","back_top":"fas fa-arrow-up","close":"fas fa-times","search":"fas fa-search","reward":"fas fa-hand-holding-usd","user_tag":"fas fa-user-alt","toc_tag":"fas fa-th-list","read":"fas fa-book-reader","arrows":"fas fa-arrows-alt-h","double_arrows":"fas fa-angle-double-down","copy":"fas fa-copy"},"icontype":"font","highlight":{"plugin":"highlighjs","theme":true,"copy":true,"lang":true,"title":"mac","height_limit":200},"toc":{"post_title":true},"live_time":{"start_time":null,"prefix":"博客已萌萌哒运行 undefined 天"},"danmu":{"enable":false,"el":".trm-banner"}};</script>
-<script id="async-page-config">window.PAGE_CONFIG = {"isPost":true,"isHome":false,"postUpdate":"2024-03-22 15:25:11"};</script>
+<script id="async-page-config">window.PAGE_CONFIG = {"isPost":true,"isHome":false,"postUpdate":"2024-03-22 15:26:28"};</script>
 
 <!-- Theme mode css -->
 <link data-swup-theme rel="stylesheet" href="/css/index.css?v=2.1.13" id="trm-switch-style">
@@ -403,29 +403,22 @@
 <h2 id="2-执行java-xxx"><a href="#2-执行java-xxx" class="headerlink" title="2. 执行java xxx"></a>2. 执行<code>java xxx</code></h2><p>接下来执行<code>java xxx</code>就是启动JVM运行main方法。这个过程中涉及到类的加载、链接和初始化。</p>
 <ol>
 <li><p>启动JVM:</p>
-<pre><code> - 操作系统创建一个新的JVM进程。JVM读取命令行参数和环境变量。
-</code></pre>
+<p> 操作系统创建一个新的JVM进程。JVM读取命令行参数和环境变量。</p>
 </li>
 <li><p>加载和链接启动类:</p>
-<pre><code> - JVM的引导类加载器(Bootstrap Class Loader)加载核心Java类库,如 java.lang.Object 和 java.lang.String。
-
- - 引导类加载器使用C++实现,是JVM的一部分。
-</code></pre>
+<p> VM的引导类加载器(Bootstrap Class Loader)加载核心Java类库,如 java.lang.Object 和 java.lang.String。</p>
+<p> 引导类加载器使用C++实现,是JVM的一部分。</p>
 </li>
 <li><p>加载和链接用户类:</p>
-<pre><code> - JVM的应用类加载器(Application Class Loader)加载用户类路径(classpath)上的类。
- 这包括自己编写的类和第三方库。
-</code></pre>
+<p> JVM的应用类加载器(Application Class Loader)加载用户类路径(classpath)上的类。<br> 这包括自己编写的类和第三方库。</p>
 </li>
 <li><p>执行main方法:</p>
-<pre><code> - JVM查找 ClassLoaderExperiment 类的 main 方法,并开始执行它。main 方法是Java程序的入口点。
-</code></pre>
+<p> JVM查找 ClassLoaderExperiment 类的 main 方法,并开始执行它。main 方法是Java程序的入口点。</p>
 </li>
 </ol>
 <h1 id="展开JVM类加载的步骤："><a href="#展开JVM类加载的步骤：" class="headerlink" title="展开JVM类加载的步骤："></a>展开JVM类加载的步骤：</h1><ol>
 <li><p>加载</p>
-<pre><code> - 类加载器查找类的字节码(通常在 .class 文件中),并从中创建一个 Class 对象。
-</code></pre>
+<p> 类加载器查找类的字节码(通常在 .class 文件中),并从中创建一个 Class 对象。</p>
 </li>
 </ol>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Class&lt;?&gt; myClass = classLoader.loadClass(<span class="string">&quot;ClassA&quot;</span>);</span><br><span class="line">System.out.println(<span class="string">&quot;Creating instance of MyClass...&quot;</span>);</span><br><span class="line"><span class="type">Object</span> <span class="variable">instance</span> <span class="operator">=</span> myClass.newInstance();</span><br></pre></td></tr></table></figure>
@@ -433,11 +426,7 @@
 <p>当 MyClassLoader 的 loadClass 方法被调用时,它触发了自定义类的加载过程。</p>
 <ol start="2">
 <li><p>链接</p>
-<pre><code> - 验证:检查字节码的正确性和安全性。为了确保不会加载可能会破坏JVM内部结构的类。
- - 准备:JVM为类的静态字段分配内存,并用默认值初始化它们。
- - 解析:将符号引用转换为直接引用。其中JVM将类、接口、字段和方法的符号引用转换为直接引用。符号引用来自类或接口的常量池，而直接引用指向方法区中的地址位置。
- - 初始化：执行类的静态初始化器和静态字段的初始化表达式。
-</code></pre>
+<p> 验证:检查字节码的正确性和安全性。为了确保不会加载可能会破坏JVM内部结构的类。<br> 准备:JVM为类的静态字段分配内存,并用默认值初始化它们。<br> 解析:将符号引用转换为直接引用。其中JVM将类、接口、字段和方法的符号引用转换为直接引用。符号引用来自类或接口的常量池，而直接引用指向方法区中的地址位置。<br> 初始化：执行类的静态初始化器和静态字段的初始化表达式。</p>
 </li>
 </ol>
 
