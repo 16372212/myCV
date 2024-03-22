@@ -7,20 +7,20 @@
 <meta name="full-screen" content="yes">
 <meta name="theme-color" content="#317EFB" />
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=0" name="viewport">
-<meta name="description" content="一些摘要 个人的成长也是如此。考察了不起的摇滚乐手、作家和企业家，他们几乎都是半路出家。哈佛大学的托德·罗斯(Todd Rose)和奥吉·奥加斯(Ogi Ogas)所著的《成为黑马》(Dark Horse:Achieving Success Through the Pursuit of Fulfillment)也讲过类似的道理。书中的成功者并没有长远的规划，都是先做过一些事情，发现自己更感兴趣的是">
+<meta name="description" content="实验1234567891011121314151617package org.example.classLoader;public class ClassA &#123;    &#x2F;&#x2F; 静态代码块和静态变量的执行顺序按照代码编写的先后顺序来执行    private static final String STATIC_FINAL_FIELD &#x3D; &quot;Static final field&amp;q">
 <meta property="og:type" content="article">
-<meta property="og:title" content="【读书】《为什么伟大不能被计划》">
-<meta property="og:url" content="http://example.com/2024/03/18/%E3%80%90%E8%AF%BB%E4%B9%A6%E3%80%91%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9F%E5%A4%A7%E4%B8%8D%E8%83%BD%E8%A2%AB%E8%AE%A1%E5%88%92/index.html">
+<meta property="og:title" content="【Java】JVM类加载观察实验">
+<meta property="og:url" content="http://example.com/2024/03/21/%E3%80%90Java%E3%80%91JVM%E7%B1%BB%E5%8A%A0%E8%BD%BD%E8%A7%82%E5%AF%9F%E5%AE%9E%E9%AA%8C/index.html">
 <meta property="og:site_name" content="Ziyang&#39;s Blog">
-<meta property="og:description" content="一些摘要 个人的成长也是如此。考察了不起的摇滚乐手、作家和企业家，他们几乎都是半路出家。哈佛大学的托德·罗斯(Todd Rose)和奥吉·奥加斯(Ogi Ogas)所著的《成为黑马》(Dark Horse:Achieving Success Through the Pursuit of Fulfillment)也讲过类似的道理。书中的成功者并没有长远的规划，都是先做过一些事情，发现自己更感兴趣的是">
+<meta property="og:description" content="实验1234567891011121314151617package org.example.classLoader;public class ClassA &#123;    &#x2F;&#x2F; 静态代码块和静态变量的执行顺序按照代码编写的先后顺序来执行    private static final String STATIC_FINAL_FIELD &#x3D; &quot;Static final field&amp;q">
 <meta property="og:locale">
-<meta property="article:published_time" content="2024-03-18T11:06:05.000Z">
-<meta property="article:modified_time" content="2024-03-18T15:09:17.376Z">
+<meta property="article:published_time" content="2024-03-21T09:59:30.000Z">
+<meta property="article:modified_time" content="2024-03-22T03:29:29.155Z">
 <meta property="article:author" content="Zhen Ziyang">
 <meta name="twitter:card" content="summary">
 
 
-<title >【读书】《为什么伟大不能被计划》</title>
+<title >【Java】JVM类加载观察实验</title>
 
 <!-- Favicon -->
 
@@ -63,7 +63,7 @@
 
 <!-- Variable -->
 <script>window.ASYNC_CONFIG = {"hostname":"example.com","author":"Zhen Ziyang","root":"/","typed_text":["ZZ！"],"theme_version":"2.1.10","theme":{"switch":true,"default":"style-light"},"favicon":{"logo":"leaf.svg","icon16":"leaf.svg","icon32":"leaf.svg","appleTouchIcon":"leaf.svg","webmanifest":"/site.webmanifest","visibilitychange":false,"hidden":"/failure.ico","showText":"(/≧▽≦/)咦！又好了！","hideText":"(●—●)喔哟，崩溃啦！"},"i18n":{"placeholder":"搜索文章...","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）","author":"本文作者：","copyright_link":"本文链接：","copyright_license_title":"版权声明：","copyright_license_content":"本博客所有文章除特别声明外，均默认采用 undefined 许可协议。","copy_success":"复制成功","copy_failure":"复制失败","open_read_mode":"进入阅读模式","exit_read_mode":"退出阅读模式","notice_outdate_message":"距离上次更新已经 undefined 天了, 文章内容可能已经过时。","sticky":"置顶","just":"刚刚","min":"分钟前","hour":"小时前","day":"天前","month":"个月前"},"swup":false,"plugin":{"flickr_justified_gallery":"https://npm.elemecdn.com/flickr-justified-gallery@latest/dist/fjGallery.min.js"},"icons":{"sun":"far fa-sun","moon":"far fa-moon","play":"fas fa-play","email":"far fa-envelope","next":"fas fa-arrow-right","calendar":"far fa-calendar-alt","clock":"far fa-clock","user":"far fa-user","back_top":"fas fa-arrow-up","close":"fas fa-times","search":"fas fa-search","reward":"fas fa-hand-holding-usd","user_tag":"fas fa-user-alt","toc_tag":"fas fa-th-list","read":"fas fa-book-reader","arrows":"fas fa-arrows-alt-h","double_arrows":"fas fa-angle-double-down","copy":"fas fa-copy"},"icontype":"font","highlight":{"plugin":"highlighjs","theme":true,"copy":true,"lang":true,"title":"mac","height_limit":200},"toc":{"post_title":true},"live_time":{"start_time":null,"prefix":"博客已萌萌哒运行 undefined 天"}};</script>
-<script id="async-page-config">window.PAGE_CONFIG = {"isPost":true,"isHome":false,"postUpdate":"2024-03-18 23:09:17"};</script>
+<script id="async-page-config">window.PAGE_CONFIG = {"isPost":true,"isHome":false,"postUpdate":"2024-03-22 11:29:29"};</script>
 
 <!-- Theme mode css -->
 <link data-swup-theme rel="stylesheet" href="/css/index.css?v=2.1.10" id="trm-switch-style">
@@ -245,7 +245,7 @@
     <div class="trm-banner">
     
     <!-- banner cover -->
-    <img style="object-position:top;object-fit:cover;" alt="banner" class="trm-banner-cover" src="/images/read.png">
+    <img style="object-position:top;object-fit:cover;" alt="banner" class="trm-banner-cover" src="/images/jvm.webp">
     <!-- banner cover end -->
     
 
@@ -264,7 +264,7 @@
                             NEWS LETTER
                         </div>
                         <h1 class="trm-mb-30 trm-hsmb-font">
-                            【读书】《为什么伟大不能被计划》
+                            【Java】JVM类加载观察实验
                         </h1>
 
                         
@@ -374,13 +374,13 @@
     <div class="col-sm-4">
         <div class="trm-card trm-label trm-label-light text-center">
             <i class="iconfont far fa-calendar-alt trm-icon"></i><br>
-            03/18
+            03/21
         </div>
     </div>
     <div class="col-sm-4">
         <div class="trm-card trm-label trm-label-light text-center">
             <i class="iconfont far fa-clock trm-icon"></i><br>
-            19:06
+            17:59
         </div>
     </div>
     <div class="col-sm-4">
@@ -392,15 +392,23 @@
 </div>
 <div class="trm-card ">
     <article id="article-container" class="trm-publication">
-    <h1 id="一些摘要"><a href="#一些摘要" class="headerlink" title="一些摘要"></a>一些摘要</h1><blockquote>
-<p>个人的成长也是如此。考察了不起的摇滚乐手、作家和企业家，他们几乎都是半路出家。哈佛大学的托德·罗斯(Todd Rose)和奥吉·奥加斯(Ogi Ogas)所著的《成为黑马》(Dark Horse:Achieving Success Through the Pursuit of Fulfillment)也讲过类似的道理。书中的成功者并没有长远的规划，都是先做过一些事情，发现自己更感兴趣的是什么，并为之转行，从而找到为其带来巨大成功的职业。请注意，这可不是说人生就应该漫无目的、随波逐流。新奇性搜索算法不预设具体目标，但是它有价值观的指引，这个价值观就是新奇和有趣。只要你每次都选择更新奇和更有趣的方向，你就不会是平凡的。</p>
-</blockquote>
-<blockquote>
-<p>真正能把追求新奇、有趣坚持到底的，都不是一般人。他们不会在中途沉迷，始终能看见下一块踏脚石，成就和实用性早晚会随之而来。如果你一开始就认准了想要得到一个什么样的珍宝，你就不会得到珍宝；最终得到珍宝的人，只是一直在寻找下一块踏脚石……他们得到的都是意想不到的珍宝。</p>
-</blockquote>
-<blockquote>
-<p>这些道理不符合普通人升职加薪的攻略，也与很多后发进取的国家发展经验相悖。这些国家在过去几十年间经常讲目标、谈规划，确实取得了伟大的成就。后发优势使它们不用踩踏脚石就知道飞机、微波炉和计算机是怎么回事儿，它们便可以确立明确的目标。这样的发展方式速度虽快，但是也在无形中限制了它们——它们不太擅长寻找踏脚石。</p>
-</blockquote>
+    <h1 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> org.example.classLoader;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ClassA</span> &#123;</span><br><span class="line">    <span class="comment">// 静态代码块和静态变量的执行顺序按照代码编写的先后顺序来执行</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">STATIC_FINAL_FIELD</span> <span class="operator">=</span> <span class="string">&quot;Static final field&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Static block executed.&quot;</span>);</span><br><span class="line">        System.out.println(STATIC_FINAL_FIELD);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="type">String</span> <span class="variable">staticField</span> <span class="operator">=</span> <span class="string">&quot;Static field&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">ClassA</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Constructor executed.&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>实现一个自定义的类加载器MyClassLoader。（注意这个类如果不写在实验类ClassLoaderExperiment里，那么执行javac的时候就要在项目的根目录下执行，不然会显示找不到类）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">package</span> org.example.classLoader;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javafx.util.Pair;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.nio.file.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ClassLoaderExperiment</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">MyClassLoader</span> <span class="keyword">extends</span> <span class="title class_">ClassLoader</span>&#123;</span><br><span class="line">        <span class="keyword">protected</span> Class&lt;?&gt; findClass(String name) <span class="keyword">throws</span> ClassNotFoundException &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                Pair&lt;String, <span class="type">byte</span>[]&gt; classData = loadClassData(name);</span><br><span class="line">                <span class="type">String</span> <span class="variable">className</span> <span class="operator">=</span> classData.getKey();</span><br><span class="line">                <span class="type">byte</span>[] bytes = classData.getValue();</span><br><span class="line">                <span class="keyword">return</span> defineClass(className, bytes, <span class="number">0</span>, bytes.length);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">ClassNotFoundException</span>(<span class="string">&quot;Class &quot;</span> + name + <span class="string">&quot; not found.&quot;</span>, e);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">private</span> Pair&lt;String, <span class="type">byte</span>[]&gt; loadClassData(String name) <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">            <span class="comment">// 从文件中读取字节码数据</span></span><br><span class="line">            <span class="type">String</span> <span class="variable">filePath</span> <span class="operator">=</span> name.replace(<span class="string">&#x27;.&#x27;</span>, <span class="string">&#x27;/&#x27;</span>) + <span class="string">&quot;.class&quot;</span>;</span><br><span class="line">            <span class="type">Path</span> <span class="variable">path</span> <span class="operator">=</span> Paths.get(<span class="string">&quot;org/example/classLoader&quot;</span>, filePath);</span><br><span class="line">            System.out.println(path);</span><br><span class="line"></span><br><span class="line">            <span class="type">byte</span>[] bytes = Files.readAllBytes(path);</span><br><span class="line">            <span class="type">String</span> <span class="variable">className</span> <span class="operator">=</span> <span class="string">&quot;org.example.classLoader.&quot;</span> + name;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Pair</span>&lt;&gt;(className, bytes);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">testSelfDefinedClass</span><span class="params">()</span> <span class="keyword">throws</span> ClassNotFoundException, InstantiationException, IllegalAccessException &#123;</span><br><span class="line">        <span class="type">MyClassLoader</span> <span class="variable">classLoader</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">MyClassLoader</span>();</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">&quot;Loading MyClass...&quot;</span>);</span><br><span class="line">        Class&lt;?&gt; myClass = classLoader.loadClass(<span class="string">&quot;ClassA&quot;</span>);</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">&quot;Creating instance of MyClass...&quot;</span>);</span><br><span class="line">        <span class="type">Object</span> <span class="variable">instance</span> <span class="operator">=</span> myClass.newInstance();</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">&quot;MyClass instance created: &quot;</span> + instance);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> ClassNotFoundException, InstantiationException, IllegalAccessException &#123;</span><br><span class="line">        testSelfDefinedClass();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最后编译并运行程序：</p>
+<p>使用javac命令编译 ClassA.java、<code>javac org/example/classLoader/ClassLoaderExperiment.java</code>。</p>
+<p>然后执行java、ClassLoaderExperiment中的main函数：<code>java org.example.classLoader.ClassLoaderExperiment</code>。注意执行java函数的地址应该在项目根地址下。</p>
+<h1 id="观察"><a href="#观察" class="headerlink" title="观察"></a>观察</h1><ol>
+<li>加载阶段:</li>
+</ol>
+<p>通过自定义的 MyClassLoader 从文件中读取字节码数据,并转换为 Class 对象。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Class&lt;?&gt; myClass = classLoader.loadClass(<span class="string">&quot;ClassA&quot;</span>);</span><br><span class="line">System.out.println(<span class="string">&quot;Creating instance of MyClass...&quot;</span>);</span><br><span class="line"><span class="type">Object</span> <span class="variable">instance</span> <span class="operator">=</span> myClass.newInstance();</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>链接阶段:</li>
+</ol>
+<p>验证:验证字节码的合法性和安全性。<br>准备:为静态变量分配内存空间,并赋予默认初值。<br>解析:将符号引用转换为直接引用。<br>初始化阶段:按顺序执行静态代码块和静态变量的初始化语句。<br>使用阶段:创建类的实例,执行构造函数。<br>通过这个实验,你可以直观地理解JVM的类加载机制,以及各个步骤的执行顺序。你还可以尝试修改 MyClass 的代码,添加更多的静态代码块、静态变量、构造函数等,观察它们的初始化顺序。</p>
+<p>如果你对类加载机制还有任何疑问或者想深入探讨的地方,欢迎随时向我提问。希望这个实验能帮助你更好地掌握JVM的类加载原理!</p>
 
 </article>
     
@@ -416,9 +424,10 @@
         </h5>
     </div>
     
+    
         <div class="col-lg-6">
     <div class="trm-blog-card trm-scroll-animation">
-        <a href="/2024/03/19/%E3%80%90Java%E3%80%91%E8%A7%84%E5%88%99%E5%BC%95%E6%93%8E/" class="trm-cover-frame trm-anima-link">
+        <a href="/2024/03/21/%E3%80%90Java%E3%80%91Java%E9%AB%98%E7%BA%A7%E5%86%99%E6%B3%95%E7%AC%94%E8%AE%B0/" class="trm-cover-frame trm-anima-link">
             
             
                 <img alt="cover" class="no-fancybox" src="/images/jvm.webp">
@@ -432,46 +441,14 @@
                 </a>
             </div>
             <h5>
-                <a href="/2024/03/19/%E3%80%90Java%E3%80%91%E8%A7%84%E5%88%99%E5%BC%95%E6%93%8E/" class="trm-anima-link">
-                    【Java】记一次规则引擎的调研与开发
+                <a href="/2024/03/21/%E3%80%90Java%E3%80%91Java%E9%AB%98%E7%BA%A7%E5%86%99%E6%B3%95%E7%AC%94%E8%AE%B0/" class="trm-anima-link">
+                    【Java】Java高级写法笔记
                 </a>
             </h5>
             <div class="trm-divider trm-mb-20 trm-mt-20"></div>
             <ul class="trm-card-data trm-label">
-                <li>24/03/19</li>
-                <li>17:28</li>
-                
-                
-            </ul>
-        </div>
-    </div>
-</div>
-    
-    
-        <div class="col-lg-6">
-    <div class="trm-blog-card trm-scroll-animation">
-        <a href="/2024/03/13/%E3%80%90Java%E3%80%91%E4%B8%80%E6%AC%A1DDD%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5/" class="trm-cover-frame trm-anima-link">
-            
-            
-                <img alt="cover" class="no-fancybox" src="/images/jvm.webp">
-            
-        </a>
-        
-        <div class="trm-card-descr">
-            <div class="trm-label trm-category trm-mb-20">
-                <a href=" /categories/Java/">
-                    Java
-                </a>
-            </div>
-            <h5>
-                <a href="/2024/03/13/%E3%80%90Java%E3%80%91%E4%B8%80%E6%AC%A1DDD%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5/" class="trm-anima-link">
-                    【Java】一次DDD设计实践
-                </a>
-            </h5>
-            <div class="trm-divider trm-mb-20 trm-mt-20"></div>
-            <ul class="trm-card-data trm-label">
-                <li>24/03/13</li>
-                <li>23:55</li>
+                <li>24/03/21</li>
+                <li>16:29</li>
                 
                 
             </ul>
@@ -578,7 +555,7 @@
 				</span>
       </div>
       <div class="trm-post-toc-content">
-        <ol class="trm-toc"><li class="trm-toc-item trm-toc-level-1" title="一些摘要"><a rel="nofollow" class="trm-toc-link" href="#一些摘要"><span class="trm-toc-number">1.</span> <span class="trm-toc-text">一些摘要</span></a></li></ol>
+        <ol class="trm-toc"><li class="trm-toc-item trm-toc-level-1" title="实验"><a rel="nofollow" class="trm-toc-link" href="#实验"><span class="trm-toc-number">1.</span> <span class="trm-toc-text">实验</span></a></li><li class="trm-toc-item trm-toc-level-1" title="观察"><a rel="nofollow" class="trm-toc-link" href="#观察"><span class="trm-toc-number">2.</span> <span class="trm-toc-text">观察</span></a></li></ol>
       </div>
     </div>
 
