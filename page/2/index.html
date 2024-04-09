@@ -1,850 +1,236 @@
-<!DOCTYPE html>
-<html lang="zh-Hans">
-
-<head>
-  <meta http-equiv="content-type" content="text/html; charset=utf-8">
-<meta name="x5-fullscreen" content="true">
-<meta name="full-screen" content="yes">
-<meta name="theme-color" content="#317EFB" />
-<meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=0" name="viewport">
-<meta property="og:type" content="website">
-<meta property="og:title" content="ZZ&#39;s Blog">
+<!DOCTYPE html><html lang="zh-Hans" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Ziyang's Blog🌸</title><meta name="author" content="Zhen Ziyang"><meta name="copyright" content="Zhen Ziyang"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta property="og:type" content="website">
+<meta property="og:title" content="Ziyang&#39;s Blog🌸">
 <meta property="og:url" content="http://example.com/page/2/index.html">
-<meta property="og:site_name" content="ZZ&#39;s Blog">
+<meta property="og:site_name" content="Ziyang&#39;s Blog🌸">
 <meta property="og:locale">
-<meta property="article:author" content="ZZY">
+<meta property="og:image" content="http://example.com/images/me.png">
+<meta property="article:author" content="Zhen Ziyang">
 <meta name="twitter:card" content="summary">
-
-
-<title >ZZ's Blog</title>
-
-<!-- Favicon -->
-
-    <link href='/leaf.svg?v=2.1.13' rel='icon' type='image/png' sizes='16x16' ></link>
-
-
-    <link href='/leaf.svg?v=2.1.13' rel='icon' type='image/png' sizes='32x32' ></link>
-
-
-    <link href='/leaf.svg?v=2.1.13' rel='apple-touch-icon' sizes='180x180' ></link>
-
-
-    <link href='/site.webmanifest' rel='manifest' ></link>
-
-
-<!-- Plugin -->
-
-
-
-
+<meta name="twitter:image" content="http://example.com/images/me.png"><link rel="shortcut icon" href="/leaf.svg"><link rel="canonical" href="http://example.com/page/2/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Error',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Ziyang\'s Blog🌸',
+  isPost: false,
+  isHome: true,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2024-04-09 22:03:51'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
     
-<link rel="stylesheet" href="/css/plugins/bootstrap.row.css">
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
 
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
     
-<link rel="stylesheet" href="https://npm.elemecdn.com/@fancyapps/ui@4.0/dist/fancybox.css">
-
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
     
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
     
-
-
-
-
-<!-- Icon -->
-
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
     
-<link rel="stylesheet" href="/css/plugins/font-awesome.min.css">
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.1.1"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/images/me.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">27</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">2</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">6</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header" style="background-image: url('/images/background.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="Ziyang's Blog🌸"><span class="site-name">Ziyang's Blog🌸</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">Ziyang's Blog🌸</h1><div id="site_social_icons"><a class="social-icon" href="https://github.com/16372212" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:coding8ziyang@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="post_cover left"><a href="/2024/03/12/%E3%80%90%E6%BA%90%E7%A0%81%E3%80%91%E5%9F%BA%E4%BA%8Emac%E7%9A%84%E4%BC%AA%E5%88%86%E5%B8%83%E5%BC%8F%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" title="【源码】基于mac的伪分布式环境搭建"><img class="post-bg" src="/images/hadoop.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【源码】基于mac的伪分布式环境搭建"></a></div><div class="recent-post-info"><a class="article-title" href="/2024/03/12/%E3%80%90%E6%BA%90%E7%A0%81%E3%80%91%E5%9F%BA%E4%BA%8Emac%E7%9A%84%E4%BC%AA%E5%88%86%E5%B8%83%E5%BC%8F%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" title="【源码】基于mac的伪分布式环境搭建">【源码】基于mac的伪分布式环境搭建</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2024-03-12T13:15:52.000Z" title="Created 2024-03-12 21:15:52">2024-03-12</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式</a></span></div><div class="content">设置免密远程登录我们使用brew安装各种环境。
+
+首先开启mac的远程登录。可以command+空格后输入远程登陆，直接进入设置界面。然后就可以通过ssh远程登录电脑了。hadoop在启动datanode、namenode时都需要免密登录，如果不设置，则会出现权限不允许（Permission denied）的错误提示，导致无法启动DataNode等。
+
+使用如下代码设置ssh免密登录：
+1234ssh-keygen -t rsa -P &#x27;&#x27; -f ~/.ssh/id_rsacat ~/.ssh/id_rsa.pub &gt;&gt; ~/.ssh/authorized_keyschmod 0600 ~/.ssh/authorized_keys
+
+Hadoop安装1brew install hadoop
+不建议使用brew安装可以手动下载到本地再解压
+123456789tar -zxvf hadoop-3.3.4.tar.gz// 再编辑 ~/.bash_profile 或 ~/.zshrc 文件:export HADOOP_HOME=/path/to/hadoop- ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2024/03/11/%E3%80%90%E5%BF%83%E5%BE%97%E3%80%91%E7%AB%99%E5%9C%A8%E9%A1%B9%E7%9B%AE%E7%9A%84%E8%A7%92%E5%BA%A6%E8%80%8C%E4%B8%8D%E6%98%AF%E5%8F%AA%E4%BC%9A%E5%90%AC%E8%AF%9D/" title="【心得】站在项目的角度而不是只会听话"><img class="post-bg" src="/images/%E5%BF%83%E5%BE%97.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【心得】站在项目的角度而不是只会听话"></a></div><div class="recent-post-info"><a class="article-title" href="/2024/03/11/%E3%80%90%E5%BF%83%E5%BE%97%E3%80%91%E7%AB%99%E5%9C%A8%E9%A1%B9%E7%9B%AE%E7%9A%84%E8%A7%92%E5%BA%A6%E8%80%8C%E4%B8%8D%E6%98%AF%E5%8F%AA%E4%BC%9A%E5%90%AC%E8%AF%9D/" title="【心得】站在项目的角度而不是只会听话">【心得】站在项目的角度而不是只会听话</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2024-03-11T14:21:34.000Z" title="Created 2024-03-11 22:21:34">2024-03-11</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%BF%83%E5%BE%97%E4%BD%93%E4%BC%9A/">心得体会</a></span></div><div class="content">今天是本人参加工作（不包括之前的其他公司的实习时间）的第237天。最近又有一些新的思维层级上的感悟。
+leader去年年底交给的一个项目让我去own, 说出了问题全权负责。这个项目一共有五六个开发人员。其实从这项目最开始我就开始跟进了，但我前几个月一直是一个follower的角色，产品经理交给我什么任务我就开发哪里的逻辑，等到我负责完整个模块的开发与测试后，逐渐开始思考是否可以帮到别人。渐渐思考如何提升自己的技术影响力。
+
+之前的我的思维转变是 从“一个coder”变成一个更有影响力的programer，建立自己的技术影响力或者技术权威。在这样的思维的转变下，自己开始review大家的代码、走查逻辑、和别人沟通时也会直接讲出他们自己的或别人的实现策略与思路。
+但最近工作上遇到的一个契机，包括上线后oncall的体验，以及领导今天开会对我的指点让我意识到自己没有以一个owner的角色工作。之前的想法远远不够。身为一个owner，要更多的理解业务逻辑、宏观上的点，站在项目的角度上，了解上线时间是否应该去主动推动、怎么推动；用户体验是否要改善，怎么改善；系统性能优化是否要提上日程，怎么设计优 ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2024/03/08/%E3%80%90Java%E3%80%91%E8%A7%92%E8%89%B2%E6%9D%83%E9%99%90%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/" title="【Java】角色权限系统设计"><img class="post-bg" src="/images/jvm.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【Java】角色权限系统设计"></a></div><div class="recent-post-info"><a class="article-title" href="/2024/03/08/%E3%80%90Java%E3%80%91%E8%A7%92%E8%89%B2%E6%9D%83%E9%99%90%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/" title="【Java】角色权限系统设计">【Java】角色权限系统设计</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2024-03-08T02:52:59.000Z" title="Created 2024-03-08 10:52:59">2024-03-08</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Java/">Java</a></span></div><div class="content">权限系统设计与案例分析常见的问题：权限交叉用户有两个权限a, b：
+
+a权限可以看到a1部门下的a2科目，
+b权限可以看到b1部门下的b2科目，权限交叉就是a1部门下的b2科目被看到了。这是不应该发生的。
+
+怎么避免这个问题呢？一种思路时遍历所有角色，根据每个角色拼装sql
+实现权限问题使用切面AOP的方法完成。
+权限校验这可以分成读和写两部分：读和写的权限解析略有不同:因为读可以限制在sql里，但写的时候insert语句没办法限制where。只能在代码中显式的通过if条件判断。
+读利用AOP拼接在查询sql中：
+
+注解中（一般用于请求读取）：根据请求中的注解拼接sql。注解是根据VO中的field名称调用getPermissionSql来拼接的。getPermissionSql会被自动set到请求体中，拼接在查询sql最后
+
+123// sql示例： and ((fill_division_code in (&#x27;SG&#x27;, &#x27;HK&#x27;) and cc_code in (&#x27;10124&#x27;, &#x27;10S03&#x27;, &#x ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2024/03/06/%E3%80%90%E6%BA%90%E7%A0%81%E3%80%91Hadoop%E8%B5%B7%E8%88%AA/" title="【源码】Spark启程计划"><img class="post-bg" src="/images/hadoop.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【源码】Spark启程计划"></a></div><div class="recent-post-info"><a class="article-title" href="/2024/03/06/%E3%80%90%E6%BA%90%E7%A0%81%E3%80%91Hadoop%E8%B5%B7%E8%88%AA/" title="【源码】Spark启程计划">【源码】Spark启程计划</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2024-03-06T14:00:10.000Z" title="Created 2024-03-06 22:00:10">2024-03-06</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式</a></span></div><div class="content">前情故事由于接触了6.824这个神课之后，对分布式的兴趣愈发浓厚。在做完第二个Lab后，发现自己确实可以从lab中了解到分布式的MapReduce，Raft等的机制，但debug过程较为繁琐。并且在开发过程中，很多自己的逻辑是面向Debug编写的，非常想知道业界比较好的实现形式，而不是在我自己写的屎山上堆逻辑。因此决定开始看看大名鼎鼎的Apache项目的源码。进行一番检索调研之后，计划从Hadoop开始入手，希望自己不要被快速打脸。嘻嘻嘻&#x2F;&#x3D; &#x3D;&#x2F;
+一些不一定靠谱的计划（来自Claude3的建议，我告诉claude3我每天可以抽出两个小时学习，结果这个姐自动规划了五天，还贴心的给我放了个周末的假期，太可爱了&#x2F;&#x2F;)
+(大佬们都是实践的差不多才写博客，但我好像把这个博客当成日记了，反正也没什么人能看到，看到的大佬请别嘲笑，看到的姐妹感兴趣的可以评论区一起交流学习～)
+Spark的standalone模式standalone模式：spark自己带的一些分布式环境。
+spark-env.sh配置JAVA地址等
+slaves-templ ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2024/03/05/%E3%80%90%E5%BF%83%E5%BE%97%E3%80%913-15%E5%B0%8F%E8%AE%B0/" title="【心得】3.05小记"><img class="post-bg" src="/images/%E5%BF%83%E5%BE%97.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【心得】3.05小记"></a></div><div class="recent-post-info"><a class="article-title" href="/2024/03/05/%E3%80%90%E5%BF%83%E5%BE%97%E3%80%913-15%E5%B0%8F%E8%AE%B0/" title="【心得】3.05小记">【心得】3.05小记</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2024-03-05T13:02:49.000Z" title="Created 2024-03-05 21:02:49">2024-03-05</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%BF%83%E5%BE%97%E4%BD%93%E4%BC%9A/">心得体会</a></span></div><div class="content">今日份救赎与思想觉醒来自一位远方的姐姐，想要做什么样的人，朝前看就好了。过去的事情就让他过去吧。
+而且，每个人都有逆境的时候，逆境的时候应该怎么做呢？难道经历了一次变故就要一觉不振了吗。之前的成绩有很多幸运的成分，但处在困境中还能逆风翻盘才能证明那些成绩是全凭运气还是各凭本事。
+当然，今后的今后，我也会不断地肯定自己，相信自己。建立自己的强大磁场，去影响更多的人。
+另外想给诸君分享近日在工作上的成就感，主要来自于影响力的提升。更有担当的去own这个项目了，出了问题先定位代码并能帮同事们解决。主动站在项目的角度而不是单纯代码的角度思考决策并给领导提供建议。这两点让我在本周的影响力大大的提升。
+另外我发现大家普遍对其他人写的代码不是很熟悉，有空去走读他人代码真的不错，学到东西不说，以后还能帮到别人帮到团队。格局就起来了。
+</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2024/02/29/%E3%80%90%E8%AF%BB%E4%B9%A6%E3%80%91%E7%81%AB%E7%AE%AD%E7%A7%91%E5%AD%A6%E5%AE%B6%E4%B8%80%E6%A0%B7%E6%80%9D%E8%80%83/" title="【读书】《像火箭科学家一样思考》"><img class="post-bg" src="/images/nasa.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【读书】《像火箭科学家一样思考》"></a></div><div class="recent-post-info"><a class="article-title" href="/2024/02/29/%E3%80%90%E8%AF%BB%E4%B9%A6%E3%80%91%E7%81%AB%E7%AE%AD%E7%A7%91%E5%AD%A6%E5%AE%B6%E4%B8%80%E6%A0%B7%E6%80%9D%E8%80%83/" title="【读书】《像火箭科学家一样思考》">【读书】《像火箭科学家一样思考》</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2024-02-29T12:45:53.000Z" title="Created 2024-02-29 20:45:53">2024-02-29</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E8%AF%BB%E4%B9%A6/">读书</a></span></div><div class="content">
+学习还可以消除失败带来的耻辱感。“对付不开心的最好办法，就是学习一些东西。这是唯一屡试不爽的方法。你会变老，身体颤抖；你可能晚上睡不着，听着静脉紊乱的声音；你可能会怀念自己的挚爱；你可能会看到周围的世界被邪恶的疯子摧毁，或者知道你的荣誉被卑劣的人践踏。这时候，你只有一件事可以做，那就是学习，了解世事为何及如何变迁。”作家T.H.White 写道
 
 
+他们将失败转化为胜利，把束缚转化为优势；他们认为小事故只是可以解决的难题，而非不可逾越的障碍；他们前进的动力不是盲目的信念，而是自我怀疑 ；他们的目标不是短期结果,而是长期突破;他们知道规则不是一成不变的,已设定的东西可以更改,他们能开辟出一条新的路径。 当别人看到重重困难时，你们看到的却是各种机遇，想使现实服从你们的意愿。你们将理性的处理问题，制定创新的解决方案，重新定义现状。 为何减法而非加法是创意的关键
 
 
-<!-- Variable -->
-<script>window.ASYNC_CONFIG = {"hostname":"example.com","author":"ZZY","root":"/","typed_text":["ZZ！"],"theme_version":"2.1.13","theme":{"switch":true,"default":"style-light"},"favicon":{"logo":"leaf.svg","icon16":"leaf.svg","icon32":"leaf.svg","appleTouchIcon":"leaf.svg","webmanifest":"/site.webmanifest","visibilitychange":false,"hidden":"/failure.ico","showText":"(/≧▽≦/)咦！又好了！","hideText":"(●—●)喔哟，崩溃啦！"},"i18n":{"placeholder":"搜索文章...","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）","author":"本文作者：","copyright_link":"本文链接：","copyright_license_title":"版权声明：","copyright_license_content":"本博客所有文章除特别声明外，均默认采用 undefined 许可协议。","copy_success":"复制成功","copy_failure":"复制失败","open_read_mode":"进入阅读模式","exit_read_mode":"退出阅读模式","notice_outdate_message":"距离上次更新已经 undefined 天了, 文章内容可能已经过时。","sticky":"置顶","just":"刚刚","min":"分钟前","hour":"小时前","day":"天前","month":"个月前"},"swup":false,"plugin":{"flickr_justified_gallery":"https://npm.elemecdn.com/flickr-justified-gallery@latest/dist/fjGallery.min.js"},"icons":{"sun":"far fa-sun","moon":"far fa-moon","play":"fas fa-play","email":"far fa-envelope","next":"fas fa-arrow-right","calendar":"far fa-calendar-alt","clock":"far fa-clock","user":"far fa-user","back_top":"fas fa-arrow-up","close":"fas fa-times","search":"fas fa-search","reward":"fas fa-hand-holding-usd","user_tag":"fas fa-user-alt","toc_tag":"fas fa-th-list","read":"fas fa-book-reader","arrows":"fas fa-arrows-alt-h","double_arrows":"fas fa-angle-double-down","copy":"fas fa-copy"},"icontype":"font","highlight":{"plugin":"highlighjs","theme":true,"copy":true,"lang":true,"title":"mac","height_limit":200},"toc":{"post_title":true},"live_time":{"start_time":null,"prefix":"博客已萌萌哒运行 undefined 天"},"danmu":{"enable":false,"el":".trm-banner"}};</script>
-<script id="async-page-config">window.PAGE_CONFIG = {"isPost":false,"isHome":true,"postUpdate":"2024-04-09 21:04:21"};</script>
+We choose to go to the moon in this decade not because they are easy，but because they are hard！
 
-<!-- Theme mode css -->
-<link data-swup-theme rel="stylesheet" href="/css/index.css?v=2.1.13" id="trm-switch-style">
-<script>
-    let defaultMode = ASYNC_CONFIG.theme.default !=='auto' ?  ASYNC_CONFIG.theme.default : (window.matchMedia("(prefers-color-scheme: light)").matches ? 'style-light' : 'style-dark')
-    let catchMode = localStorage.getItem('theme-mode') || defaultMode;
-    let type = catchMode === 'style-dark' ? 'add' : 'remove';
-    document.documentElement.classList[type]('dark')
-</script>
+这本书拯救了我焦虑的情绪。半年前我 ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2024/02/29/%E3%80%90%E8%AF%BB%E4%B9%A6%E3%80%91%E3%80%8A%E5%8A%A8%E7%89%A9%E5%86%9C%E5%9C%BA%E3%80%8B/" title="【读书】《动物农场》"><img class="post-bg" src="/images/%E5%8A%A8%E7%89%A9%E5%86%9C%E5%9C%BA.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【读书】《动物农场》"></a></div><div class="recent-post-info"><a class="article-title" href="/2024/02/29/%E3%80%90%E8%AF%BB%E4%B9%A6%E3%80%91%E3%80%8A%E5%8A%A8%E7%89%A9%E5%86%9C%E5%9C%BA%E3%80%8B/" title="【读书】《动物农场》">【读书】《动物农场》</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2024-02-29T12:19:42.000Z" title="Created 2024-02-29 20:19:42">2024-02-29</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E8%AF%BB%E4%B9%A6/">读书</a></span></div><div class="content">这本书花了三天的时间看完的。第一天读的时候正好赶上年后返乡。当天暴雪封路，好多高铁都停运、晚点，我在返京的高铁站拉着箱子吹着冷风等了三个小时。
 
-<!-- CDN -->
+不知道是工作以后年纪增长了还是工作原因，突然对政治和经济很感兴趣。不过再感兴趣也耐不住底子薄，对很多事情也是一知半解。
+故事里除了猪和一匹年龄很大的马以外，几乎没有坚持阅读、书写，学会独立思考的动物们，他们面对暴力与专治展现出的是极致的温顺。但他们心中也是有信念的，也是向往自由的，但这份信念却让他们轻而易举的被猪们剥削的淋漓尽致。当然，不可置否的是，之前在人掌管农场的时候，他们也是被剥削的。由此看来，阶级还是会在不同性质的农场若有若无的存在着，不同的是游戏规则发生了略微改变而已。
+奥维尔的原意是揭露苏联社会主义的真实面目，在强权统治下，谈论共产主义的劳动创造共同价值，实现“自由王国”的可能性微乎其微。从古至今，阶级斗争永无止尽。
+这本书用动物农场发生的革命故事来讽刺政治。一开始看的时候嘴角上扬，到后面越看越觉得脊背发凉。有论者说。“多一个人看奥维尔，就多了一份自由的保障”，希望大家都可以掌握独立思考的能力，阅读真的很有必要。
+</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2024/02/29/%E3%80%90Java%E3%80%91SpringBoot%E7%83%AD%E9%83%A8%E7%BD%B2/" title="JVM热部署,热加载与源码解读"><img class="post-bg" src="/images/jvm.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="JVM热部署,热加载与源码解读"></a></div><div class="recent-post-info"><a class="article-title" href="/2024/02/29/%E3%80%90Java%E3%80%91SpringBoot%E7%83%AD%E9%83%A8%E7%BD%B2/" title="JVM热部署,热加载与源码解读">JVM热部署,热加载与源码解读</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2024-02-29T10:09:19.000Z" title="Created 2024-02-29 18:09:19">2024-02-29</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Java/">Java</a></span></div><div class="content">名词与解释加载与部署加载Loading：
 
+原理：将程序或数据从存储设备读取到内存。涉及内容：给程序分配内存空间，将机器码和数据加载到分配的空间中。
 
-    
-    
+部署Deployment：
 
+将已编译的机器码（可执行文件）和任何必要的库或依赖项放置到目标系统或服务器
 
+编译型语言和解释型语言这是两种不同的执行方式。
+解释性Interpretation：
 
-<!-- Site Analytics -->
- 
-<meta name="generator" content="Hexo 7.1.1"></head>
+程序运行时逐行或逐块被解释器直接执行&#x2F;在程序运行时动态地被解释和执行。python or js.
 
-<body>
+编译型Compilation：
 
-  <!-- app wrapper -->
-  <div class="trm-app-frame">
+运行前事先编译成机器码.c, c++, go
 
-    <!-- page preloader -->
-    <div class="trm-preloader">
-    <div class="trm-holder">
-        <div class="preloader">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
-    </div>
-</div>
-    <!-- page preloader end -->
+注意这里说的是机器码而不是字节码。字节码不直接针对特定的硬件架构。字节码通常由编译器从高级语言源代码编译得到，然后可以由虚拟机解释执行或进一步编译成机器码。一般Java，.Net，Python有字节码
+那Java属于什么类型语言？Java通常被认为同时具有编译型和解释型语言的特点： - 编译型特点：Java源代码（.java文件）首先被Java编译器编译成字节码（.class文件） - 解释型特点：JVM中的解释器对Java代码进行解释。
+热部署热部署主要 ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2024/02/29/%E3%80%90%E4%BD%8E%E4%BB%A3%E7%A0%81%E5%BC%95%E6%93%8E%E3%80%91%E4%BB%8B%E7%BB%8D%E4%B8%8E%E5%BC%80%E6%BA%90%E6%A1%88%E4%BE%8B/" title="基于SpringBoot的低代码平台"><img class="post-bg" src="/images/jvm.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="基于SpringBoot的低代码平台"></a></div><div class="recent-post-info"><a class="article-title" href="/2024/02/29/%E3%80%90%E4%BD%8E%E4%BB%A3%E7%A0%81%E5%BC%95%E6%93%8E%E3%80%91%E4%BB%8B%E7%BB%8D%E4%B8%8E%E5%BC%80%E6%BA%90%E6%A1%88%E4%BE%8B/" title="基于SpringBoot的低代码平台">基于SpringBoot的低代码平台</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2024-02-29T07:17:24.000Z" title="Created 2024-02-29 15:17:24">2024-02-29</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Java/">Java</a></span></div><div class="content">低代码简介意义
+低代码引擎的核心是设计器，通过扩展、周边生态等可以产出各式各样的设计器。它不是一套可以适合所有人的低代码平台，而是帮助低代码平台的开发者，快速生产低代码平台的工具。
 
-    <!-- change mode preloader -->
-    <div class="trm-mode-swich-animation-frame">
-    <div class="trm-mode-swich-animation">
-        <i class="i-sun"><i class="iconfont far fa-sun"></i></i>
-        <div class="trm-horizon"></div>
-        <i class="i-moon"><i class="iconfont far fa-moon"></i></i>
-    </div>
-</div>
-    <!-- change mode preloader end -->
-
-      <!-- scroll container -->
-      <div id="trm-dynamic-content" class="trm-swup-animation">
-        <div id="trm-scroll-container" class="trm-scroll-container" style="opacity: 0">
-            <!-- top bar -->
-            <header class="trm-top-bar">
-	<div class="container">
-		<div class="trm-left-side">
-			<!-- logo -->
-<a href="/" class="trm-logo-frame trm-anima-link">
-    
-        <img alt="logo" src="/leaf.svg">
-    
-    
-        <div class="trm-logo-text">
-            Ziyang<span>Zhen</span>
-        </div>
-    
-</a>
-<!-- logo end -->
-		</div>
-		<div class="trm-right-side">
-			<!-- menu -->
-<div class="trm-menu">
-    <nav>
-        <ul>
+低代码引擎包括前端代码相关的以及后端例如Java相关的代码平台。
+EruptErupt是一个基于Java的低代码平台，它不是通过自动生成Java代码来实现功能，而是使用Java注解（Annotations）来动态生成后台管理系统的页面和功能。这种方法使得开发者不需要编写前端代码或是手动创建数据库表结构，极大地简化了开发流程和提高了开发效率。
+Erupt 不是通过自动生成CRUD的Java代码来实现其功能的。相反，它采用一种基于注解的方法，通过在Java实体类上使用注解来定义如何对数据进行增删改查操作，以及如何在用户界面上展示这些数据。这种方法避免了传统的代码生成器所带来的代码冗余和后续维护困难的问题。
+具体来说，开发者只需定义数据模型，并使用Erupt提供的注解来标注这些模型，Erupt框架会自动解析这些注解，并生成相应的后台管理界面，包括数据列表、表单等，以及对应的增删改查逻辑。这一过程完全自动化，极大 ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2024/02/28/%E5%A6%82%E4%BD%95%E4%B8%8D%E5%81%9A%E5%B1%80%E5%A4%96%E4%BA%BA/" title="如何own好项目，不做局外人"><img class="post-bg" src="/images/%E5%BF%83%E5%BE%97.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="如何own好项目，不做局外人"></a></div><div class="recent-post-info"><a class="article-title" href="/2024/02/28/%E5%A6%82%E4%BD%95%E4%B8%8D%E5%81%9A%E5%B1%80%E5%A4%96%E4%BA%BA/" title="如何own好项目，不做局外人">如何own好项目，不做局外人</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2024-02-28T14:33:36.000Z" title="Created 2024-02-28 22:33:36">2024-02-28</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%BF%83%E5%BE%97%E4%BD%93%E4%BC%9A/">心得体会</a></span></div><div class="content">事情的起因是最近在工作中，由于颇受领导重视，被分配了一个小组重点开展的项目去做。
+这个项目一共有五、六个人一起开发，由于我负责的那块相对封闭，逻辑和大家负责的部分没太多关联。因此对于大家负责的模块一知半解。后续在项目需求开发快结束时，领导突然说让我去own整个项目，既进行代码开发也肩负起小项目管理的角色。
+其实我之前也有做整个项目的代码走查，但由于很少帮助其他模块的同事开发，刚入职半年帮其他同事review代码的次数一只手能数得过来，而且也只review了和自己负责的小模块相关的同事的代码。几乎没有任何技术影响力。对项目的运维信息、上线信息也没有积极跟进，都是由一位资深架构师去跟进的。例如项目的资源申请、内存是否够用，cpu核数是否需要再申请等等。本人由于主动性不够，除了我负责的工作以外开发的代码逻辑不够多，范围覆盖面较小。后续一些模块迭代需求的时候，PM找的都是之前负责的同事而不是自己。所以一个月以后，我没有很好的own这个项目，反而和需求有些脱轨，俨然变成了一个局外人。
+后来经历了自我反思，并与行业大佬交流后，了解了一些正确own项目的案例故事。例如某应届生同样也是刚刚工作半年，被 ...</div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/#content-inner">3</a><a class="extend next" rel="next" href="/page/3/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/images/me.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Zhen Ziyang</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">27</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">2</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">6</div></a></div><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/16372212" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:coding8ziyang@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">Welcome to Ziyang's blog. Hear you can see coding/分布式/CFA...</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/04/09/%E3%80%90Java%E3%80%91%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/" title="【Java】函数式编程"><img src="/images/jvm.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【Java】函数式编程"/></a><div class="content"><a class="title" href="/2024/04/09/%E3%80%90Java%E3%80%91%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/" title="【Java】函数式编程">【Java】函数式编程</a><time datetime="2024-04-09T13:03:54.000Z" title="Created 2024-04-09 21:03:54">2024-04-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/04/09/%E3%80%90Java%E3%80%91%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/" title="【Java】动态代理源码阅读"><img src="/images/jvm.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【Java】动态代理源码阅读"/></a><div class="content"><a class="title" href="/2024/04/09/%E3%80%90Java%E3%80%91%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/" title="【Java】动态代理源码阅读">【Java】动态代理源码阅读</a><time datetime="2024-04-09T13:02:28.000Z" title="Created 2024-04-09 21:02:28">2024-04-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/04/09/%E3%80%90Java%E3%80%91%E5%8F%8D%E5%B0%84%E4%B9%8B%E5%8A%A8%E6%80%81%E5%8E%9F%E7%90%86/" title="【Java】反射之动态代理"><img src="/images/jvm.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【Java】反射之动态代理"/></a><div class="content"><a class="title" href="/2024/04/09/%E3%80%90Java%E3%80%91%E5%8F%8D%E5%B0%84%E4%B9%8B%E5%8A%A8%E6%80%81%E5%8E%9F%E7%90%86/" title="【Java】反射之动态代理">【Java】反射之动态代理</a><time datetime="2024-04-09T03:01:51.000Z" title="Created 2024-04-09 11:01:51">2024-04-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/04/07/%E3%80%90%E8%AF%BB%E4%B9%A6%E3%80%91Effective-Java/" title="【读书】Effective Java"><img src="/images/read.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【读书】Effective Java"/></a><div class="content"><a class="title" href="/2024/04/07/%E3%80%90%E8%AF%BB%E4%B9%A6%E3%80%91Effective-Java/" title="【读书】Effective Java">【读书】Effective Java</a><time datetime="2024-04-07T10:00:00.000Z" title="Created 2024-04-07 18:00:00">2024-04-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/03/31/%E3%80%90%E5%BF%83%E5%BE%97%E3%80%913-31%E5%B0%8F%E8%AE%B0/" title="【心得】3-31小记"><img src="/images/IMG_9248.JPG" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【心得】3-31小记"/></a><div class="content"><a class="title" href="/2024/03/31/%E3%80%90%E5%BF%83%E5%BE%97%E3%80%913-31%E5%B0%8F%E8%AE%B0/" title="【心得】3-31小记">【心得】3-31小记</a><time datetime="2024-03-31T03:26:46.000Z" title="Created 2024-03-31 11:26:46">2024-03-31</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>Categories</span>
             
-            <li class="menu-item-has-children ">
-                <a  href="/" target="">
-                    首页
-                </a>
-                
-            </li>
-            
-            <li class="menu-item-has-children ">
-                <a  href="/categories/" target="">
-                    分类
-                </a>
-                
-                <ul>
-                    
-                    <li>
-                        <a  href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/" target="">
-                            分布式
-                        </a>
-                    </li>
-                    
-                    <li>
-                        <a  href="/categories/AI/" target="">
-                            AI
-                        </a>
-                    </li>
-                    
-                    <li>
-                        <a  href="/categories/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/" target="">
-                            基础算法
-                        </a>
-                    </li>
-                    
-                    <li>
-                        <a  href="/categories/Java/" target="">
-                            Java
-                        </a>
-                    </li>
-                    
-                    <li>
-                        <a  href="/categories/CFA/" target="">
-                            CFA
-                        </a>
-                    </li>
-                    
-                    <li>
-                        <a  href="/categories/%E8%AF%BB%E4%B9%A6/" target="">
-                            读书
-                        </a>
-                    </li>
-                    
-                    <li>
-                        <a  href="/categories/%E5%BF%83%E5%BE%97%E4%BD%93%E4%BC%9A/" target="">
-                            心得
-                        </a>
-                    </li>
-                    
-                </ul>
-                
-            </li>
-            
-            <li class="menu-item-has-children ">
-                <a data-no-swup href="/archives/" target="">
-                    归档
-                </a>
-                
-            </li>
-            
-        </ul>
-    </nav>
-</div>
-<!-- menu end -->
-			
-    <!-- mode switcher place -->
-    <div class="trm-mode-switcher-place">
-        <div class="trm-mode-switcher">
-            <i class="iconfont far fa-sun"></i>
-            <input class="tgl tgl-light" id="trm-swich" type="checkbox">
-            <label class="trm-swich" for="trm-swich"></label>
-            <i class="iconfont far fa-moon"></i>
-        </div>
-    </div>
-    <!-- mode switcher place end -->
-
-			
-		</div>
-		<div class="trm-menu-btn">
-			<span></span>
-		</div>
-	</div>
-</header>
-            <!-- top bar end -->
-
-            <!-- body -->
-            <div class="trm-content-start">
-    <!-- banner -->
-    <div class="trm-banner">
-    
-    <!-- banner cover -->
-    <img style="object-position:top;object-fit:cover;" alt="banner" class="trm-banner-cover" src="https://pic1.zhimg.com/v2-b3c2c6745b9421a13a3c4706b19223b3_r.jpg?source=1940ef5c">
-    <!-- banner cover end -->
-    
-
-    <!-- banner content -->
-    <div class="trm-banner-content trm-overlay">
-        <div class="container">
-            <div class="row">
-                
-                <div class="col-lg-4"></div>
-                
-                <div class="col-lg-8">
-
-                    <!-- banner title -->
-                    <div class="trm-banner-text ">
-                        <div class="trm-label trm-mb-20">
-                            Welcome to zzy&#39;s blog.
-                        </div>
-                        <h1 class="trm-mb-30 trm-hsmb-font">
-                            不在显赫处强求，<br>而在隐微处锲而不舍。
-                        </h1>
-
-                        
-                            <ul class="trm-breadcrumbs trm-label">
-                                <li>
-                                    <a href="/" class="trm-anima-link">Home</a>
-                                </li>
-                                <li>
-                                    <span>
-                                        page
-                                    </span>
-                                </li>
-                            </ul>
-                        
-                    </div>
-                    <!-- banner title end -->
-
-                    <!-- scroll hint -->
-                    <span id="scroll-triger" class="trm-scroll-hint-frame">
-                        <div class="trm-scroll-hint"></div>
-                        <span class="trm-label">Scroll down</span>
-                    </span>
-                    <!-- scroll hint end -->
-
-                </div>
             </div>
-        </div>
-    </div>
-    <!-- banner content end -->
-</div>
-    <!-- banner end -->
-    <div class="container">
-        <div class="row">
-            
-                <div class="trm-page-sidebar col-lg-4 hidden-sm">
-                    <!-- main card -->
-                    <div class="trm-main-card-frame trm-sidebar">
-    <div class="trm-main-card"> 
-        <!-- card header -->
-<div class="trm-mc-header">
-    <div class="trm-avatar-frame trm-mb-20">
-        <img alt="Avatar" class="trm-avatar" src="/images/me.png">
-    </div>
-    <h5 class="trm-name trm-mb-15">
-        Z ZY
-    </h5>
-    
-        <div class="trm-label">
-            Coding吧
-            <span class="trm-typed-text">
-                <!-- Words for theme.user.typedText -->
-            </span>
-        </div>
-    
-</div>
-<!-- card header end -->
-        <!-- sidebar social -->
-
-<div class="trm-divider trm-mb-40 trm-mt-40"></div>
-<div class="trm-social">
-    
-        <a href="https://github.com/16372212/" title="github" rel="nofollow" target="_blank">
-            <i class="iconfont fab fa-github"></i>
-        </a>
-    
-        <a href="mailto:coding8ziyang@gmail.com" title="mail" rel="nofollow" target="_blank">
-            <i class="iconfont fas fa-mail-bulk"></i>
-        </a>
-    
-</div>
-
-<!-- sidebar social end -->
-        <!-- info -->
-<div class="trm-divider trm-mb-40 trm-mt-40"></div>
-<ul class="trm-table trm-mb-20">
-    
-        <li>
-            <div class="trm-label">
-                地址:
-            </div>
-            <div class="trm-label trm-label-light">
-                银河系
-            </div>
-        </li>
-    
-        <li>
-            <div class="trm-label">
-                博客关键词:
-            </div>
-            <div class="trm-label trm-label-light">
-                Coding/分布式/CFA
-            </div>
-        </li>
-    
-</ul>
-<!-- info end -->
-
-        
-    </div>
-</div>
-                    <!-- main card end -->
-                </div>
-            
-            <div class="trm-page-content col-lg-8">
-                <div id="trm-content" class="trm-content">
-                    <!-- categories -->
-
-    <div class="row hidden-sm">
-        
-        
-        <div class="col-lg-6">
-            <!-- categories card -->
-<div class="trm-blog-categories trm-scroll-animation">
-    <h6>
-        Java
-        <span class="trm-number">
-            12
-        </span>
-    </h6>
-    <div class="trm-divider trm-mb-20 trm-mt-20"></div>
-    <a href="/categories/Java/." class="trm-label">
-        查看分类 
-        <i class="iconfont fas fa-arrow-right arrow-right"></i>
-    </a>
-</div>
-<!-- categories card end -->
-        </div>
-        
-        <div class="col-lg-6">
-            <!-- categories card -->
-<div class="trm-blog-categories trm-scroll-animation">
-    <h6>
-        心得体会
-        <span class="trm-number">
-            5
-        </span>
-    </h6>
-    <div class="trm-divider trm-mb-20 trm-mt-20"></div>
-    <a href="/categories/%E5%BF%83%E5%BE%97%E4%BD%93%E4%BC%9A/." class="trm-label">
-        查看分类 
-        <i class="iconfont fas fa-arrow-right arrow-right"></i>
-    </a>
-</div>
-<!-- categories card end -->
-        </div>
-        
-    </div>
-
-<!-- categories end -->
-
-<!-- newest publications -->
-<div class="row">
-    
-        <div class="col-lg-12">
-            <!-- title -->
-            <h5 class="trm-title-with-divider">
-                最近发布 
-                <span data-number="01"></span>
-            </h5>
-        </div>
-    
-    
-        <div class="col-lg-6">
-    <div class="trm-blog-card trm-scroll-animation">
-        <a href="/2024/03/12/%E3%80%90%E6%BA%90%E7%A0%81%E3%80%91%E5%9F%BA%E4%BA%8Emac%E7%9A%84%E4%BC%AA%E5%88%86%E5%B8%83%E5%BC%8F%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" class="trm-cover-frame trm-anima-link">
-            
-            
-                <img alt="cover" class="no-fancybox" src="/images/hadoop.png">
-            
-        </a>
-        
-        <div class="trm-card-descr">
-            <div class="trm-label trm-category trm-mb-20">
-                <a href=" /categories/%E5%88%86%E5%B8%83%E5%BC%8F/">
-                    分布式
-                </a>
-            </div>
-            <h5>
-                <a href="/2024/03/12/%E3%80%90%E6%BA%90%E7%A0%81%E3%80%91%E5%9F%BA%E4%BA%8Emac%E7%9A%84%E4%BC%AA%E5%88%86%E5%B8%83%E5%BC%8F%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" class="trm-anima-link">
-                    【源码】基于mac的伪分布式环境搭建
-                </a>
-            </h5>
-            <div class="trm-divider trm-mb-20 trm-mt-20"></div>
-            <ul class="trm-card-data trm-label">
-                <li>24/03/12</li>
-                <li>21:15</li>
-                
-                
-            </ul>
-        </div>
-    </div>
-</div>
-    
-        <div class="col-lg-6">
-    <div class="trm-blog-card trm-scroll-animation">
-        <a href="/2024/03/11/%E3%80%90%E5%BF%83%E5%BE%97%E3%80%91%E7%AB%99%E5%9C%A8%E9%A1%B9%E7%9B%AE%E7%9A%84%E8%A7%92%E5%BA%A6%E8%80%8C%E4%B8%8D%E6%98%AF%E5%8F%AA%E4%BC%9A%E5%90%AC%E8%AF%9D/" class="trm-cover-frame trm-anima-link">
-            
-            
-                <img alt="cover" class="no-fancybox" src="/images/%E5%BF%83%E5%BE%97.jpg">
-            
-        </a>
-        
-        <div class="trm-card-descr">
-            <div class="trm-label trm-category trm-mb-20">
-                <a href=" /categories/%E5%BF%83%E5%BE%97%E4%BD%93%E4%BC%9A/">
-                    心得体会
-                </a>
-            </div>
-            <h5>
-                <a href="/2024/03/11/%E3%80%90%E5%BF%83%E5%BE%97%E3%80%91%E7%AB%99%E5%9C%A8%E9%A1%B9%E7%9B%AE%E7%9A%84%E8%A7%92%E5%BA%A6%E8%80%8C%E4%B8%8D%E6%98%AF%E5%8F%AA%E4%BC%9A%E5%90%AC%E8%AF%9D/" class="trm-anima-link">
-                    【心得】站在项目的角度而不是只会听话
-                </a>
-            </h5>
-            <div class="trm-divider trm-mb-20 trm-mt-20"></div>
-            <ul class="trm-card-data trm-label">
-                <li>24/03/11</li>
-                <li>22:21</li>
-                
-                
-            </ul>
-        </div>
-    </div>
-</div>
-    
-        <div class="col-lg-6">
-    <div class="trm-blog-card trm-scroll-animation">
-        <a href="/2024/03/08/%E3%80%90Java%E3%80%91%E8%A7%92%E8%89%B2%E6%9D%83%E9%99%90%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/" class="trm-cover-frame trm-anima-link">
-            
-            
-                <img alt="cover" class="no-fancybox" src="/images/jvm.webp">
-            
-        </a>
-        
-        <div class="trm-card-descr">
-            <div class="trm-label trm-category trm-mb-20">
-                <a href=" /categories/Java/">
-                    Java
-                </a>
-            </div>
-            <h5>
-                <a href="/2024/03/08/%E3%80%90Java%E3%80%91%E8%A7%92%E8%89%B2%E6%9D%83%E9%99%90%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/" class="trm-anima-link">
-                    【Java】角色权限系统设计
-                </a>
-            </h5>
-            <div class="trm-divider trm-mb-20 trm-mt-20"></div>
-            <ul class="trm-card-data trm-label">
-                <li>24/03/08</li>
-                <li>10:52</li>
-                
-                
-            </ul>
-        </div>
-    </div>
-</div>
-    
-        <div class="col-lg-6">
-    <div class="trm-blog-card trm-scroll-animation">
-        <a href="/2024/03/06/%E3%80%90%E6%BA%90%E7%A0%81%E3%80%91Hadoop%E8%B5%B7%E8%88%AA/" class="trm-cover-frame trm-anima-link">
-            
-            
-                <img alt="cover" class="no-fancybox" src="/images/hadoop.png">
-            
-        </a>
-        
-        <div class="trm-card-descr">
-            <div class="trm-label trm-category trm-mb-20">
-                <a href=" /categories/%E5%88%86%E5%B8%83%E5%BC%8F/">
-                    分布式
-                </a>
-            </div>
-            <h5>
-                <a href="/2024/03/06/%E3%80%90%E6%BA%90%E7%A0%81%E3%80%91Hadoop%E8%B5%B7%E8%88%AA/" class="trm-anima-link">
-                    【源码】Spark启程计划
-                </a>
-            </h5>
-            <div class="trm-divider trm-mb-20 trm-mt-20"></div>
-            <ul class="trm-card-data trm-label">
-                <li>24/03/06</li>
-                <li>22:00</li>
-                
-                
-            </ul>
-        </div>
-    </div>
-</div>
-    
-        <div class="col-lg-6">
-    <div class="trm-blog-card trm-scroll-animation">
-        <a href="/2024/03/05/%E3%80%90%E5%BF%83%E5%BE%97%E3%80%913-15%E5%B0%8F%E8%AE%B0/" class="trm-cover-frame trm-anima-link">
-            
-            
-                <img alt="cover" class="no-fancybox" src="/images/%E5%BF%83%E5%BE%97.jpg">
-            
-        </a>
-        
-        <div class="trm-card-descr">
-            <div class="trm-label trm-category trm-mb-20">
-                <a href=" /categories/%E5%BF%83%E5%BE%97%E4%BD%93%E4%BC%9A/">
-                    心得体会
-                </a>
-            </div>
-            <h5>
-                <a href="/2024/03/05/%E3%80%90%E5%BF%83%E5%BE%97%E3%80%913-15%E5%B0%8F%E8%AE%B0/" class="trm-anima-link">
-                    【心得】3.05小记
-                </a>
-            </h5>
-            <div class="trm-divider trm-mb-20 trm-mt-20"></div>
-            <ul class="trm-card-data trm-label">
-                <li>24/03/05</li>
-                <li>21:02</li>
-                
-                
-            </ul>
-        </div>
-    </div>
-</div>
-    
-        <div class="col-lg-6">
-    <div class="trm-blog-card trm-scroll-animation">
-        <a href="/2024/02/29/%E3%80%90%E8%AF%BB%E4%B9%A6%E3%80%91%E7%81%AB%E7%AE%AD%E7%A7%91%E5%AD%A6%E5%AE%B6%E4%B8%80%E6%A0%B7%E6%80%9D%E8%80%83/" class="trm-cover-frame trm-anima-link">
-            
-            
-                <img alt="cover" class="no-fancybox" src="/images/nasa.png">
-            
-        </a>
-        
-        <div class="trm-card-descr">
-            <div class="trm-label trm-category trm-mb-20">
-                <a href=" /categories/%E8%AF%BB%E4%B9%A6/">
-                    读书
-                </a>
-            </div>
-            <h5>
-                <a href="/2024/02/29/%E3%80%90%E8%AF%BB%E4%B9%A6%E3%80%91%E7%81%AB%E7%AE%AD%E7%A7%91%E5%AD%A6%E5%AE%B6%E4%B8%80%E6%A0%B7%E6%80%9D%E8%80%83/" class="trm-anima-link">
-                    【读书】《像火箭科学家一样思考》
-                </a>
-            </h5>
-            <div class="trm-divider trm-mb-20 trm-mt-20"></div>
-            <ul class="trm-card-data trm-label">
-                <li>24/02/29</li>
-                <li>20:45</li>
-                
-                
-            </ul>
-        </div>
-    </div>
-</div>
-    
-        <div class="col-lg-6">
-    <div class="trm-blog-card trm-scroll-animation">
-        <a href="/2024/02/29/%E3%80%90%E8%AF%BB%E4%B9%A6%E3%80%91%E3%80%8A%E5%8A%A8%E7%89%A9%E5%86%9C%E5%9C%BA%E3%80%8B/" class="trm-cover-frame trm-anima-link">
-            
-            
-                <img alt="cover" class="no-fancybox" src="/images/%E5%8A%A8%E7%89%A9%E5%86%9C%E5%9C%BA.png">
-            
-        </a>
-        
-        <div class="trm-card-descr">
-            <div class="trm-label trm-category trm-mb-20">
-                <a href=" /categories/%E8%AF%BB%E4%B9%A6/">
-                    读书
-                </a>
-            </div>
-            <h5>
-                <a href="/2024/02/29/%E3%80%90%E8%AF%BB%E4%B9%A6%E3%80%91%E3%80%8A%E5%8A%A8%E7%89%A9%E5%86%9C%E5%9C%BA%E3%80%8B/" class="trm-anima-link">
-                    【读书】《动物农场》
-                </a>
-            </h5>
-            <div class="trm-divider trm-mb-20 trm-mt-20"></div>
-            <ul class="trm-card-data trm-label">
-                <li>24/02/29</li>
-                <li>20:19</li>
-                
-                
-            </ul>
-        </div>
-    </div>
-</div>
-    
-        <div class="col-lg-6">
-    <div class="trm-blog-card trm-scroll-animation">
-        <a href="/2024/02/29/%E3%80%90Java%E3%80%91SpringBoot%E7%83%AD%E9%83%A8%E7%BD%B2/" class="trm-cover-frame trm-anima-link">
-            
-            
-                <img alt="cover" class="no-fancybox" src="/images/jvm.webp">
-            
-        </a>
-        
-        <div class="trm-card-descr">
-            <div class="trm-label trm-category trm-mb-20">
-                <a href=" /categories/Java/">
-                    Java
-                </a>
-            </div>
-            <h5>
-                <a href="/2024/02/29/%E3%80%90Java%E3%80%91SpringBoot%E7%83%AD%E9%83%A8%E7%BD%B2/" class="trm-anima-link">
-                    JVM热部署,热加载与源码解读
-                </a>
-            </h5>
-            <div class="trm-divider trm-mb-20 trm-mt-20"></div>
-            <ul class="trm-card-data trm-label">
-                <li>24/02/29</li>
-                <li>18:09</li>
-                
-                
-            </ul>
-        </div>
-    </div>
-</div>
-    
-        <div class="col-lg-6">
-    <div class="trm-blog-card trm-scroll-animation">
-        <a href="/2024/02/29/%E3%80%90%E4%BD%8E%E4%BB%A3%E7%A0%81%E5%BC%95%E6%93%8E%E3%80%91%E4%BB%8B%E7%BB%8D%E4%B8%8E%E5%BC%80%E6%BA%90%E6%A1%88%E4%BE%8B/" class="trm-cover-frame trm-anima-link">
-            
-            
-                <img alt="cover" class="no-fancybox" src="/images/jvm.webp">
-            
-        </a>
-        
-        <div class="trm-card-descr">
-            <div class="trm-label trm-category trm-mb-20">
-                <a href=" /categories/Java/">
-                    Java
-                </a>
-            </div>
-            <h5>
-                <a href="/2024/02/29/%E3%80%90%E4%BD%8E%E4%BB%A3%E7%A0%81%E5%BC%95%E6%93%8E%E3%80%91%E4%BB%8B%E7%BB%8D%E4%B8%8E%E5%BC%80%E6%BA%90%E6%A1%88%E4%BE%8B/" class="trm-anima-link">
-                    基于SpringBoot的低代码平台
-                </a>
-            </h5>
-            <div class="trm-divider trm-mb-20 trm-mt-20"></div>
-            <ul class="trm-card-data trm-label">
-                <li>24/02/29</li>
-                <li>15:17</li>
-                
-                
-            </ul>
-        </div>
-    </div>
-</div>
-    
-        <div class="col-lg-6">
-    <div class="trm-blog-card trm-scroll-animation">
-        <a href="/2024/02/28/%E5%A6%82%E4%BD%95%E4%B8%8D%E5%81%9A%E5%B1%80%E5%A4%96%E4%BA%BA/" class="trm-cover-frame trm-anima-link">
-            
-            
-                <img alt="cover" class="no-fancybox" src="/images/%E5%BF%83%E5%BE%97.jpg">
-            
-        </a>
-        
-        <div class="trm-card-descr">
-            <div class="trm-label trm-category trm-mb-20">
-                <a href=" /categories/%E5%BF%83%E5%BE%97%E4%BD%93%E4%BC%9A/">
-                    心得体会
-                </a>
-            </div>
-            <h5>
-                <a href="/2024/02/28/%E5%A6%82%E4%BD%95%E4%B8%8D%E5%81%9A%E5%B1%80%E5%A4%96%E4%BA%BA/" class="trm-anima-link">
-                    如何own好项目，不做局外人
-                </a>
-            </h5>
-            <div class="trm-divider trm-mb-20 trm-mt-20"></div>
-            <ul class="trm-card-data trm-label">
-                <li>24/02/28</li>
-                <li>22:33</li>
-                
-                
-            </ul>
-        </div>
-    </div>
-</div>
-    
-</div>
-<!-- newest publications end -->
-
-
-    <div class="trm-pagination">
-        <a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a>
-    </div>
-
-
-                    <div class="trm-divider footer-divider"></div>
-
-                    <!-- footer -->
-                    <style>
-    #footer {
-        text-align: center;
-        font-size: 0.8em; /* 调整字体大小 */
-    }
-    .busuanzi {
-        display: inline-block;
-        margin: 0 auto;
-    }
-</style>
-
-<div id="footer">
-    <div class="busuanzi">
-        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-        <span id="busuanzi_container_site_pv">
-            本站总访问量<span id="busuanzi_value_site_pv"></span>次
-        </span>
-        <span class="post-meta-divider">|</span>
-        <span id="busuanzi_container_site_uv" style='display:none'>
-            本站访客数<span id="busuanzi_value_site_uv"></span>人
-        </span>
-    </div>
-    <div>
-        Hosted by 🤡<a href="https://github.com/16372212" rel="noopener" target="_blank">zzy's github</a>
-    </div>
-</div>
-
-                    <!-- footer end -->
-
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-            <!-- body end -->
-
-            
-
-            
-<div class="trm-fixed-container">
-    
-    
-    
-    <div id="trm-back-top" class="trm-fixed-btn" data-title="回到顶部">
-        <i class="iconfont fas fa-arrow-up"></i>
-    </div>
-</div>
-        </div>
-      </div>
-      <!-- scroll container end -->
-  </div>
-  <!-- app wrapper end -->
-
-  
-  <!-- Plugin -->
-
-
-
-
-    
-    
-<script src="https://npm.elemecdn.com/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
-
-    
-
-    
-        <script src="/js/plugins/typing.js?v=2.1.13"></script>
-    
-
-    
-
-    <!-- 数学公式 -->
-    
-
-    <!-- 评论插件 -->
-    
-
-		
-
-
-
-
-    <!-- Service Worker -->
-    
-    <!-- baidu push -->
-    
-
-
-<script id="async-script" src="/js/main.js?v=2.1.13"></script>
-
-<!-- CDN -->
-
-
-    
-
-    
-
-    
-
-
-
-</body>
-
-</html>
+            <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/CFA/"><span class="card-category-list-name">CFA</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Java/"><span class="card-category-list-name">Java</span><span class="card-category-list-count">12</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/"><span class="card-category-list-name">分布式</span><span class="card-category-list-count">4</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%BF%83%E5%BE%97%E4%BD%93%E4%BC%9A/"><span class="card-category-list-name">心得体会</span><span class="card-category-list-count">5</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E8%AF%BB%E4%B9%A6/"><span class="card-category-list-name">读书</span><span class="card-category-list-count">4</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E9%80%9A%E7%94%A8/"><span class="card-category-list-name">通用</span><span class="card-category-list-count">1</span></a></li>
+            </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>Tags</span></div><div class="card-tag-cloud"><a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" style="font-size: 1.1em; color: #999">分布式</a> <a href="/tags/%E8%AF%BB%E4%B9%A6/" style="font-size: 1.1em; color: #999">读书</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>Archives</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/04/"><span class="card-archive-list-date">April 2024</span><span class="card-archive-list-count">4</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/03/"><span class="card-archive-list-date">March 2024</span><span class="card-archive-list-count">11</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/02/"><span class="card-archive-list-date">February 2024</span><span class="card-archive-list-count">12</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>Info</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">Article :</div><div class="item-count">27</div></div><div class="webinfo-item"><div class="item-name">UV :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">PV :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">Last Update :</div><div class="item-count" id="last-push-date" data-lastPushDate="2024-04-09T14:03:50.857Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer" style="background: transparent"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By Zhen Ziyang</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
