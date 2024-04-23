@@ -1,0 +1,233 @@
+<!DOCTYPE html><html lang="zh-Hans" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>【深入理解JVM】带你编译JVM | Ziyang's Blog🌸</title><meta name="author" content="Zhen Ziyang"><meta name="copyright" content="Zhen Ziyang"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="背景最近在学习周志华的《深入理解JVM》，对Java的内存分配很感兴趣。想和c++对比着学习。 编译与调试1. 编译可调试版JVM12345编译环境:操作系统:macOSCPU架构:Apple Silicon (aarch64)Xcode版本:14.4  编译流程:  下载并安装适用于macOS的JDK 17。  从OpenJDK官方仓库下载或克隆与JDK版本匹配的JDK 17源代码(jdk-17">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【深入理解JVM】带你编译JVM">
+<meta property="og:url" content="http://example.com/2024/04/21/%E3%80%90%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3JVM%E3%80%91%E7%BC%96%E8%AF%91JVM/index.html">
+<meta property="og:site_name" content="Ziyang&#39;s Blog🌸">
+<meta property="og:description" content="背景最近在学习周志华的《深入理解JVM》，对Java的内存分配很感兴趣。想和c++对比着学习。 编译与调试1. 编译可调试版JVM12345编译环境:操作系统:macOSCPU架构:Apple Silicon (aarch64)Xcode版本:14.4  编译流程:  下载并安装适用于macOS的JDK 17。  从OpenJDK官方仓库下载或克隆与JDK版本匹配的JDK 17源代码(jdk-17">
+<meta property="og:locale">
+<meta property="og:image" content="http://example.com/images/jvm.webp">
+<meta property="article:published_time" content="2024-04-21T07:34:13.000Z">
+<meta property="article:modified_time" content="2024-04-23T15:11:07.459Z">
+<meta property="article:author" content="Zhen Ziyang">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/jvm.webp"><link rel="shortcut icon" href="/leaf.svg"><link rel="canonical" href="http://example.com/2024/04/21/%E3%80%90%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3JVM%E3%80%91%E7%BC%96%E8%AF%91JVM/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Error',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '【深入理解JVM】带你编译JVM',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-04-23 23:11:07'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.1.1"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/images/me.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">31</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">6</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/images/jvm.webp')"><nav id="nav"><span id="blog-info"><a href="/" title="Ziyang's Blog🌸"><span class="site-name">Ziyang's Blog🌸</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">【深入理解JVM】带你编译JVM</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2024-04-21T07:34:13.000Z" title="Created 2024-04-21 15:34:13">2024-04-21</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2024-04-23T15:11:07.459Z" title="Updated 2024-04-23 23:11:07">2024-04-23</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Java/">Java</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="【深入理解JVM】带你编译JVM"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>最近在学习周志华的《深入理解JVM》，对Java的内存分配很感兴趣。想和c++对比着学习。</p>
+<h1 id="编译与调试"><a href="#编译与调试" class="headerlink" title="编译与调试"></a>编译与调试</h1><h2 id="1-编译可调试版JVM"><a href="#1-编译可调试版JVM" class="headerlink" title="1. 编译可调试版JVM"></a>1. 编译可调试版JVM</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">编译环境:</span><br><span class="line"></span><br><span class="line">操作系统:macOS</span><br><span class="line">CPU架构:Apple Silicon (aarch64)</span><br><span class="line">Xcode版本:14.4</span><br></pre></td></tr></table></figure>
+
+<p>编译流程:</p>
+<ol>
+<li>下载并安装适用于macOS的JDK 17。</li>
+</ol>
+<p>从OpenJDK官方仓库下载或克隆与JDK版本匹配的JDK 17源代码(jdk-17.0.11-ga)。</p>
+<ol start="2">
+<li><p>配置编译环境,确保安装了所有必要的依赖项和工具。（后续需要啥安装啥就行）</p>
+</li>
+<li><p>在终端中导航到JDK源代码的根目录。<br>运行以下命令配置构建，自动进行配置检查:</p>
+</li>
+</ol>
+<p>（这里因为jvm和xcode的版本之间对不上量费了一些时间）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash configure --with-boot-jdk=/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home --with-debug-level=slowdebug --with-native-debug-symbols=internal --disable-warnings-as-errorsls</span><br></pre></td></tr></table></figure>
+
+<p>检查通过以后可以执行<code>make images</code></p>
+<p>等待构建过程完成。成功完成后,会看到消息”Finished building target ‘images’ in configuration ‘macosx-aarch64-server-slowdebug’”。</p>
+<h2 id="2-在IDEA中进行源码调试"><a href="#2-在IDEA中进行源码调试" class="headerlink" title="2. 在IDEA中进行源码调试"></a>2. 在IDEA中进行源码调试</h2><p>由于clion默认是用cmake，但是编译openjdk是用make，可以通过下面这个办法解决</p>
+<blockquote>
+<p>If you are working with a project which is not based on CMake, Gradle, or Makefiles, you can still benefit from the advanced IDE features that CLion provides. One way is to import a non-CMake project and let CLion convert it into a simple CMake structure. Another option is to open a project by loading its compilation database</p>
+</blockquote>
+<p>我们可以用下面的指令生成compile_commands.json文件，然后再clion中导入这个compile-commands.json文件（选择open as project)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make compile-commands</span><br></pre></td></tr></table></figure>
+
+<p>这时候，你会发现你是看不到源码的，所以下面需要修改项目的根目录，通过Tools -&gt; Compilation Database -&gt; Change Project Root功能，选中你的源码目录，也就是jdk11</p>
+<p><img src="/images/jvm1.png" alt="jvm1"></p>
+<p>然后设置Custom Build Targets</p>
+<p>设置custom build target可以参考：<br><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000040305260">某中文版博客教程</a>或者<a target="_blank" rel="noopener" href="https://blog.jetbrains.com/clion/2020/03/openjdk-with-clion/">官网教程</a></p>
+<p>我们需要配置clean和build的指令。</p>
+<blockquote>
+<p>select make as the program, and specify the make arguments that should be used to build your image. In our case, the only argument is the make configuration: CONF&#x3D;macosx-x86_64-server-fastdebug. Set ${source_root} as the Working Directory:</p>
+</blockquote>
+<p>我配置的时候遇到了一个坑，这里我把working directory的{source_root}写成了构建目录下的JDK，后者包含编译后的、机器可执行的字节码和本地代码。这里应该配置成全局的源码地址。</p>
+<p>然后配置Run&#x2F;Debug configurations</p>
+<p><img src="/jvm2.jpg" alt="jvm2.jpg"></p>
+<p>这里一定要配置编译好的jdk的路径。如果是正确的路径会自动编程黑色terminal的小标志。</p>
+<p>配置完上述步骤“按说”就大功完成了。</p>
+<h2 id="3-JVM的内存部分进行调试"><a href="#3-JVM的内存部分进行调试" class="headerlink" title="3. JVM的内存部分进行调试"></a>3. JVM的内存部分进行调试</h2><h3 id="jvm-入口"><a href="#jvm-入口" class="headerlink" title="jvm 入口"></a>jvm 入口</h3><p>我们可以观察一下<code>./java</code>的入口:</p>
+<p>在JDK的源代码中,编译后的 java 可执行文件的入口点位于 src&#x2F;java.base&#x2F;share&#x2F;native&#x2F;libjli&#x2F;java.c 文件中的 JavaMain和JLILaunch 函数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">流程：</span><br><span class="line"></span><br><span class="line">_start(java_md_solinux.c,Linux/macOS)或WinMain(java_md.c,Windows)</span><br><span class="line">JavaMain(java.c,Linux/macOS;java_md.c,Windows)</span><br><span class="line">JNI_CreateJavaVM(在JVM的本地代码中定义)</span><br><span class="line">sun.launcher.LauncherHelper.checkAndLoadMain(LauncherHelper.java)</span><br><span class="line">你的Java程序的main方法</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><img src="/JVM_root.png" alt="JVM_root"></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">JavaMain</span>(<span class="type">void</span>* _args)</span><br><span class="line">&#123;</span><br><span class="line">    JavaMainArgs *args = (JavaMainArgs *)_args;</span><br><span class="line">    <span class="type">int</span> argc = args-&gt;argc;</span><br><span class="line">    <span class="type">char</span> **argv = args-&gt;argv;</span><br><span class="line">    <span class="type">int</span> mode = args-&gt;mode;</span><br><span class="line">    <span class="type">char</span> *what = args-&gt;what;</span><br><span class="line">    InvocationFunctions ifn = args-&gt;ifn;</span><br><span class="line"></span><br><span class="line">    JavaVM *vm = <span class="number">0</span>;</span><br><span class="line">    JNIEnv *env = <span class="number">0</span>;</span><br><span class="line">    jclass mainClass = <span class="literal">NULL</span>;</span><br><span class="line">    jclass appClass = <span class="literal">NULL</span>; <span class="comment">// actual application class being launched</span></span><br><span class="line">    jmethodID mainID;</span><br><span class="line">    jobjectArray mainArgs;</span><br><span class="line">    <span class="type">int</span> ret = <span class="number">0</span>;</span><br><span class="line">    jlong start = <span class="number">0</span>, end = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">RegisterThread</span>();</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Initialize the virtual machine */</span></span><br><span class="line">    start = <span class="built_in">CurrentTimeMicros</span>();</span><br><span class="line">    <span class="keyword">if</span> (!<span class="built_in">InitializeJVM</span>(&amp;vm, &amp;env, &amp;ifn)) &#123;</span><br><span class="line">        <span class="built_in">JLI_ReportErrorMessage</span>(JVM_ERROR1);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (showSettings != <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="built_in">ShowSettings</span>(env, showSettings);</span><br><span class="line">        <span class="built_in">CHECK_EXCEPTION_LEAVE</span>(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// show resolved modules and continue</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<p>在我们着手调试JVM内存分配的代码前先堆内存分配进行一个简单的了解</p>
+<h3 id="内存部分的结构："><a href="#内存部分的结构：" class="headerlink" title="内存部分的结构："></a>内存部分的结构：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">JVM内存管理 (位于 src/hotspot/ 目录下)</span><br><span class="line">│</span><br><span class="line">├── 内存分配器(Memory Allocator)</span><br><span class="line">│   ├── C++堆分配器(C++ Heap Allocator)</span><br><span class="line">│   │   └── src/hotspot/share/memory/allocation.hpp</span><br><span class="line">│   └── Java堆分配器(Java Heap Allocator)</span><br><span class="line">│       ├── 新生代(Young Generation)</span><br><span class="line">│       │   ├── Eden区</span><br><span class="line">│       │   │   └── src/hotspot/share/gc/parallel/psYoungGen.hpp</span><br><span class="line">│       │   └── Survivor区</span><br><span class="line">│       │       └── src/hotspot/share/gc/parallel/psSurvivorSpace.hpp</span><br><span class="line">│       └── 老年代(Old Generation)</span><br><span class="line">│           └── src/hotspot/share/gc/parallel/psOldGen.hpp</span><br><span class="line">│</span><br><span class="line">├── 垃圾收集器(Garbage Collector)</span><br><span class="line">│   ├── 新生代GC</span><br><span class="line">│   │   ├── Serial GC</span><br><span class="line">│   │   │   └── src/hotspot/share/gc/serial/defNewGeneration.hpp</span><br><span class="line">│   │   ├── Parallel GC</span><br><span class="line">│   │   │   └── src/hotspot/share/gc/parallel/parallelScavengeHeap.hpp</span><br><span class="line">│   │   └── G1 GC (JDK 9+)</span><br><span class="line">│   │       └── src/hotspot/share/gc/g1/g1CollectedHeap.hpp</span><br><span class="line">│   └── 老年代GC</span><br><span class="line">│       ├── Serial Old GC</span><br><span class="line">│       │   └── src/hotspot/share/gc/serial/tenuredGeneration.hpp</span><br><span class="line">│       ├── Parallel Old GC</span><br><span class="line">│       │   └── src/hotspot/share/gc/parallel/parallelScavengeHeap.hpp</span><br><span class="line">│       ├── Concurrent Mark Sweep (CMS) GC</span><br><span class="line">│       │   └── src/hotspot/share/gc/cms/concurrentMarkSweepGeneration.hpp</span><br><span class="line">│       ├── G1 GC (JDK 9+)</span><br><span class="line">│       │   └── src/hotspot/share/gc/g1/g1CollectedHeap.hpp</span><br><span class="line">│       └── ZGC (JDK 11+, 实验性)</span><br><span class="line">│           └── src/hotspot/share/gc/z/zCollectedHeap.hpp</span><br><span class="line">│</span><br><span class="line">├── 内存管理工具(Memory Management Tools)</span><br><span class="line">│   ├── JVM工具接口(JVM Tool Interface, JVMTI)</span><br><span class="line">│   │   └── src/hotspot/share/prims/jvmtiExport.hpp</span><br><span class="line">│   └── 本地内存跟踪(Native Memory Tracking, NMT) (JDK 8+)</span><br><span class="line">│       └── src/hotspot/share/services/mallocTracker.hpp</span><br><span class="line">│</span><br><span class="line">└── 其他内存相关组件</span><br><span class="line">    ├── Metaspace (JDK 8+, 替代永久代)</span><br><span class="line">    │   └── src/hotspot/share/memory/metaspace.hpp</span><br><span class="line">    └── 线程局部分配缓冲区(Thread-Local Allocation Buffer, TLAB)</span><br><span class="line">        └── src/hotspot/share/gc/shared/threadLocalAllocBuffer.hpp</span><br></pre></td></tr></table></figure>
+
+<h3 id="内存分配："><a href="#内存分配：" class="headerlink" title="内存分配："></a>内存分配：</h3><blockquote>
+<p>当新new一个对象的时候，首先执行 (虚拟机视角) 1.类加载检查 -&gt; 2.分配内存 -&gt; 3.内存空间初始化为0值 -&gt; 4.对对象进行必要的设置（将一些信息存放在对象的对象头Object Header) -&gt; (Java程序视角) 5.执行构造函数</p>
+</blockquote>
+<p>在HotSpot JVM中,内存分配主要发生在两个地方:Java堆和本地(C++)堆。</p>
+<h4 id="1-Java堆中的分配"><a href="#1-Java堆中的分配" class="headerlink" title="1. Java堆中的分配"></a>1. Java堆中的分配</h4><p>Java堆:</p>
+<p>存储Java对象和数组。<br>由JVM管理,受垃圾收集的控制。<br>Java应用程序可以直接与之交互。<br>它的大小可以在JVM启动时通过-Xms和-Xmx参数来设置。</p>
+<p>Java堆的分配入口函数位于 src&#x2F;hotspot&#x2F;share&#x2F;gc&#x2F;shared&#x2F;collectedHeap.hpp 文件中。CollectedHeap 是一个抽象类,代表了Java堆,不同的垃圾收集器会提供不同的实现。在 CollectedHeap 类中,有两个重要的内存分配函数:</p>
+<ul>
+<li><p><code>allocate_new_tlab(size_t min_size, size_t requested_size, size_t* actual_size)</code>: 这个函数用于为线程分配一个新的线程局部分配缓冲区(TLAB)。TLAB是为了提高内存分配的效率,每个线程会从自己的TLAB中分配小的对象。</p>
+</li>
+<li><p><code>mem_allocate(size_t size, bool* gc_overhead_limit_was_exceeded)</code>: 这个函数用于在Java堆上分配一个指定大小的内存块。如果TLAB被耗尽,或者要分配的对象太大,就会直接调用这个函数。</p>
+</li>
+</ul>
+<h4 id="2-本地-C-堆的分配"><a href="#2-本地-C-堆的分配" class="headerlink" title="2. 本地(C++)堆的分配"></a>2. 本地(C++)堆的分配</h4><p>C++堆:</p>
+<p>存储JVM内部数据结构,如类数据结构(如 Klass),线程数据结构,JIT编译器生成的代码等。<br>由C++运行时库管理,不受JVM垃圾收集的控制。<br>Java应用程序通常不会直接与之交互。<br>它的大小取决于操作系统和C++运行时库的设置。</p>
+<p>入口点是 src&#x2F;hotspot&#x2F;share&#x2F;memory&#x2F;allocation.hpp 中的函数:</p>
+<ul>
+<li><code>AllocateHeap(size_t size, MEMFLAGS flags)</code>: 在C++堆上分配一个指定大小的内存块。</li>
+<li><code>ReallocateHeap(void* old, size_t size, MEMFLAGS flag)</code>: 在C++堆上重新分配一个内存块。</li>
+</ul>
+<p>这些函数最终会调用操作系统的内存分配函数,如 malloc 和 realloc。</p>
+<h4 id="示例代码调试"><a href="#示例代码调试" class="headerlink" title="示例代码调试"></a>示例代码调试</h4><p>在JDK 17中</p>
+<h4 id="类加载器"><a href="#类加载器" class="headerlink" title="类加载器"></a>类加载器</h4><p>启动类（根）的加载器 负责启动java的核心类库。<br>扩展类加载器：加载扩展目录下的加载起。 ExtClassLoader实现。<br>应用程序加载器：默认加载器，如果父加载器不能满足就让他执行。加载应用程序的类路径上的类。</p>
+<h4 id="双亲委派机制"><a href="#双亲委派机制" class="headerlink" title="双亲委派机制"></a>双亲委派机制</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">protected</span> Class&lt;?&gt; loadClass(String name, <span class="type">boolean</span> resolve)</span><br><span class="line">    <span class="keyword">throws</span> ClassNotFoundException</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">synchronized</span> (getClassLoadingLock(name)) &#123;</span><br><span class="line">        <span class="comment">// 首先,检查请求的类是否已经被加载</span></span><br><span class="line">        Class&lt;?&gt; c = findLoadedClass(name);</span><br><span class="line">        <span class="keyword">if</span> (c == <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="keyword">if</span> (parent != <span class="literal">null</span>) &#123;</span><br><span class="line">                    <span class="comment">// 如果父加载器不为空,请求父加载器加载类</span></span><br><span class="line">                    c = parent.loadClass(name, <span class="literal">false</span>);</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="comment">// 如果父加载器为空,使用启动类加载器加载类</span></span><br><span class="line">                    c = findBootstrapClassOrNull(name);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123;</span><br><span class="line">                <span class="comment">// 如果父加载器抛出ClassNotFoundException,</span></span><br><span class="line">                <span class="comment">// 则尝试自己查找并加载类</span></span><br><span class="line">                c = findClass(name);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (resolve) &#123;</span><br><span class="line">            resolveClass(c);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> c;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>如果父类不为空，则请求父加载器加载。</p>
+<p>父类加载器为空，抛出一个<code>ClassNotFoundException</code>，尝试自己查找类并加载</p>
+<h4 id="native方法是什么？"><a href="#native方法是什么？" class="headerlink" title="native方法是什么？"></a>native方法是什么？</h4><p>native方法确实可以被看作是Java和JVM的本地代码(通常是C或C++)之间的一种接口或者桥梁。</p>
+<p>带了native关键字的，说明Java的范围调用不到了，就回去调用底层c语言的库。此时会进入本地方法栈。然后会调用本地方法本地接口JNI。（本地方发栈存储native方法的调用状态。）</p>
+<p>当Java代码调用一个native方法时,它实际上是在请求JVM执行这个方法的本地实现。JVM通过JNI(Java Native Interface)找到并调用相应的C或C++函数。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="http://example.com">Zhen Ziyang</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="http://example.com/2024/04/21/%E3%80%90%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3JVM%E3%80%91%E7%BC%96%E8%AF%91JVM/">http://example.com/2024/04/21/%E3%80%90%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3JVM%E3%80%91%E7%BC%96%E8%AF%91JVM/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/images/jvm.webp" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2024/04/14/%E3%80%90Java%E3%80%91%E5%85%83%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86/" title="【Java】“元数据管理平台”还是“数据集成和数据流处理平台”？"><img class="cover" src="/images/nifi.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">Next</div><div class="next_info">【Java】“元数据管理平台”还是“数据集成和数据流处理平台”？</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/images/me.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Zhen Ziyang</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">31</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">6</div></a></div><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/16372212" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:coding8ziyang@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">Welcome to Ziyang's blog. Hear you can see coding/分布式/CFA...</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%83%8C%E6%99%AF"><span class="toc-number">1.</span> <span class="toc-text">背景</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BC%96%E8%AF%91%E4%B8%8E%E8%B0%83%E8%AF%95"><span class="toc-number">2.</span> <span class="toc-text">编译与调试</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E7%BC%96%E8%AF%91%E5%8F%AF%E8%B0%83%E8%AF%95%E7%89%88JVM"><span class="toc-number">2.1.</span> <span class="toc-text">1. 编译可调试版JVM</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%9C%A8IDEA%E4%B8%AD%E8%BF%9B%E8%A1%8C%E6%BA%90%E7%A0%81%E8%B0%83%E8%AF%95"><span class="toc-number">2.2.</span> <span class="toc-text">2. 在IDEA中进行源码调试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-JVM%E7%9A%84%E5%86%85%E5%AD%98%E9%83%A8%E5%88%86%E8%BF%9B%E8%A1%8C%E8%B0%83%E8%AF%95"><span class="toc-number">2.3.</span> <span class="toc-text">3. JVM的内存部分进行调试</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#jvm-%E5%85%A5%E5%8F%A3"><span class="toc-number">2.3.1.</span> <span class="toc-text">jvm 入口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%85%E5%AD%98%E9%83%A8%E5%88%86%E7%9A%84%E7%BB%93%E6%9E%84%EF%BC%9A"><span class="toc-number">2.3.2.</span> <span class="toc-text">内存部分的结构：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%EF%BC%9A"><span class="toc-number">2.3.3.</span> <span class="toc-text">内存分配：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-Java%E5%A0%86%E4%B8%AD%E7%9A%84%E5%88%86%E9%85%8D"><span class="toc-number">2.3.3.1.</span> <span class="toc-text">1. Java堆中的分配</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E6%9C%AC%E5%9C%B0-C-%E5%A0%86%E7%9A%84%E5%88%86%E9%85%8D"><span class="toc-number">2.3.3.2.</span> <span class="toc-text">2. 本地(C++)堆的分配</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B%E4%BB%A3%E7%A0%81%E8%B0%83%E8%AF%95"><span class="toc-number">2.3.3.3.</span> <span class="toc-text">示例代码调试</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8"><span class="toc-number">2.3.3.4.</span> <span class="toc-text">类加载器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%9C%BA%E5%88%B6"><span class="toc-number">2.3.3.5.</span> <span class="toc-text">双亲委派机制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#native%E6%96%B9%E6%B3%95%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-number">2.3.3.6.</span> <span class="toc-text">native方法是什么？</span></a></li></ol></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/04/21/%E3%80%90%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3JVM%E3%80%91%E7%BC%96%E8%AF%91JVM/" title="【深入理解JVM】带你编译JVM"><img src="/images/jvm.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【深入理解JVM】带你编译JVM"/></a><div class="content"><a class="title" href="/2024/04/21/%E3%80%90%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3JVM%E3%80%91%E7%BC%96%E8%AF%91JVM/" title="【深入理解JVM】带你编译JVM">【深入理解JVM】带你编译JVM</a><time datetime="2024-04-21T07:34:13.000Z" title="Created 2024-04-21 15:34:13">2024-04-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/04/14/%E3%80%90Java%E3%80%91%E5%85%83%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86/" title="【Java】“元数据管理平台”还是“数据集成和数据流处理平台”？"><img src="/images/nifi.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【Java】“元数据管理平台”还是“数据集成和数据流处理平台”？"/></a><div class="content"><a class="title" href="/2024/04/14/%E3%80%90Java%E3%80%91%E5%85%83%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86/" title="【Java】“元数据管理平台”还是“数据集成和数据流处理平台”？">【Java】“元数据管理平台”还是“数据集成和数据流处理平台”？</a><time datetime="2024-04-14T08:09:23.000Z" title="Created 2024-04-14 16:09:23">2024-04-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/04/14/%E3%80%90%E5%BF%83%E5%BE%97%E3%80%91%E6%8A%BD%E8%B1%A1%E5%92%8C%E6%B2%89%E6%B7%80/" title="【心得】抽象和沉淀"><img src="/images/IMG_9248.JPG" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【心得】抽象和沉淀"/></a><div class="content"><a class="title" href="/2024/04/14/%E3%80%90%E5%BF%83%E5%BE%97%E3%80%91%E6%8A%BD%E8%B1%A1%E5%92%8C%E6%B2%89%E6%B7%80/" title="【心得】抽象和沉淀">【心得】抽象和沉淀</a><time datetime="2024-04-14T07:57:20.000Z" title="Created 2024-04-14 15:57:20">2024-04-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/04/11/%E3%80%90%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E3%80%91%E8%B4%A3%E4%BB%BB%E9%93%BE%E6%A8%A1%E5%BC%8F%E4%B8%8E%E6%B5%81%E6%B0%B4%E7%BA%BF/" title="【设计模式】源码上理解责任链模式与流水线"><img src="/images/jvm.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【设计模式】源码上理解责任链模式与流水线"/></a><div class="content"><a class="title" href="/2024/04/11/%E3%80%90%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E3%80%91%E8%B4%A3%E4%BB%BB%E9%93%BE%E6%A8%A1%E5%BC%8F%E4%B8%8E%E6%B5%81%E6%B0%B4%E7%BA%BF/" title="【设计模式】源码上理解责任链模式与流水线">【设计模式】源码上理解责任链模式与流水线</a><time datetime="2024-04-11T02:01:28.000Z" title="Created 2024-04-11 10:01:28">2024-04-11</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/04/09/%E3%80%90Java%E3%80%91%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/" title="【Java】函数式编程"><img src="/images/jvm.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【Java】函数式编程"/></a><div class="content"><a class="title" href="/2024/04/09/%E3%80%90Java%E3%80%91%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/" title="【Java】函数式编程">【Java】函数式编程</a><time datetime="2024-04-09T13:03:54.000Z" title="Created 2024-04-09 21:03:54">2024-04-09</time></div></div></div></div></div></div></main><footer id="footer" style="background: transparent"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By Zhen Ziyang</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
