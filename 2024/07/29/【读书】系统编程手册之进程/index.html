@@ -1,0 +1,199 @@
+<!DOCTYPE html><html lang="zh-Hans" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>【读书】系统编程手册之进程 | Ziyang's Blog🌸</title><meta name="author" content="Zhen Ziyang"><meta name="copyright" content="Zhen Ziyang"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="进程进程的内存布局 文本段。包括机器语言指令。每个进程都有自己的虚拟地址空间， 初始化与未初始化的数据段 stack: 每个当前调用的函数都分配一个栈帧。每个帧都有函数局部变量，函数实参，以及单个函数调用的调用链接信息。 heap: 运行时给变量动态分配内存的区域。  虚拟地址空间： 每个进程都拥有自己独立的地址空间,这个地址空间在逻辑上是连续的,但在物理内存上并不需要是连续的linux如何保证每">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【读书】系统编程手册之进程">
+<meta property="og:url" content="http://example.com/2024/07/29/%E3%80%90%E8%AF%BB%E4%B9%A6%E3%80%91%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E6%89%8B%E5%86%8C%E4%B9%8B%E8%BF%9B%E7%A8%8B/index.html">
+<meta property="og:site_name" content="Ziyang&#39;s Blog🌸">
+<meta property="og:description" content="进程进程的内存布局 文本段。包括机器语言指令。每个进程都有自己的虚拟地址空间， 初始化与未初始化的数据段 stack: 每个当前调用的函数都分配一个栈帧。每个帧都有函数局部变量，函数实参，以及单个函数调用的调用链接信息。 heap: 运行时给变量动态分配内存的区域。  虚拟地址空间： 每个进程都拥有自己独立的地址空间,这个地址空间在逻辑上是连续的,但在物理内存上并不需要是连续的linux如何保证每">
+<meta property="og:locale">
+<meta property="og:image" content="http://example.com/images/jvm.webp">
+<meta property="article:published_time" content="2024-07-29T09:32:54.000Z">
+<meta property="article:modified_time" content="2024-08-05T05:46:06.655Z">
+<meta property="article:author" content="Zhen Ziyang">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/jvm.webp"><link rel="shortcut icon" href="/leaf.svg"><link rel="canonical" href="http://example.com/2024/07/29/%E3%80%90%E8%AF%BB%E4%B9%A6%E3%80%91%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E6%89%8B%E5%86%8C%E4%B9%8B%E8%BF%9B%E7%A8%8B/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Error',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '【读书】系统编程手册之进程',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-08-05 13:46:06'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.1.1"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/images/me.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">46</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">7</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">8</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/images/jvm.webp')"><nav id="nav"><span id="blog-info"><a href="/" title="Ziyang's Blog🌸"><span class="site-name">Ziyang's Blog🌸</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">【读书】系统编程手册之进程</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2024-07-29T09:32:54.000Z" title="Created 2024-07-29 17:32:54">2024-07-29</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2024-08-05T05:46:06.655Z" title="Updated 2024-08-05 13:46:06">2024-08-05</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Java/">Java</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="【读书】系统编程手册之进程"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h1><h2 id="进程的内存布局"><a href="#进程的内存布局" class="headerlink" title="进程的内存布局"></a>进程的内存布局</h2><ul>
+<li>文本段。包括机器语言指令。每个进程都有自己的虚拟地址空间，</li>
+<li>初始化与未初始化的数据段</li>
+<li>stack: 每个当前调用的函数都分配一个栈帧。每个帧都有函数局部变量，函数实参，以及单个函数调用的调用链接信息。</li>
+<li>heap: 运行时给变量动态分配内存的区域。</li>
+</ul>
+<h2 id="虚拟地址空间："><a href="#虚拟地址空间：" class="headerlink" title="虚拟地址空间："></a>虚拟地址空间：</h2><blockquote>
+<p>每个进程都拥有自己独立的地址空间,这个地址空间在逻辑上是连续的,但在物理内存上并不需要是连续的<br>linux如何保证每个进程都有自己的虚拟地址空间：页表机制 + 内存管理单元 + 地址空间布局（Linux 为每个进程预留了独立的虚拟地址空间布局） + 内存保护机制</p>
+</blockquote>
+<p>内核给每个进程都维护了一张页表，页表描述了虚拟地址空间中的某个位置对应的RAM的位置，如果没有，就说明还在磁盘上，返回以“页面错误”。</p>
+<p>这种可以实现进程之间的内存隔离，因为页表指向的内存地址不一样。内存管理就是内核把不同进程的页表条目指到了同一个RAM。</p>
+<p>进程通信：进程可以通过shmget() mmap()系统调用显示地请求与其他进程共享内存区。</p>
+<h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><p>环境是进程之间通信的一种方式。不过是单方面一次性的，在父进程创建子进程的时候用到，子进程获取父进程环境的副本。后面各自会各自修改自己的环境，并对对方不可见。</p>
+<h1 id="内存分配"><a href="#内存分配" class="headerlink" title="内存分配"></a>内存分配</h1><p>进程可以通过增加堆的大小来分配内存。堆开始的位置起始于进程未初始化数据段的末尾。进程可以访问分配区内的任意的虚拟内存地址，首次访问时内核会去为这些虚拟内存地址分配新的物理页。</p>
+<p>在堆上分配内存一般使用malloc() and free()</p>
+<p>malloc(): 在堆上返回参数size大小的内存，并返回指向新分配内存起始位置的指针，</p>
+<p>free(): 释放ptr参数指向的内存块。将这些内存添加到空闲链表里。</p>
+<h2 id="堆上分配内存"><a href="#堆上分配内存" class="headerlink" title="堆上分配内存"></a>堆上分配内存</h2><h3 id="malloc-and-free-的实现原理"><a href="#malloc-and-free-的实现原理" class="headerlink" title="malloc() and free()的实现原理"></a>malloc() and free()的实现原理</h3><p>malloc():扫描free()释放的空闲内存列表，判断是否有大小大于或者等于要求的空闲内存（first fit or best fit)。如果内存大小更大一些，会切割后将合适的返回。如果找不到足够大的空闲列表，会调用sbrk()分配更多的内存。</p>
+<p>free():就是把内存块放到了空闲列表上。</p>
+<h3 id="空闲列表的内存块和非空闲列表的内存块长什么样子？"><a href="#空闲列表的内存块和非空闲列表的内存块长什么样子？" class="headerlink" title="空闲列表的内存块和非空闲列表的内存块长什么样子？"></a>空闲列表的内存块和非空闲列表的内存块长什么样子？</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">malloc()返回的内存块：</span><br><span class="line">---------------------------------------</span><br><span class="line">| 内存块长度(L) |   供调用者使用的内存   |</span><br><span class="line">---------------------------------------</span><br><span class="line"></span><br><span class="line">空闲列表中的内存块</span><br><span class="line">----------------------------------------------------------------------------------------</span><br><span class="line">| 内存块长度(L) |   指向前空闲内存块的指针P  |指向后一空闲内存块的指针N | 内存快剩下的空闲内存|</span><br><span class="line">----------------------------------------------------------------------------------------</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="其他方法"><a href="#其他方法" class="headerlink" title="其他方法"></a>其他方法</h3><p>calloc() and realloc()</p>
+<h2 id="堆栈上分配内存"><a href="#堆栈上分配内存" class="headerlink" title="堆栈上分配内存"></a>堆栈上分配内存</h2><p>alloca()</p>
+<p>这种内存不需要显示调用free()，而是在调用alloca()函数返回的时候自动释放的。</p>
+<h1 id="进程与线程"><a href="#进程与线程" class="headerlink" title="进程与线程"></a>进程与线程</h1><p>进程构造子进程是靠fork(), 创建子线程用的是clone().</p>
+<p>clone()的时候不需要考虑内存页、文件描述符表。节省很多空间。</p>
+<p>线程自己的独有内容如下：</p>
+<ul>
+<li>线程ID</li>
+<li>信号掩码</li>
+<li>浮点型</li>
+<li>栈</li>
+<li>CPU亲和力</li>
+</ul>
+<p>curl ‘<a target="_blank" rel="noopener" href="http://121.196.196.174:8080/api/openai/v1/chat/completions">http://121.196.196.174:8080/api/openai/v1/chat/completions</a>‘ <br>  -H ‘Accept: application&#x2F;json, text&#x2F;event-stream’ <br>  -H ‘Content-Type: application&#x2F;json’ <br>  –data-raw ‘{“model”:”qwen-long”,”frequency_penalty”:0,”max_tokens”:800,”stream”:false,”messages”:[{“role”:”user”,”content”:”higress项目主仓库的github地址是什么”}],”presence_penalty”:0,”temperature”:0.7,”top_p”:0.95}’</p>
+<p>curl <a target="_blank" rel="noopener" href="http://env-cqm8ntllhtgmr7v3mf7g-cn-hangzhou.alicloudapi.com/test/">http://env-cqm8ntllhtgmr7v3mf7g-cn-hangzhou.alicloudapi.com/test\</a><br>  -H ‘Accept: application&#x2F;json, text&#x2F;event-stream’ <br>  -H ‘Content-Type: application&#x2F;json’ <br>  –data-raw ‘{“model”:”qwen-long”,”frequency_penalty”:0,”max_tokens”:800,”stream”:false,”messages”:[{“role”:”user”,”content”:”higress项目主仓库的github地址是什么”}],”presence_penalty”:0,”temperature”:0.7,”top_p”:0.95}’</p>
+<p>  registry.cn-hangzhou.aliyuncs.com&#x2F;ztygw&#x2F;aio-redis:1.4.0-rc.1<br>  registry.cn-hangzhou.aliyuncs.com&#x2F;ztygw&#x2F;aio-redis:1.4.1-rc.1</p>
+<p>docker pull higress-registry.cn-hangzhou.cr.aliyuncs.com&#x2F;higress&#x2F;all-in-one:1.4.0</p>
+<p>docker tag higress-registry.cn-hangzhou.cr.aliyuncs.com&#x2F;higress&#x2F;all-in-one:1.4.0 higress-ai-cache-zzy&#x2F;repo:1.4.0</p>
+<p>registry.cn-hangzhou.aliyuncs.com&#x2F;ztygw&#x2F;aio-redis:1.4.1-rc.1</p>
+<p>docker tag higress-registry.cn-hangzhou.cr.aliyuncs.com&#x2F;higress&#x2F;all-in-one:1.4.0 </p>
+<p>docker push registry.cn-hangzhou.aliyuncs.com&#x2F;zzyspace&#x2F;zzy-repo-test:1.4.0</p>
+<p>docker push higress-registry</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="http://example.com">Zhen Ziyang</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="http://example.com/2024/07/29/%E3%80%90%E8%AF%BB%E4%B9%A6%E3%80%91%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E6%89%8B%E5%86%8C%E4%B9%8B%E8%BF%9B%E7%A8%8B/">http://example.com/2024/07/29/%E3%80%90%E8%AF%BB%E4%B9%A6%E3%80%91%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E6%89%8B%E5%86%8C%E4%B9%8B%E8%BF%9B%E7%A8%8B/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/images/jvm.webp" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/07/29/%E3%80%90%E8%AF%BB%E4%B9%A6%E3%80%91redis%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/" title="【读书】redis设计与实现"><img class="cover" src="/images/jvm.webp" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">Previous</div><div class="prev_info">【读书】redis设计与实现</div></div></a></div><div class="next-post pull-right"><a href="/2024/07/09/%E3%80%90%E6%BA%90%E7%A0%81%E3%80%91Higress/" title="【源码】Higress"><img class="cover" src="/images/read.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">Next</div><div class="next_info">【源码】Higress</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/images/me.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Zhen Ziyang</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">46</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">7</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">8</div></a></div><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/16372212" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:coding8ziyang@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">Welcome to Ziyang's blog. Hear you can see coding/分布式/CFA...</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B"><span class="toc-number">1.</span> <span class="toc-text">进程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B%E7%9A%84%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80"><span class="toc-number">1.1.</span> <span class="toc-text">进程的内存布局</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%99%9A%E6%8B%9F%E5%9C%B0%E5%9D%80%E7%A9%BA%E9%97%B4%EF%BC%9A"><span class="toc-number">1.2.</span> <span class="toc-text">虚拟地址空间：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83"><span class="toc-number">1.3.</span> <span class="toc-text">环境</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D"><span class="toc-number">2.</span> <span class="toc-text">内存分配</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A0%86%E4%B8%8A%E5%88%86%E9%85%8D%E5%86%85%E5%AD%98"><span class="toc-number">2.1.</span> <span class="toc-text">堆上分配内存</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#malloc-and-free-%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86"><span class="toc-number">2.1.1.</span> <span class="toc-text">malloc() and free()的实现原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A9%BA%E9%97%B2%E5%88%97%E8%A1%A8%E7%9A%84%E5%86%85%E5%AD%98%E5%9D%97%E5%92%8C%E9%9D%9E%E7%A9%BA%E9%97%B2%E5%88%97%E8%A1%A8%E7%9A%84%E5%86%85%E5%AD%98%E5%9D%97%E9%95%BF%E4%BB%80%E4%B9%88%E6%A0%B7%E5%AD%90%EF%BC%9F"><span class="toc-number">2.1.2.</span> <span class="toc-text">空闲列表的内存块和非空闲列表的内存块长什么样子？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E6%96%B9%E6%B3%95"><span class="toc-number">2.1.3.</span> <span class="toc-text">其他方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A0%86%E6%A0%88%E4%B8%8A%E5%88%86%E9%85%8D%E5%86%85%E5%AD%98"><span class="toc-number">2.2.</span> <span class="toc-text">堆栈上分配内存</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B"><span class="toc-number">3.</span> <span class="toc-text">进程与线程</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/08/05/%E3%80%90CPP%E3%80%91CPP-Primer%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" title="【CPP】CPP Primer读书笔记"><img src="/images/jvm.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【CPP】CPP Primer读书笔记"/></a><div class="content"><a class="title" href="/2024/08/05/%E3%80%90CPP%E3%80%91CPP-Primer%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" title="【CPP】CPP Primer读书笔记">【CPP】CPP Primer读书笔记</a><time datetime="2024-08-05T06:19:42.000Z" title="Created 2024-08-05 14:19:42">2024-08-05</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/07/29/%E3%80%90%E8%AF%BB%E4%B9%A6%E3%80%91%E4%BB%8E%E6%A0%B9%E4%B8%8A%E7%90%86%E8%A7%A3Mysql/" title="【读书】从根上理解Mysql"><img src="/images/mysql-mulu.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【读书】从根上理解Mysql"/></a><div class="content"><a class="title" href="/2024/07/29/%E3%80%90%E8%AF%BB%E4%B9%A6%E3%80%91%E4%BB%8E%E6%A0%B9%E4%B8%8A%E7%90%86%E8%A7%A3Mysql/" title="【读书】从根上理解Mysql">【读书】从根上理解Mysql</a><time datetime="2024-07-29T09:35:13.000Z" title="Created 2024-07-29 17:35:13">2024-07-29</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/07/29/%E3%80%90%E8%AF%BB%E4%B9%A6%E3%80%91redis%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/" title="【读书】redis设计与实现"><img src="/images/jvm.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【读书】redis设计与实现"/></a><div class="content"><a class="title" href="/2024/07/29/%E3%80%90%E8%AF%BB%E4%B9%A6%E3%80%91redis%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/" title="【读书】redis设计与实现">【读书】redis设计与实现</a><time datetime="2024-07-29T09:34:14.000Z" title="Created 2024-07-29 17:34:14">2024-07-29</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/07/29/%E3%80%90%E8%AF%BB%E4%B9%A6%E3%80%91%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E6%89%8B%E5%86%8C%E4%B9%8B%E8%BF%9B%E7%A8%8B/" title="【读书】系统编程手册之进程"><img src="/images/jvm.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【读书】系统编程手册之进程"/></a><div class="content"><a class="title" href="/2024/07/29/%E3%80%90%E8%AF%BB%E4%B9%A6%E3%80%91%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E6%89%8B%E5%86%8C%E4%B9%8B%E8%BF%9B%E7%A8%8B/" title="【读书】系统编程手册之进程">【读书】系统编程手册之进程</a><time datetime="2024-07-29T09:32:54.000Z" title="Created 2024-07-29 17:32:54">2024-07-29</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/07/09/%E3%80%90%E6%BA%90%E7%A0%81%E3%80%91Higress/" title="【源码】Higress"><img src="/images/read.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【源码】Higress"/></a><div class="content"><a class="title" href="/2024/07/09/%E3%80%90%E6%BA%90%E7%A0%81%E3%80%91Higress/" title="【源码】Higress">【源码】Higress</a><time datetime="2024-07-09T07:56:18.000Z" title="Created 2024-07-09 15:56:18">2024-07-09</time></div></div></div></div></div></div></main><footer id="footer" style="background: transparent"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By Zhen Ziyang</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
